@@ -1,0 +1,56 @@
+body {
+  min-height: 2000px;
+  padding-top: 60px;
+}
+
+table tr {
+    font-size: 10px;
+}
+
+td.titulo {
+    font-weight: bold;  
+    background-color: #f5f5f5;
+}
+
+
+p { line-height: 1.2; 
+    font-size: 1em; 
+    margin: 0 0 0px
+}
+
+pagination { 
+    margin: 0 0 0px
+}
+
+.form-group { 
+    margin-bottom: 5px
+}
+
+.panel {
+    border-color: #6b9311;
+    border-bottom-width: 5px;
+    border-width: 2px; 
+}
+.panel-default > .panel-heading {
+    color: #FFFFFF;
+    background-color: #016A01;
+    border-color: #ddd;
+}
+    
+.navbar-default {
+
+}
+
+.table > tbody > tr > th {
+    background-color:  #FFD800;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #90DE90;
+}
+
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    margin-bottom: 5px; 
+    border: 2px solid #FFD800;
+}

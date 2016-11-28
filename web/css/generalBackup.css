@@ -1,0 +1,27 @@
+body {
+  min-height: 2000px;
+  padding-top: 60px;
+}
+
+table tr {
+    font-size: 10px;
+}
+
+td.titulo {
+    font-weight: bold;  
+    background-color: #f5f5f5;
+}
+
+
+p { line-height: 1.2; 
+    font-size: 1em; 
+    margin: 0 0 0px
+}
+
+pagination { 
+    margin: 0 0 0px
+}
+
+.form-group { 
+    margin-bottom: 5px
+}
