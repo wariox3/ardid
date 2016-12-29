@@ -12,12 +12,11 @@ class PagoController extends Controller
      */
     public function listaAction()
     {
-        $pagos = $this->getDoctrine()
-                ->getRepository('ArdidBundle:Pago')
-                ->findAll();
+        $arUsuario = $this->getUser();        
+        $pagos = $this->getDoctrine()->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
 
         return $this->render('ArdidBundle:Consulta:pago.html.twig', array(
-                    'pagos' => $pagos
+                    'arPagos' => $pagos
         ));
     }
     

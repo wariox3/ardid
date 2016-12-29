@@ -16,13 +16,13 @@
     </thead>
     <tbody>
         
-    {% for pago in pagos %}
+    {% for arPagos in arPagos %}
      <tr>
-         <th scope="row">{{pago.codigoPagoPk}}</th> 
-         <td>{{pago.codigoEmpresafk}}</td>
-         <td>{{pago.codigoEmpleadofk}}</td>
-         <td>{{pago.numero}}</td>
-         <td>{{pago.vrDevengado}}</td>
+         <th scope="row">{{arPagos.codigoPagoPk}}</th> 
+         <td>{{arPagos.empresaRel.nombre}}</td>
+         <td>{{arPagos.codigoEmpleadofk}}</td>
+         <td>{{arPagos.numero}}</td>
+         <td>{{arPagos.vrDevengado}}</td>
      </tr>
       {% endfor %}
     </tbody>

@@ -32,7 +32,10 @@ class Empresa
      */    
     private $digitoVerificacion;
     
-
+    /**
+     * @ORM\OneToMany(targetEntity="Pago", mappedBy="empresaRel")
+     */
+    protected $pagosEmpresaRel; 
    
 
     /**
@@ -115,5 +118,46 @@ class Empresa
     public function getDigitoVerificacion()
     {
         return $this->digitoVerificacion;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add pagosEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Pago $pagosEmpresaRel
+     *
+     * @return Empresa
+     */
+    public function addPagosEmpresaRel(\ArdidBundle\Entity\Pago $pagosEmpresaRel)
+    {
+        $this->pagosEmpresaRel[] = $pagosEmpresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagosEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Pago $pagosEmpresaRel
+     */
+    public function removePagosEmpresaRel(\ArdidBundle\Entity\Pago $pagosEmpresaRel)
+    {
+        $this->pagosEmpresaRel->removeElement($pagosEmpresaRel);
+    }
+
+    /**
+     * Get pagosEmpresaRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPagosEmpresaRel()
+    {
+        return $this->pagosEmpresaRel;
     }
 }

@@ -17,15 +17,15 @@ class Pago
      */
     private $codigoPagoPk;   
     
-     /**
+    /**
      * @ORM\Column(name="codigo_empresa_fk", type="integer")
      */
-    private $codigoEmpresafk; 
+    private $codigoEmpresaFk; 
      
     /**
      * @ORM\Column(name="codigo_empleado_fk", type="integer")
      */
-    private $codigoEmpleadofk; 
+    private $codigoEmpleadoFk; 
     
     /**
      * @ORM\Column(name="numero", type="string", length=30, nullable=true)
@@ -37,6 +37,11 @@ class Pago
      */
     private $vrDevengado = 0;    
     
+    /**
+     * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="pagosEmpresaRel")
+     * @ORM\JoinColumn(name="codigo_empresa_fk", referencedColumnName="codigo_empresa_pk")
+     */
+    protected $empresaRel;
 
     /**
      * Get codigoPagoPk
@@ -49,51 +54,51 @@ class Pago
     }
 
     /**
-     * Set codigoEmpresafk
+     * Set codigoEmpresaFk
      *
-     * @param integer $codigoEmpresafk
+     * @param integer $codigoEmpresaFk
      *
      * @return Pago
      */
-    public function setCodigoEmpresafk($codigoEmpresafk)
+    public function setCodigoEmpresaFk($codigoEmpresaFk)
     {
-        $this->codigoEmpresafk = $codigoEmpresafk;
+        $this->codigoEmpresaFk = $codigoEmpresaFk;
 
         return $this;
     }
 
     /**
-     * Get codigoEmpresafk
+     * Get codigoEmpresaFk
      *
      * @return integer
      */
-    public function getCodigoEmpresafk()
+    public function getCodigoEmpresaFk()
     {
-        return $this->codigoEmpresafk;
+        return $this->codigoEmpresaFk;
     }
 
     /**
-     * Set codigoEmpleadofk
+     * Set codigoEmpleadoFk
      *
-     * @param integer $codigoEmpleadofk
+     * @param integer $codigoEmpleadoFk
      *
      * @return Pago
      */
-    public function setCodigoEmpleadofk($codigoEmpleadofk)
+    public function setCodigoEmpleadoFk($codigoEmpleadoFk)
     {
-        $this->codigoEmpleadofk = $codigoEmpleadofk;
+        $this->codigoEmpleadoFk = $codigoEmpleadoFk;
 
         return $this;
     }
 
     /**
-     * Get codigoEmpleadofk
+     * Get codigoEmpleadoFk
      *
      * @return integer
      */
-    public function getCodigoEmpleadofk()
+    public function getCodigoEmpleadoFk()
     {
-        return $this->codigoEmpleadofk;
+        return $this->codigoEmpleadoFk;
     }
 
     /**
@@ -142,5 +147,29 @@ class Pago
     public function getVrDevengado()
     {
         return $this->vrDevengado;
+    }
+
+    /**
+     * Set empresaRel
+     *
+     * @param \ArdidBundle\Entity\Empresa $empresaRel
+     *
+     * @return Pago
+     */
+    public function setEmpresaRel(\ArdidBundle\Entity\Empresa $empresaRel = null)
+    {
+        $this->empresaRel = $empresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Get empresaRel
+     *
+     * @return \ArdidBundle\Entity\Empresa
+     */
+    public function getEmpresaRel()
+    {
+        return $this->empresaRel;
     }
 }
