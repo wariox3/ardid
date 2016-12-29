@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+{% block title %}Pagos lista{% endblock %} 
+{% block content %}
+
+<div class="container">
+  <h2>Lista de pagos</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+          <th>#</th>
+          <th>Empresa</th>
+          <th>Empleado</th>
+          <th>numero</th>
+          <th>Vr devengado</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+    {% for pago in pagos %}
+     <tr>
+         <th scope="row">{{pago.codigoPagoPk}}</th> 
+         <td>{{pago.codigoEmpresafk}}</td>
+         <td>{{pago.codigoEmpleadofk}}</td>
+         <td>{{pago.numero}}</td>
+         <td>{{pago.vrDevengado}}</td>
+     </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
+
+{% endblock %}
