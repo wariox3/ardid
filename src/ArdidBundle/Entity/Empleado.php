@@ -17,7 +17,7 @@ class Empleado
      */
     private $codigoEmpleadoPk;   
     
-     /**
+    /**
      * @ORM\Column(name="codigo_identificacion_tipo_fk", type="integer")
      */
     private $codigoIdentificacionTipofk; 
@@ -32,20 +32,30 @@ class Empleado
      */    
     private $nombre1;
     
-      /**
+    /**
      * @ORM\Column(name="nombre2", type="string", length=30, nullable=true)
      */    
     private $nombre2;
     
-      /**
+    /**
      * @ORM\Column(name="apellido1", type="string", length=30, nullable=true)
      */    
     private $apellido1;
     
-      /**
+    /**
      * @ORM\Column(name="apellido2", type="string", length=30, nullable=true)
      */    
     private $apellido2;
+    
+     /**
+     * @ORM\Column(name="nombre_corto", type="string", length=40, nullable=true)
+     */    
+    private $nombreCorto;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Pago", mappedBy="empleadoRel")
+     */
+    protected $pagosEmpleadoRel;
     
   
     
@@ -202,5 +212,70 @@ class Empleado
     public function getApellido2()
     {
         return $this->apellido2;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add pagosEmpleadoRel
+     *
+     * @param \ArdidBundle\Entity\Pago $pagosEmpleadoRel
+     *
+     * @return Empleado
+     */
+    public function addPagosEmpleadoRel(\ArdidBundle\Entity\Pago $pagosEmpleadoRel)
+    {
+        $this->pagosEmpleadoRel[] = $pagosEmpleadoRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagosEmpleadoRel
+     *
+     * @param \ArdidBundle\Entity\Pago $pagosEmpleadoRel
+     */
+    public function removePagosEmpleadoRel(\ArdidBundle\Entity\Pago $pagosEmpleadoRel)
+    {
+        $this->pagosEmpleadoRel->removeElement($pagosEmpleadoRel);
+    }
+
+    /**
+     * Get pagosEmpleadoRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPagosEmpleadoRel()
+    {
+        return $this->pagosEmpleadoRel;
+    }
+
+    /**
+     * Set nombreCorto
+     *
+     * @param string $nombreCorto
+     *
+     * @return Empleado
+     */
+    public function setNombreCorto($nombreCorto)
+    {
+        $this->nombreCorto = $nombreCorto;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreCorto
+     *
+     * @return string
+     */
+    public function getNombreCorto()
+    {
+        return $this->nombreCorto;
     }
 }

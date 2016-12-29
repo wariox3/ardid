@@ -18,6 +18,21 @@ class PagoDetalle
     private $codigoPagoDetallePk;           
     
     /**
+     * @ORM\Column(name="codigo_pago_fk", type="integer")
+     */
+    private $codigoPagoFk; 
+    
+    /**
+     * @ORM\Column(name="codigo_concepto_fk", type="integer")
+     */
+    private $codigoConceptoFk;
+    
+    /**
+     * @ORM\Column(name="cncepto", type="integer")
+     */
+    private $concepto;
+    
+    /**
      * @ORM\Column(name="vr_pago", type="float")
      */
     private $vrPago = 0;     
@@ -28,24 +43,20 @@ class PagoDetalle
     private $operacion = 0;
     
     /**
-     * @ORM\Column(name="vr_pago_operado", type="float")
+     * @ORM\Column(name="vr_pago_neto", type="float")
      */
-    private $vrPagoOperado = 0;    
+    private $vrNeto= 0;    
     
     /**
      * @ORM\Column(name="horas", type="float")
      */
     private $horas = 0;    
     
-    /**
-     * @ORM\Column(name="vr_hora", type="float")
-     */
-    private $vrHora = 0;     
     
     /**
-     * @ORM\Column(name="porcentaje_aplicado", type="float")
+     * @ORM\Column(name="porcentaje", type="float")
      */
-    private $porcentajeAplicado = 0;    
+    private $porcentaje = 0;    
     
     /**
      * @ORM\Column(name="dias", type="integer")
@@ -53,15 +64,10 @@ class PagoDetalle
     private $dias = 0;                                   
     
     /**
-     * @ORM\Column(name="vr_ingreso_base_cotizacion", type="float")
+     * @ORM\ManyToOne(targetEntity="Pago", inversedBy="pagosRel")
+     * @ORM\JoinColumn(name="codigo_pago_fk", referencedColumnName="codigo_pago_pk")
      */
-    private $vrIngresoBaseCotizacion = 0;     
-
-    /**
-     * @ORM\Column(name="vr_ingreso_base_prestacion", type="float")
-     */
-    private $vrIngresoBasePrestacion = 0;               
-
+    protected $pagoRel;       
 
     /**
      * Get codigoPagoDetallePk
@@ -71,6 +77,78 @@ class PagoDetalle
     public function getCodigoPagoDetallePk()
     {
         return $this->codigoPagoDetallePk;
+    }
+
+    /**
+     * Set codigoPagoFk
+     *
+     * @param integer $codigoPagoFk
+     *
+     * @return PagoDetalle
+     */
+    public function setCodigoPagoFk($codigoPagoFk)
+    {
+        $this->codigoPagoFk = $codigoPagoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoPagoFk
+     *
+     * @return integer
+     */
+    public function getCodigoPagoFk()
+    {
+        return $this->codigoPagoFk;
+    }
+
+    /**
+     * Set codigoConceptoFk
+     *
+     * @param integer $codigoConceptoFk
+     *
+     * @return PagoDetalle
+     */
+    public function setCodigoConceptoFk($codigoConceptoFk)
+    {
+        $this->codigoConceptoFk = $codigoConceptoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoConceptoFk
+     *
+     * @return integer
+     */
+    public function getCodigoConceptoFk()
+    {
+        return $this->codigoConceptoFk;
+    }
+
+    /**
+     * Set concepto
+     *
+     * @param integer $concepto
+     *
+     * @return PagoDetalle
+     */
+    public function setConcepto($concepto)
+    {
+        $this->concepto = $concepto;
+
+        return $this;
+    }
+
+    /**
+     * Get concepto
+     *
+     * @return integer
+     */
+    public function getConcepto()
+    {
+        return $this->concepto;
     }
 
     /**
@@ -122,27 +200,27 @@ class PagoDetalle
     }
 
     /**
-     * Set vrPagoOperado
+     * Set vrNeto
      *
-     * @param float $vrPagoOperado
+     * @param float $vrNeto
      *
      * @return PagoDetalle
      */
-    public function setVrPagoOperado($vrPagoOperado)
+    public function setVrNeto($vrNeto)
     {
-        $this->vrPagoOperado = $vrPagoOperado;
+        $this->vrNeto = $vrNeto;
 
         return $this;
     }
 
     /**
-     * Get vrPagoOperado
+     * Get vrNeto
      *
      * @return float
      */
-    public function getVrPagoOperado()
+    public function getVrNeto()
     {
-        return $this->vrPagoOperado;
+        return $this->vrNeto;
     }
 
     /**
@@ -170,51 +248,27 @@ class PagoDetalle
     }
 
     /**
-     * Set vrHora
+     * Set porcentaje
      *
-     * @param float $vrHora
+     * @param float $porcentaje
      *
      * @return PagoDetalle
      */
-    public function setVrHora($vrHora)
+    public function setPorcentaje($porcentaje)
     {
-        $this->vrHora = $vrHora;
+        $this->porcentaje = $porcentaje;
 
         return $this;
     }
 
     /**
-     * Get vrHora
+     * Get porcentaje
      *
      * @return float
      */
-    public function getVrHora()
+    public function getPorcentaje()
     {
-        return $this->vrHora;
-    }
-
-    /**
-     * Set porcentajeAplicado
-     *
-     * @param float $porcentajeAplicado
-     *
-     * @return PagoDetalle
-     */
-    public function setPorcentajeAplicado($porcentajeAplicado)
-    {
-        $this->porcentajeAplicado = $porcentajeAplicado;
-
-        return $this;
-    }
-
-    /**
-     * Get porcentajeAplicado
-     *
-     * @return float
-     */
-    public function getPorcentajeAplicado()
-    {
-        return $this->porcentajeAplicado;
+        return $this->porcentaje;
     }
 
     /**
@@ -242,50 +296,26 @@ class PagoDetalle
     }
 
     /**
-     * Set vrIngresoBaseCotizacion
+     * Set pagoRel
      *
-     * @param float $vrIngresoBaseCotizacion
+     * @param \ArdidBundle\Entity\Pago $pagoRel
      *
      * @return PagoDetalle
      */
-    public function setVrIngresoBaseCotizacion($vrIngresoBaseCotizacion)
+    public function setPagoRel(\ArdidBundle\Entity\Pago $pagoRel = null)
     {
-        $this->vrIngresoBaseCotizacion = $vrIngresoBaseCotizacion;
+        $this->pagoRel = $pagoRel;
 
         return $this;
     }
 
     /**
-     * Get vrIngresoBaseCotizacion
+     * Get pagoRel
      *
-     * @return float
+     * @return \ArdidBundle\Entity\Pago
      */
-    public function getVrIngresoBaseCotizacion()
+    public function getPagoRel()
     {
-        return $this->vrIngresoBaseCotizacion;
-    }
-
-    /**
-     * Set vrIngresoBasePrestacion
-     *
-     * @param float $vrIngresoBasePrestacion
-     *
-     * @return PagoDetalle
-     */
-    public function setVrIngresoBasePrestacion($vrIngresoBasePrestacion)
-    {
-        $this->vrIngresoBasePrestacion = $vrIngresoBasePrestacion;
-
-        return $this;
-    }
-
-    /**
-     * Get vrIngresoBasePrestacion
-     *
-     * @return float
-     */
-    public function getVrIngresoBasePrestacion()
-    {
-        return $this->vrIngresoBasePrestacion;
+        return $this->pagoRel;
     }
 }

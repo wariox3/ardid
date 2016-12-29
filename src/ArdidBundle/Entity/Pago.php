@@ -27,10 +27,35 @@ class Pago
      */
     private $codigoEmpleadoFk; 
     
+     /**
+     * @ORM\Column(name="codigo_pago_tipo_fk", type="integer")
+     */
+    private $codigoPagoTipoFk; 
+    
+     /**
+     * @ORM\Column(name="fecha_desde", type="date", nullable=true)
+     */    
+    private $fechaDesde;  
+    
+     /**
+     * @ORM\Column(name="fecha_hasta", type="date", nullable=true)
+     */    
+    private $fechaHasta;  
+    
     /**
      * @ORM\Column(name="numero", type="string", length=30, nullable=true)
      */    
     private $numero;
+    
+    /**
+     * @ORM\Column(name="vr_deducciones", type="float")
+     */
+    private $vrDeducciones = 0;    
+    
+    /**
+     * @ORM\Column(name="vr_neto", type="float")
+     */
+    private $vrNeto = 0;    
     
     /**
      * @ORM\Column(name="vr_devengado", type="float")
@@ -42,6 +67,24 @@ class Pago
      * @ORM\JoinColumn(name="codigo_empresa_fk", referencedColumnName="codigo_empresa_pk")
      */
     protected $empresaRel;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Empleado", inversedBy="pagosEmpleadoRel")
+     * @ORM\JoinColumn(name="codigo_empleado_fk", referencedColumnName="codigo_empleado_pk")
+     */
+    protected $empleadoRel;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="PagoTipo", inversedBy="pagosTipoRel")
+     * @ORM\JoinColumn(name="codigo_pago_tipo_Fk", referencedColumnName="codigo_pago_tipo_pk")
+     */
+    protected $pagoTipoRel;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="pagoRel")
+     */
+    protected $pagosRel; 
+    
 
     /**
      * Get codigoPagoPk
@@ -171,5 +214,214 @@ class Pago
     public function getEmpresaRel()
     {
         return $this->empresaRel;
+    }
+
+    /**
+     * Set empleadoRel
+     *
+     * @param \ArdidBundle\Entity\Empleado $empleadoRel
+     *
+     * @return Pago
+     */
+    public function setEmpleadoRel(\ArdidBundle\Entity\Empleado $empleadoRel = null)
+    {
+        $this->empleadoRel = $empleadoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get empleadoRel
+     *
+     * @return \ArdidBundle\Entity\Empleado
+     */
+    public function getEmpleadoRel()
+    {
+        return $this->empleadoRel;
+    }
+
+    /**
+     * Set codigoPagoTipoFk
+     *
+     * @param integer $codigoPagoTipoFk
+     *
+     * @return Pago
+     */
+    public function setCodigoPagoTipoFk($codigoPagoTipoFk)
+    {
+        $this->codigoPagoTipoFk = $codigoPagoTipoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoPagoTipoFk
+     *
+     * @return integer
+     */
+    public function getCodigoPagoTipoFk()
+    {
+        return $this->codigoPagoTipoFk;
+    }
+
+    /**
+     * Set fechaDesde
+     *
+     * @param \DateTime $fechaDesde
+     *
+     * @return Pago
+     */
+    public function setFechaDesde($fechaDesde)
+    {
+        $this->fechaDesde = $fechaDesde;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaDesde
+     *
+     * @return \DateTime
+     */
+    public function getFechaDesde()
+    {
+        return $this->fechaDesde;
+    }
+
+    /**
+     * Set fechaHasta
+     *
+     * @param \DateTime $fechaHasta
+     *
+     * @return Pago
+     */
+    public function setFechaHasta($fechaHasta)
+    {
+        $this->fechaHasta = $fechaHasta;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaHasta
+     *
+     * @return \DateTime
+     */
+    public function getFechaHasta()
+    {
+        return $this->fechaHasta;
+    }
+
+    /**
+     * Set vrDeducciones
+     *
+     * @param float $vrDeducciones
+     *
+     * @return Pago
+     */
+    public function setVrDeducciones($vrDeducciones)
+    {
+        $this->vrDeducciones = $vrDeducciones;
+
+        return $this;
+    }
+
+    /**
+     * Get vrDeducciones
+     *
+     * @return float
+     */
+    public function getVrDeducciones()
+    {
+        return $this->vrDeducciones;
+    }
+
+    /**
+     * Set vrNeto
+     *
+     * @param float $vrNeto
+     *
+     * @return Pago
+     */
+    public function setVrNeto($vrNeto)
+    {
+        $this->vrNeto = $vrNeto;
+
+        return $this;
+    }
+
+    /**
+     * Get vrNeto
+     *
+     * @return float
+     */
+    public function getVrNeto()
+    {
+        return $this->vrNeto;
+    }
+
+    /**
+     * Set pagoTipoRel
+     *
+     * @param \ArdidBundle\Entity\PagoTipo $pagoTipoRel
+     *
+     * @return Pago
+     */
+    public function setPagoTipoRel(\ArdidBundle\Entity\PagoTipo $pagoTipoRel = null)
+    {
+        $this->pagoTipoRel = $pagoTipoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get pagoTipoRel
+     *
+     * @return \ArdidBundle\Entity\PagoTipo
+     */
+    public function getPagoTipoRel()
+    {
+        return $this->pagoTipoRel;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add pagosRel
+     *
+     * @param \ArdidBundle\Entity\PagoDetalle $pagosRel
+     *
+     * @return Pago
+     */
+    public function addPagosRel(\ArdidBundle\Entity\PagoDetalle $pagosRel)
+    {
+        $this->pagosRel[] = $pagosRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagosRel
+     *
+     * @param \ArdidBundle\Entity\PagoDetalle $pagosRel
+     */
+    public function removePagosRel(\ArdidBundle\Entity\PagoDetalle $pagosRel)
+    {
+        $this->pagosRel->removeElement($pagosRel);
+    }
+
+    /**
+     * Get pagosRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPagosRel()
+    {
+        return $this->pagosRel;
     }
 }
