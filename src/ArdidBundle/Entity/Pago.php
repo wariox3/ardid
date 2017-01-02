@@ -43,7 +43,7 @@ class Pago
     private $fechaHasta;  
     
     /**
-     * @ORM\Column(name="numero", type="string", length=30, nullable=true)
+     * @ORM\Column(name="numero", type="integer", length=30, nullable=true)
      */    
     private $numero;
     
@@ -79,11 +79,6 @@ class Pago
      * @ORM\JoinColumn(name="codigo_pago_tipo_Fk", referencedColumnName="codigo_pago_tipo_pk")
      */
     protected $pagoTipoRel;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="pagoRel")
-     */
-    protected $pagosRel; 
     
 
     /**
@@ -142,102 +137,6 @@ class Pago
     public function getCodigoEmpleadoFk()
     {
         return $this->codigoEmpleadoFk;
-    }
-
-    /**
-     * Set numero
-     *
-     * @param string $numero
-     *
-     * @return Pago
-     */
-    public function setNumero($numero)
-    {
-        $this->numero = $numero;
-
-        return $this;
-    }
-
-    /**
-     * Get numero
-     *
-     * @return string
-     */
-    public function getNumero()
-    {
-        return $this->numero;
-    }
-
-    /**
-     * Set vrDevengado
-     *
-     * @param float $vrDevengado
-     *
-     * @return Pago
-     */
-    public function setVrDevengado($vrDevengado)
-    {
-        $this->vrDevengado = $vrDevengado;
-
-        return $this;
-    }
-
-    /**
-     * Get vrDevengado
-     *
-     * @return float
-     */
-    public function getVrDevengado()
-    {
-        return $this->vrDevengado;
-    }
-
-    /**
-     * Set empresaRel
-     *
-     * @param \ArdidBundle\Entity\Empresa $empresaRel
-     *
-     * @return Pago
-     */
-    public function setEmpresaRel(\ArdidBundle\Entity\Empresa $empresaRel = null)
-    {
-        $this->empresaRel = $empresaRel;
-
-        return $this;
-    }
-
-    /**
-     * Get empresaRel
-     *
-     * @return \ArdidBundle\Entity\Empresa
-     */
-    public function getEmpresaRel()
-    {
-        return $this->empresaRel;
-    }
-
-    /**
-     * Set empleadoRel
-     *
-     * @param \ArdidBundle\Entity\Empleado $empleadoRel
-     *
-     * @return Pago
-     */
-    public function setEmpleadoRel(\ArdidBundle\Entity\Empleado $empleadoRel = null)
-    {
-        $this->empleadoRel = $empleadoRel;
-
-        return $this;
-    }
-
-    /**
-     * Get empleadoRel
-     *
-     * @return \ArdidBundle\Entity\Empleado
-     */
-    public function getEmpleadoRel()
-    {
-        return $this->empleadoRel;
     }
 
     /**
@@ -313,6 +212,30 @@ class Pago
     }
 
     /**
+     * Set numero
+     *
+     * @param integer $numero
+     *
+     * @return Pago
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer
+     */
+    public function getNumero()
+    {
+        return $this->numero;
+    }
+
+    /**
      * Set vrDeducciones
      *
      * @param float $vrDeducciones
@@ -361,6 +284,78 @@ class Pago
     }
 
     /**
+     * Set vrDevengado
+     *
+     * @param float $vrDevengado
+     *
+     * @return Pago
+     */
+    public function setVrDevengado($vrDevengado)
+    {
+        $this->vrDevengado = $vrDevengado;
+
+        return $this;
+    }
+
+    /**
+     * Get vrDevengado
+     *
+     * @return float
+     */
+    public function getVrDevengado()
+    {
+        return $this->vrDevengado;
+    }
+
+    /**
+     * Set empresaRel
+     *
+     * @param \ArdidBundle\Entity\Empresa $empresaRel
+     *
+     * @return Pago
+     */
+    public function setEmpresaRel(\ArdidBundle\Entity\Empresa $empresaRel = null)
+    {
+        $this->empresaRel = $empresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Get empresaRel
+     *
+     * @return \ArdidBundle\Entity\Empresa
+     */
+    public function getEmpresaRel()
+    {
+        return $this->empresaRel;
+    }
+
+    /**
+     * Set empleadoRel
+     *
+     * @param \ArdidBundle\Entity\Empleado $empleadoRel
+     *
+     * @return Pago
+     */
+    public function setEmpleadoRel(\ArdidBundle\Entity\Empleado $empleadoRel = null)
+    {
+        $this->empleadoRel = $empleadoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get empleadoRel
+     *
+     * @return \ArdidBundle\Entity\Empleado
+     */
+    public function getEmpleadoRel()
+    {
+        return $this->empleadoRel;
+    }
+
+    /**
      * Set pagoTipoRel
      *
      * @param \ArdidBundle\Entity\PagoTipo $pagoTipoRel
@@ -382,46 +377,5 @@ class Pago
     public function getPagoTipoRel()
     {
         return $this->pagoTipoRel;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->pagosRel = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add pagosRel
-     *
-     * @param \ArdidBundle\Entity\PagoDetalle $pagosRel
-     *
-     * @return Pago
-     */
-    public function addPagosRel(\ArdidBundle\Entity\PagoDetalle $pagosRel)
-    {
-        $this->pagosRel[] = $pagosRel;
-
-        return $this;
-    }
-
-    /**
-     * Remove pagosRel
-     *
-     * @param \ArdidBundle\Entity\PagoDetalle $pagosRel
-     */
-    public function removePagosRel(\ArdidBundle\Entity\PagoDetalle $pagosRel)
-    {
-        $this->pagosRel->removeElement($pagosRel);
-    }
-
-    /**
-     * Get pagosRel
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getPagosRel()
-    {
-        return $this->pagosRel;
     }
 }

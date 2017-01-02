@@ -29,6 +29,14 @@ class PagoTipo
    
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosTipoRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get codigoPagoTipoPk
      *
      * @return integer
@@ -60,13 +68,6 @@ class PagoTipo
     public function getNombre()
     {
         return $this->nombre;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->pagosTipoRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

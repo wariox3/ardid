@@ -17,6 +17,7 @@
           <th>DEDUCCION</th>
           <th>DEVENGADO</th>
           <th>NETO</th>
+          <th></th>
       </tr>
     </thead>
     <tbody>
@@ -34,13 +35,11 @@
          <td style="text-align: right">{{arPagos.vrDevengado}}</td>
          <td style="text-align: right">{{arPagos.vrNeto}}</td>
          <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=22 height=22></a></td>
-
-     </tr>
+        </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
-
 </body>
 </html>
 

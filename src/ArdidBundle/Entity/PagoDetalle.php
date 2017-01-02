@@ -18,9 +18,14 @@ class PagoDetalle
     private $codigoPagoDetallePk;           
     
     /**
-     * @ORM\Column(name="codigo_pago_fk", type="integer")
+     * @ORM\Column(name="codigo_empresa_fk", type="integer")
      */
-    private $codigoPagoFk; 
+    private $codigoEmpresaFk; 
+    
+    /**
+     * @ORM\Column(name="codigo_numero_fk", type="integer")
+     */
+    private $numeroFk; 
     
     /**
      * @ORM\Column(name="codigo_concepto_fk", type="integer")
@@ -63,11 +68,17 @@ class PagoDetalle
      */
     private $dias = 0;                                   
     
-    /**
-     * @ORM\ManyToOne(targetEntity="Pago", inversedBy="pagosRel")
-     * @ORM\JoinColumn(name="codigo_pago_fk", referencedColumnName="codigo_pago_pk")
+   
+     /**
+     * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="pagosDetallesEmpresaRel")
+     * @ORM\JoinColumn(name="codigo_empresa_fk", referencedColumnName="codigo_empresa_pk")
      */
-    protected $pagoRel;       
+    protected $empresaRel;    
+
+   
+
+    
+
 
     /**
      * Get codigoPagoDetallePk
@@ -80,27 +91,51 @@ class PagoDetalle
     }
 
     /**
-     * Set codigoPagoFk
+     * Set codigoEmpresaFk
      *
-     * @param integer $codigoPagoFk
+     * @param integer $codigoEmpresaFk
      *
      * @return PagoDetalle
      */
-    public function setCodigoPagoFk($codigoPagoFk)
+    public function setCodigoEmpresaFk($codigoEmpresaFk)
     {
-        $this->codigoPagoFk = $codigoPagoFk;
+        $this->codigoEmpresaFk = $codigoEmpresaFk;
 
         return $this;
     }
 
     /**
-     * Get codigoPagoFk
+     * Get codigoEmpresaFk
      *
      * @return integer
      */
-    public function getCodigoPagoFk()
+    public function getCodigoEmpresaFk()
     {
-        return $this->codigoPagoFk;
+        return $this->codigoEmpresaFk;
+    }
+
+    /**
+     * Set numeroFk
+     *
+     * @param integer $numeroFk
+     *
+     * @return PagoDetalle
+     */
+    public function setNumeroFk($numeroFk)
+    {
+        $this->numeroFk = $numeroFk;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroFk
+     *
+     * @return integer
+     */
+    public function getNumeroFk()
+    {
+        return $this->numeroFk;
     }
 
     /**
@@ -296,26 +331,26 @@ class PagoDetalle
     }
 
     /**
-     * Set pagoRel
+     * Set empresaRel
      *
-     * @param \ArdidBundle\Entity\Pago $pagoRel
+     * @param \ArdidBundle\Entity\Empresa $empresaRel
      *
      * @return PagoDetalle
      */
-    public function setPagoRel(\ArdidBundle\Entity\Pago $pagoRel = null)
+    public function setEmpresaRel(\ArdidBundle\Entity\Empresa $empresaRel = null)
     {
-        $this->pagoRel = $pagoRel;
+        $this->empresaRel = $empresaRel;
 
         return $this;
     }
 
     /**
-     * Get pagoRel
+     * Get empresaRel
      *
-     * @return \ArdidBundle\Entity\Pago
+     * @return \ArdidBundle\Entity\Empresa
      */
-    public function getPagoRel()
+    public function getEmpresaRel()
     {
-        return $this->pagoRel;
+        return $this->empresaRel;
     }
 }

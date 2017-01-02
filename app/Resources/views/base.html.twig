@@ -28,14 +28,24 @@
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <b class="caret"></b></a>
-                                <ul class="dropdown-menu">                        
-                                    <li class="dropdown-submenu"> 
-                                        <a tabindex="-1" href="#">General</a>
-                                    <li><a href="{{ path('consulta_pago') }}">Pagos</a></li>
-                            </li>
-                        </ul>
+                           
+                            <ul class="dropdown-menu">                        
+                                <li class="dropdown-submenu"> 
+                                <li><a href="{{ path('consulta_pago') }}">Pagos</a></li>
+                                </li>
+                            </ul>
                         </li>
                         </ul>
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administracion <b class="caret"></b></a>
+                                         <ul class="dropdown-menu">                        
+                                        <li class="dropdown-submenu"> 
+                                        <li><a href="{{ path('cargar_archivo') }}">Cargar Archivo</a></li>
+                                        </li>
+                                    </ul>
+                                    </li>
+                                </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ app.user.username|lower }} <span class="badge">0</span><b class="caret"></b></a>

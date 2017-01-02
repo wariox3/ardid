@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+{% block title %}Pagos lista{% endblock %} 
+{% block content %}
+{{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+{{ form_errors(form) }}
+    <div class="container">
+        <h2>DETALLE PAGO</h2>
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CODIGO CONCEPTO</th>
+                    <th>CONCEPTO</th>
+                    <th>PORCENTAJE</th>
+                    <th>HORAS</th>
+                    <th>DIAS</th>
+                    <th>OPERACION</th>
+                    <th>PAGO</th>
+                    <th>NETO</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for arPagoDetalles in arPagoDetalles %}
+                    <tr>
+                        <th scope="row">{{arPagoDetalles.codigoPagoFk}}</th> 
+                        <td>conceptofk</td>
+                        <td style="text-align: right">{{arPagoDetalles.concepto}}</td> 
+                        <td style="text-align: right">{{arPagoDetalles.porcentaje}}</td>
+                        <td style="text-align: right">{{arPagoDetalles.horas}}</td>
+                        <td style="text-align: right">{{arPagoDetalles.dias}}</td>
+                        <td style="text-align: right">{{arPagoDetalles.operacion}}</td>
+                        <td style="text-align: right">{{arPagoDetalles.vrPago}}</td>
+                        <td style="text-align: right">{{arPagoDetalles.vrNeto}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div>
+            
+            <a  class="btn btn-default btn-sm" href="{{ path('consulta_pago') }}">Volver</a>            
+            <div class="btn-toolbar" style="float:right">
+            <div class="btn-group">
+                {{ form_widget(form.BtnImprimir, { 'attr': {'class': 'btn btn-success btn-sm'} }) }} 
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
+  {{ form_rest(form) }}
+ {{ form_end(form) }}
+{% endblock %}

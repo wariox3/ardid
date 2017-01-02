@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+{% block title %}Pagos lista{% endblock %} 
+{% block content %}
+{{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+{{ form_errors(form) }}
+
+ <div class="container">
+        <h2>CARGAR ARCHIVO</h2>
+        <div>
+            <div class="btn-group">
+                {{ form_widget(form.BtnCargar, { 'attr': {'class': 'btn btn-success btn-sm'} }) }} 
+            </div>
+        </div>
+        </div>
+    </div
+ {{ form_rest(form) }}
+ {{ form_end(form) }}
+{% endblock %}

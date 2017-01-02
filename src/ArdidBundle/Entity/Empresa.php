@@ -30,13 +30,28 @@ class Empresa
      /**
      * @ORM\Column(name="digito_verificacion", type="string", length=1, nullable=true)
      */    
-    private $digitoVerificacion;
+    private $digitoVerificacion;    
     
     /**
+     * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="empresaRel")
+     */
+    protected $pagosDetallesEmpresaRel;    
+   
+     /**
      * @ORM\OneToMany(targetEntity="Pago", mappedBy="empresaRel")
      */
-    protected $pagosEmpresaRel; 
-   
+    protected $pagosEmpresaRel;   
+    
+  
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosDetallesEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pagosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get codigoEmpresaPk
@@ -119,12 +134,39 @@ class Empresa
     {
         return $this->digitoVerificacion;
     }
+
     /**
-     * Constructor
+     * Add pagosDetallesEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\PagoDetalle $pagosDetallesEmpresaRel
+     *
+     * @return Empresa
      */
-    public function __construct()
+    public function addPagosDetallesEmpresaRel(\ArdidBundle\Entity\PagoDetalle $pagosDetallesEmpresaRel)
     {
-        $this->pagosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pagosDetallesEmpresaRel[] = $pagosDetallesEmpresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagosDetallesEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\PagoDetalle $pagosDetallesEmpresaRel
+     */
+    public function removePagosDetallesEmpresaRel(\ArdidBundle\Entity\PagoDetalle $pagosDetallesEmpresaRel)
+    {
+        $this->pagosDetallesEmpresaRel->removeElement($pagosDetallesEmpresaRel);
+    }
+
+    /**
+     * Get pagosDetallesEmpresaRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPagosDetallesEmpresaRel()
+    {
+        return $this->pagosDetallesEmpresaRel;
     }
 
     /**
