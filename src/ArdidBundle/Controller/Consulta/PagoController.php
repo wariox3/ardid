@@ -16,8 +16,9 @@ class PagoController extends Controller
      */
     public function listaAction(Request $request)
     {
-        $arUsuario = $this->getUser();        
-        $arPagos = $this->getDoctrine()->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
+        $arUsuario = $this->getUser();  
+        $em = $this->getDoctrine()->getManager();   
+        $arPagos = $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
 
         return $this->render('ArdidBundle:Consulta:pago.html.twig', array(
                     'arPagos' => $arPagos
@@ -32,7 +33,7 @@ class PagoController extends Controller
     {
         $em = $this->getDoctrine()->getManager(); 
         $arUsuario = $this->getUser(); 
-        $arPagos= $this->getDoctrine()->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
+        $arPagos= $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
         $arPagoDetalles = $this->getDoctrine()->getRepository('ArdidBundle:PagoDetalle')->findBy(array('codigoPagoFk' => $codigoPago));
         $form = $this->createFormBuilder()            
             ->add('BtnImprimir', SubmitType::class, array('label'  => 'Imprimir',))           

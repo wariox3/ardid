@@ -27,7 +27,6 @@ class PagoTipo
      */
     protected $pagosTipoRel;
    
-
     /**
      * Constructor
      */

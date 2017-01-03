@@ -39,6 +39,12 @@ class User implements UserInterface, \Serializable
     private $codigoEmpleadoFk;      
     
     /**
+     * @ORM\Column(name="codigo_empresa_fk", type="integer", nullable=true)
+     */
+    private $codigoEmpresaFk;    
+
+    
+    /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
@@ -208,5 +214,29 @@ class User implements UserInterface, \Serializable
     public function getCodigoEmpleadoFk()
     {
         return $this->codigoEmpleadoFk;
+    }
+
+    /**
+     * Set codigoEmpresaFk
+     *
+     * @param integer $codigoEmpresaFk
+     *
+     * @return User
+     */
+    public function setCodigoEmpresaFk($codigoEmpresaFk)
+    {
+        $this->codigoEmpresaFk = $codigoEmpresaFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoEmpresaFk
+     *
+     * @return integer
+     */
+    public function getCodigoEmpresaFk()
+    {
+        return $this->codigoEmpresaFk;
     }
 }

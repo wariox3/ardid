@@ -20,7 +20,7 @@ class Empleado
     /**
      * @ORM\Column(name="codigo_identificacion_tipo_fk", type="integer")
      */
-    private $codigoIdentificacionTipofk; 
+    private $codigoIdentificacionTipoFk; 
      
     /**
      * @ORM\Column(name="numero_identifacion", type="integer", length=30)
@@ -57,8 +57,20 @@ class Empleado
      */
     protected $pagosEmpleadoRel;
     
-  
-    
+    /**
+     * @ORM\ManyToOne(targetEntity="IdentificacionTipo", inversedBy="empleadosIdentificacionTipoRel")
+     * @ORM\JoinColumn(name="codigo_identificacion_tipo_fk", referencedColumnName="codigo_identificacion_tipo_pk")
+     */
+    protected $identificacionTipoRel;
+   
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get codigoEmpleadoPk
@@ -71,27 +83,27 @@ class Empleado
     }
 
     /**
-     * Set codigoIdentificacionTipofk
+     * Set codigoIdentificacionTipoFk
      *
-     * @param integer $codigoIdentificacionTipofk
+     * @param integer $codigoIdentificacionTipoFk
      *
      * @return Empleado
      */
-    public function setCodigoIdentificacionTipofk($codigoIdentificacionTipofk)
+    public function setCodigoIdentificacionTipoFk($codigoIdentificacionTipoFk)
     {
-        $this->codigoIdentificacionTipofk = $codigoIdentificacionTipofk;
+        $this->codigoIdentificacionTipoFk = $codigoIdentificacionTipoFk;
 
         return $this;
     }
 
     /**
-     * Get codigoIdentificacionTipofk
+     * Get codigoIdentificacionTipoFk
      *
      * @return integer
      */
-    public function getCodigoIdentificacionTipofk()
+    public function getCodigoIdentificacionTipoFk()
     {
-        return $this->codigoIdentificacionTipofk;
+        return $this->codigoIdentificacionTipoFk;
     }
 
     /**
@@ -213,12 +225,29 @@ class Empleado
     {
         return $this->apellido2;
     }
+
     /**
-     * Constructor
+     * Set nombreCorto
+     *
+     * @param string $nombreCorto
+     *
+     * @return Empleado
      */
-    public function __construct()
+    public function setNombreCorto($nombreCorto)
     {
-        $this->pagosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->nombreCorto = $nombreCorto;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreCorto
+     *
+     * @return string
+     */
+    public function getNombreCorto()
+    {
+        return $this->nombreCorto;
     }
 
     /**
@@ -256,26 +285,26 @@ class Empleado
     }
 
     /**
-     * Set nombreCorto
+     * Set identificacionTipoRel
      *
-     * @param string $nombreCorto
+     * @param \ArdidBundle\Entity\IdentificacionTipo $identificacionTipoRel
      *
      * @return Empleado
      */
-    public function setNombreCorto($nombreCorto)
+    public function setIdentificacionTipoRel(\ArdidBundle\Entity\IdentificacionTipo $identificacionTipoRel = null)
     {
-        $this->nombreCorto = $nombreCorto;
+        $this->identificacionTipoRel = $identificacionTipoRel;
 
         return $this;
     }
 
     /**
-     * Get nombreCorto
+     * Get identificacionTipoRel
      *
-     * @return string
+     * @return \ArdidBundle\Entity\IdentificacionTipo
      */
-    public function getNombreCorto()
+    public function getIdentificacionTipoRel()
     {
-        return $this->nombreCorto;
+        return $this->identificacionTipoRel;
     }
 }

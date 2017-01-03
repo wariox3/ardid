@@ -18,53 +18,53 @@ class PagoDetalle
     private $codigoPagoDetallePk;           
     
     /**
-     * @ORM\Column(name="codigo_empresa_fk", type="integer")
+     * @ORM\Column(name="codigo_empresa_fk", type="integer",nullable=true)
      */
     private $codigoEmpresaFk; 
     
     /**
-     * @ORM\Column(name="codigo_numero_fk", type="integer")
+     * @ORM\Column(name="codigo_numero_fk", type="integer",nullable=true)
      */
     private $numeroFk; 
     
     /**
-     * @ORM\Column(name="codigo_concepto_fk", type="integer")
+     * @ORM\Column(name="codigo_concepto_fk", type="integer",nullable=true)
      */
     private $codigoConceptoFk;
     
     /**
-     * @ORM\Column(name="cncepto", type="integer")
+     * @ORM\Column(name="concepto", type="string",nullable=true)
      */
     private $concepto;
     
     /**
-     * @ORM\Column(name="vr_pago", type="float")
+     * @ORM\Column(name="vr_pago", type="float",nullable=true)
      */
     private $vrPago = 0;     
 
     /**
-     * @ORM\Column(name="operacion", type="integer")
+     * @ORM\Column(name="operacion", type="integer",nullable=true)
      */
     private $operacion = 0;
     
     /**
-     * @ORM\Column(name="vr_pago_neto", type="float")
+     * @ORM\Column(name="vr_pago_neto", type="float",nullable=true)
      */
     private $vrNeto= 0;    
     
     /**
-     * @ORM\Column(name="horas", type="float")
+     * @ORM\Column(name="horas", type="float",nullable=true)
      */
     private $horas = 0;    
     
     
     /**
-     * @ORM\Column(name="porcentaje", type="float")
+     * @ORM\Column(name="porcentaje", type="float",nullable=true)
      */
     private $porcentaje = 0;    
     
     /**
-     * @ORM\Column(name="dias", type="integer")
+     * @ORM\Column(name="dias", type="integer",nullable=true)
      */
     private $dias = 0;                                   
     

@@ -18,17 +18,17 @@ class Pago
     private $codigoPagoPk;   
     
     /**
-     * @ORM\Column(name="codigo_empresa_fk", type="integer")
+     * @ORM\Column(name="codigo_empresa_fk", type="integer",nullable=true)
      */
     private $codigoEmpresaFk; 
      
     /**
-     * @ORM\Column(name="codigo_empleado_fk", type="integer")
+     * @ORM\Column(name="codigo_empleado_fk", type="integer",nullable=true)
      */
     private $codigoEmpleadoFk; 
     
      /**
-     * @ORM\Column(name="codigo_pago_tipo_fk", type="integer")
+     * @ORM\Column(name="codigo_pago_tipo_fk", type="integer",nullable=true)
      */
     private $codigoPagoTipoFk; 
     
@@ -48,17 +48,17 @@ class Pago
     private $numero;
     
     /**
-     * @ORM\Column(name="vr_deducciones", type="float")
+     * @ORM\Column(name="vr_deducciones", type="float", nullable=true)
      */
     private $vrDeducciones = 0;    
     
     /**
-     * @ORM\Column(name="vr_neto", type="float")
+     * @ORM\Column(name="vr_neto", type="float", nullable=true)
      */
     private $vrNeto = 0;    
     
     /**
-     * @ORM\Column(name="vr_devengado", type="float")
+     * @ORM\Column(name="vr_devengado", type="float", nullable=true)
      */
     private $vrDevengado = 0;    
     
@@ -76,7 +76,7 @@ class Pago
     
     /**
      * @ORM\ManyToOne(targetEntity="PagoTipo", inversedBy="pagosTipoRel")
-     * @ORM\JoinColumn(name="codigo_pago_tipo_Fk", referencedColumnName="codigo_pago_tipo_pk")
+     * @ORM\JoinColumn(name="codigo_pago_tipo_fk", referencedColumnName="codigo_pago_tipo_pk")
      */
     protected $pagoTipoRel;
     

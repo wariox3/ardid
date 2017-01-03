@@ -28,49 +28,75 @@ class CargaController extends Controller {
                 $rutaTemporal = '/var/www/html/temporal/';
                 $form['attachment']->getData()->move($rutaTemporal, "carga.txt");
                 $fp = fopen($rutaTemporal . "carga.txt", "r");
+                $arUsuario = $this->getUser();
+                $arEmpresa = new \ArdidBundle\Entity\Empresa();
+                $arEmpresa = $em->getRepository('ArdidBundle:Empresa')->find($arUsuario->getCodigoEmpresaFk());
                 while (!feof($fp)) {
                     $linea = fgets($fp);
                     if ($linea) {
-                        echo $linea;
-                        
-                        /*$arrayDetalle = explode(";", $linea);
-                        $arPagos= $this->getDoctrine()->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
-                        $arPagoDetalles = $this->getDoctrine()->getRepository('ArdidBundle:PagoDetalle')->findBy(array('codigoPagoFk' => $codigoPago));
-                        */
-                        /*$arPagos = $em->getRepository('ArdidBundle:Pago')->find(array($arrayDetalle[1]));
-                        $arPagoDetalles = $em->getRepository('ArdidBundle:PagoDetalle')->find($arrayDetalle[1]);
-                        $arPagos = $em->setCodigoPk($arrayDetalle[1]);
-                        $arPagos = $em->setCodigoEmpresaFk($arrayDetalle[2]);
-                        $arPagos = $em->setCodigoEmpleadoFk($arrayDetalle[3]);
-                        $arPagos = $em->setCodigoPagoTipoFk($arrayDetalle[4]);
-                        $arPagos = $em->setFechaDesde ($arrayDetalle[5]);
-                        $arPagos = $em->setFechaHasta ($arrayDetalle[6]);
-                        $arPagos = $em->setNumero($arrayDetalle[7]);
-                        $arPagos = $em->setVrDeducciones($arrayDetalle[8]);
-                        $arPagos = $em->setVrNeto($arrayDetalle[9]);
-                        $arPagos = $em->setVrDevengado($arrayDetalle[10]);
-                        $arPagoDetalles = $em->setCodigoPagoFk($arrayDetalle[1]);
-                        $arPagoDetalles = $em->setCodigoConceptoFk($arrayDetalle[11]);
-                        $arPagoDetalles = $em->setconcepto($arrayDetalle[12]);
-                        $arPagoDetalles = $em->setVrPago($arrayDetalle[13]);
-                        $arPagoDetalles = $em->setVrNeto($arrayDetalle[9]);
-                        $arPagoDetalles = $em->setOperacion($arrayDetalle[14]);
-                        $arPagoDetalles = $em->setHoras($arrayDetalle[15]);
-                        $arPagoDetalles = $em->setDias($arrayDetalle[16]);
-                        $arPagoDetalles = $em->setPorcentaje($arrayDetalle[17]);
-                      
-                        */
+                        $tipoRegistro = substr($linea, 0, 1);
+                        if ($tipoRegistro == 1) {
+                            $tipoPago = substr($linea, 1, 2);
+                            $arPagoTipo = new \ArdidBundle\Entity\PagoTipo();
+                            $arPagoTipo = $em->getRepository('ArdidBundle:PagoTipo')->find($tipoPago);
+                            $fechaDesde = substr($linea, 3, 10);
+                            $fechaHasta = substr($linea, 13, 10);
+                            $numero = substr($linea, 23, 9);
+                            $vrDeduccion = substr($linea, 32, 11);
+                            $vrNeto = substr($linea, 43, 11);
+                            $vrDevengado = substr($linea, 54, 11);
+                            $tipoDocumento = substr ($linea, 65, 2);
+                            $numeroDocumento = substr ($linea, 67, 16);
+                            $fecha1 = date_create($fechaDesde);
+                            $fecha2 = date_create($fechaHasta);
+                            
+                            $arPago = new \ArdidBundle\Entity\Pago();
+                            $arPago->setEmpresaRel($arEmpresa);
+                            $arPago->setPagoTipoRel($arPagoTipo);
+                            $arPago->setFechaDesde($fecha1);
+                            $arPago->setFechaHasta($fecha2);
+                            $arPago->setNumero($numero);
+                            $arPago->setVrDeducciones($vrDeduccion);
+                            $arPago->setVrNeto($vrNeto);
+                            $arPago->setVrDevengado($vrDevengado);
+                            $em->persist($arPago);                          
+                        } 
+                        if ($tipoRegistro == 2) {
+                            $concepto = substr($linea, 1, 80);
+                            $vrPago = substr($linea, 81, 11);
+                            $operacion = substr($linea, 92, 1);
+                            $horas = substr($linea, 93, 10);
+                            $porcetaje = substr($linea, 103, 4);
+                            $dias = substr($linea, 107, 4);
+                            $vrNetoDetalle = substr($linea, 111, 11);
+                            $numeroDetalle = substr($linea, 122, 9);
 
-
+                            $arPagoDetalles = new \ArdidBundle\Entity\PagoDetalle();
+                            $arPagoDetalles->setconcepto($concepto);
+                            $arPagoDetalles->setVrPago($vrPago);
+                            $arPagoDetalles->setEmpresaRel($arEmpresa);
+                            $arPagoDetalles->setVrNeto($vrNetoDetalle);
+                            $arPagoDetalles->setOperacion($operacion);
+                            $arPagoDetalles->setHoras($horas);
+                            $arPagoDetalles->setDias($dias);
+                            $arPagoDetalles->setPorcentaje($porcetaje);
+                            $arPagoDetalles->setNumeroFk($numeroDetalle);
+                            $em->persist($arPagoDetalles);
                         }
-
+                        
                     }
                 }
-            }return $this->render('ArdidBundle:Administracion:Carga.html.twig', array(
-                                    'form' => $form->createView()    ));
-        } 
+                echo($tipoDocumento);
+                $em->flush();
+            }
+        }
+        return $this->render('ArdidBundle:Administracion:Carga.html.twig', array(
+                    'form' => $form->createView()));
+    }
+
 }
-        /*
+
+/*
           $objMensaje = new \Brasa\GeneralBundle\MisClases\Mensajes();
           $rutaTemporal = new \Brasa\GeneralBundle\Entity\GenConfiguracion();
           $rutaTemporal = $em->getRepository('BrasaGeneralBundle:GenConfiguracion')->find(1);
