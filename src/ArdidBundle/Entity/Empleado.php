@@ -28,27 +28,27 @@ class Empleado
     private $numeroIdentificacion; 
     
     /**
-     * @ORM\Column(name="nombre1", type="string", length=30, nullable=true)
+     * @ORM\Column(name="nombre1", type="string", length=60, nullable=true)
      */    
     private $nombre1;
     
     /**
-     * @ORM\Column(name="nombre2", type="string", length=30, nullable=true)
+     * @ORM\Column(name="nombre2", type="string", length=60, nullable=true)
      */    
     private $nombre2;
     
     /**
-     * @ORM\Column(name="apellido1", type="string", length=30, nullable=true)
+     * @ORM\Column(name="apellido1", type="string", length=60, nullable=true)
      */    
     private $apellido1;
     
     /**
-     * @ORM\Column(name="apellido2", type="string", length=30, nullable=true)
+     * @ORM\Column(name="apellido2", type="string", length=60, nullable=true)
      */    
     private $apellido2;
     
      /**
-     * @ORM\Column(name="nombre_corto", type="string", length=40, nullable=true)
+     * @ORM\Column(name="nombre_corto", type="string", length=240, nullable=true)
      */    
     private $nombreCorto;
     
@@ -63,6 +63,7 @@ class Empleado
      */
     protected $identificacionTipoRel;
    
+
 
     /**
      * Constructor

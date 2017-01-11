@@ -18,11 +18,17 @@ class IdentificacionTipo
      */
     private $identificacionTipoPk;    
     
+        /**
+     * @ORM\Column(name="nombre", type="string", length=60, nullable=true)
+     */    
+    private $nombre; 
+    
     /**
      * @ORM\OneToMany(targetEntity="Empleado", mappedBy="identificacionTipoRel")
      */
     protected $empleadosIdentificacionTipoRel;
         
+
     /**
      * Constructor
      */
@@ -39,6 +45,30 @@ class IdentificacionTipo
     public function getIdentificacionTipoPk()
     {
         return $this->identificacionTipoPk;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     *
+     * @return IdentificacionTipo
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
     }
 
     /**

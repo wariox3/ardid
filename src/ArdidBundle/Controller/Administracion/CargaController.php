@@ -31,11 +31,32 @@ class CargaController extends Controller {
                 $arUsuario = $this->getUser();
                 $arEmpresa = new \ArdidBundle\Entity\Empresa();
                 $arEmpresa = $em->getRepository('ArdidBundle:Empresa')->find($arUsuario->getCodigoEmpresaFk());
-                while (!feof($fp)) {
+ 
+                while (!feof($fp)) {                   
                     $linea = fgets($fp);
                     if ($linea) {
                         $tipoRegistro = substr($linea, 0, 1);
-                        if ($tipoRegistro == 1) {
+                        if ($tipoRegistro == 1){
+                            $tipoIdentificacion = substr($linea,1,2);
+                            $arTipoIdentificacion = new \ArdidBundle\Entity\IdentificacionTipo();
+                            $arTipoIdentificacion = $em->getRepository('ArdidBundle:IdentificacionTipo')->find($tipoIdentificacion);
+                            $numeroIdentificacion = substr($linea, 3, 16);
+                            $nombre1 = substr($linea,19,60 );
+                            $nombre2 = substr($linea, 79,60 );
+                            $apellido1= substr($linea, 139,60 );
+                            $apellido2= substr($linea,199 ,60 );
+                            
+                            $arEmpleado = new \ArdidBundle\Entity\Empleado();
+                            $arEmpleado->setIdentificacionTipoRel($arTipoIdentificacion);
+                            $arEmpleado->setNumeroIdentificacion($numeroIdentificacion);
+                            $arEmpleado->setNombre1($nombre1);
+                            $arEmpleado->setNombre2($nombre2);
+                            $arEmpleado->setApellido1($apellido1);
+                            $arEmpleado->setApellido2($apellido2);
+                            $arEmpleado->setNombreCorto($nombre1.$nombre2.$apellido1.$apellido2);
+                            $em->persist($arEmpleado);
+                        }
+                        if ($tipoRegistro == 2) {
                             $tipoPago = substr($linea, 1, 2);
                             $arPagoTipo = new \ArdidBundle\Entity\PagoTipo();
                             $arPagoTipo = $em->getRepository('ArdidBundle:PagoTipo')->find($tipoPago);
@@ -59,9 +80,9 @@ class CargaController extends Controller {
                             $arPago->setVrDeducciones($vrDeduccion);
                             $arPago->setVrNeto($vrNeto);
                             $arPago->setVrDevengado($vrDevengado);
-                            $em->persist($arPago);                          
+                            $em->persist($arPago);                        
                         } 
-                        if ($tipoRegistro == 2) {
+                        if ($tipoRegistro == 3) {
                             $concepto = substr($linea, 1, 80);
                             $vrPago = substr($linea, 81, 11);
                             $operacion = substr($linea, 92, 1);
@@ -86,7 +107,7 @@ class CargaController extends Controller {
                         
                     }
                 }
-                echo($tipoDocumento);
+              //  echo($tipoDocumento);
                 $em->flush();
             }
         }
@@ -96,83 +117,5 @@ class CargaController extends Controller {
 
 }
 
-/*
-          $objMensaje = new \Brasa\GeneralBundle\MisClases\Mensajes();
-          $rutaTemporal = new \Brasa\GeneralBundle\Entity\GenConfiguracion();
-          $rutaTemporal = $em->getRepository('BrasaGeneralBundle:GenConfiguracion')->find(1);
-         * 
-          $form = $this->createFormBuilder()
-          ->add('attachment', FileType::class)
-          ->add('BtnCargar', SubmitType::class, array('label'  => 'Cargar'))
-          ->getForm();
-          $form->handleRequest($request);
 
-          if($form->isValid()) {
-          if($form->get('BtnCargar')->isClicked()) {
-          $rutaTemporal = $em->getRepository('BrasaGeneralBundle:GenConfiguracion')->find(1);
-
-         * 
-         * 
-         * 
-         * 
-
-          $empleadoSinContrato = "";
-          $empleadoNoExiste = "";
-          while(!feof($fp)) {
-          $linea = fgets($fp);
-          if($linea){
-          $arrayDetalle = explode(";", $linea);
-          if($arrayDetalle[0] != "") {
-          $arEmpleado = new \Brasa\RecursoHumanoBundle\Entity\RhuEmpleado();
-          $arEmpleado = $em->getRepository('BrasaRecursoHumanoBundle:RhuEmpleado')->findOneBy(array('numeroIdentificacion' => $arrayDetalle[0]));
-          if(count($arEmpleado) > 0) {
-          $arEmpleadoValidar = $em->getRepository('BrasaRecursoHumanoBundle:RhuEmpleado')->findOneBy(array('numeroIdentificacion' => $arrayDetalle[0], 'codigoCentroCostoFk' => null));
-          if (count($arEmpleadoValidar) > 0){
-          $empleadoSinContrato = "El numero de identificación " .$arrayDetalle[0]. " No tiene contrato";
-          }else{
-          //Créditos
-          $arCredito = new \Brasa\RecursoHumanoBundle\Entity\RhuCredito();
-          $arCreditoTipo = new \Brasa\RecursoHumanoBundle\Entity\RhuCreditoTipo();
-          $arCreditoTipo = $em->getRepository('BrasaRecursoHumanoBundle:RhuCreditoTipo')->find($arrayDetalle[1]);
-          $arCreditoTipoPago = new \Brasa\RecursoHumanoBundle\Entity\RhuCreditoTipoPago();
-          $arCreditoTipoPago = $em->getRepository('BrasaRecursoHumanoBundle:RhuCreditoTipoPago')->find($arrayDetalle[4]);
-          $arCredito->setEmpleadoRel($arEmpleado);
-          $arCredito->setCreditoTipoRel($arCreditoTipo);
-          $arCredito->setCreditoTipoPagoRel($arCreditoTipoPago);
-          $arCredito->setCentroCostoRel($arEmpleado->getCentroCostoRel());
-          $intVrCredito = $arrayDetalle[2];
-          $arCredito->setVrPagar($intVrCredito);
-          $intCuotas = $arrayDetalle[3];
-          $arCredito->setNumeroCuotas($intCuotas);
-          $arCredito->setVrCuota($intVrCredito / $intCuotas);
-          $dateFecha = $arrayDetalle[5];
-          $dateFecha = new \DateTime($dateFecha);
-          $arCredito->setFecha(new \DateTime('now'));
-          $arCredito->setFechaInicio($dateFecha);
-          $intVrSeguro = $arrayDetalle[6];
-          $arCredito->setSeguro($intVrSeguro);
-          $em->persist($arCredito);
-          }
-          }else{
-          $empleadoNoExiste = "El numero de identificación " .$arrayDetalle[0]. " No existe";
-          }
-          }
-          }
-          }
-          fclose($fp);
-          if ($empleadoNoExiste <> ""){
-          $objMensaje->Mensaje("error", "" .$empleadoNoExiste. "");
-          }else{
-          if($empleadoSinContrato <> ""){
-          $objMensaje->Mensaje("error", "" .$empleadoSinContrato. "");
-          }else{
-          $em->flush();
-          echo "<script languaje='javascript' type='text/javascript'>window.close();window.opener.location.reload();</script>";
-          }
-          }
-          }
-          }
-          return $this->render('BrasaRecursoHumanoBundle:Movimientos/Creditos:cargarCredito.html.twig', array(
-          'form' => $form->createView()
-          ));
-          } */        
+      
