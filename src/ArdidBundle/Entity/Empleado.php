@@ -18,14 +18,14 @@ class Empleado
     private $codigoEmpleadoPk;   
     
     /**
-     * @ORM\Column(name="codigo_identificacion_tipo_fk", type="integer")
+     * @ORM\Column(name="codigo_identificacion_tipo_fk", length=2, nullable=true)
      */
     private $codigoIdentificacionTipoFk; 
      
     /**
-     * @ORM\Column(name="numero_identifacion", type="integer", length=30)
+     * @ORM\Column(name="identificacion_numero", type="integer", length=30)
      */
-    private $numeroIdentificacion; 
+    private $identificacionNumero; 
     
     /**
      * @ORM\Column(name="nombre1", type="string", length=60, nullable=true)
@@ -63,8 +63,6 @@ class Empleado
      */
     protected $identificacionTipoRel;
    
-
-
     /**
      * Constructor
      */
@@ -86,7 +84,7 @@ class Empleado
     /**
      * Set codigoIdentificacionTipoFk
      *
-     * @param integer $codigoIdentificacionTipoFk
+     * @param string $codigoIdentificacionTipoFk
      *
      * @return Empleado
      */
@@ -100,7 +98,7 @@ class Empleado
     /**
      * Get codigoIdentificacionTipoFk
      *
-     * @return integer
+     * @return string
      */
     public function getCodigoIdentificacionTipoFk()
     {
@@ -108,27 +106,27 @@ class Empleado
     }
 
     /**
-     * Set numeroIdentificacion
+     * Set identificacionNumero
      *
-     * @param integer $numeroIdentificacion
+     * @param integer $identificacionNumero
      *
      * @return Empleado
      */
-    public function setNumeroIdentificacion($numeroIdentificacion)
+    public function setIdentificacionNumero($identificacionNumero)
     {
-        $this->numeroIdentificacion = $numeroIdentificacion;
+        $this->identificacionNumero = $identificacionNumero;
 
         return $this;
     }
 
     /**
-     * Get numeroIdentificacion
+     * Get identificacionNumero
      *
      * @return integer
      */
-    public function getNumeroIdentificacion()
+    public function getIdentificacionNumero()
     {
-        return $this->numeroIdentificacion;
+        return $this->identificacionNumero;
     }
 
     /**

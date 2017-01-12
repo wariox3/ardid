@@ -6,15 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * @ORM\Table(name="IdentifiacaionTipo")
+ * @ORM\Table(name="identificacion_tipo")
  * @ORM\Entity(repositoryClass="ArdidBundle\Repository\IdentificacionTipoRepository")
  */
 class IdentificacionTipo
 {
     /**
      * @ORM\Id
-     * @ORM\Column(name="codigo_identificacion_tipo_pk", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="codigo_identificacion_tipo_pk", type="string", length=2)
      */
     private $identificacionTipoPk;    
     
@@ -38,9 +37,23 @@ class IdentificacionTipo
     }
 
     /**
+     * Set identificacionTipoPk
+     *
+     * @param string $identificacionTipoPk
+     *
+     * @return IdentificacionTipo
+     */
+    public function setIdentificacionTipoPk($identificacionTipoPk)
+    {
+        $this->identificacionTipoPk = $identificacionTipoPk;
+
+        return $this;
+    }
+
+    /**
      * Get identificacionTipoPk
      *
-     * @return integer
+     * @return string
      */
     public function getIdentificacionTipoPk()
     {
