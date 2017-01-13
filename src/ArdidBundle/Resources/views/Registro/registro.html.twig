@@ -23,15 +23,19 @@
                 <form class="form-signin" action="{{ path('registro') }}"  method="post">
                     <span id="reauth-email" class="reauth-email"></span>
                     {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Numero de identificacion'} }) }}
+                    <br />
                     {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Correo electronico'} }) }}
+                    <br />
                     {{ form_widget(form.password.first, { 'attr': {'class': 'form-control', 'placeholder': 'Contraseña'} }) }}
+                    <br />
                     {{ form_widget(form.password.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repetir contraseña'} }) }}
+                    <br />
                     <br />
                     {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-lg btn-primary btn-block btn-signin'} }) }}                    
                     <br />
                     <a href="{{ path('login') }}" class="forgot-password"/>Volver Atras</a>
 
-                {{ form_end(form) }}
+                    {{ form_end(form) }}
 
             </div><!-- /card-container -->
         </div><!-- /container -->
@@ -41,7 +45,6 @@
         <script src="assets/js/placeholder.js"></script>
         <![endif]-->
     </body>
-
 </html>    
 
 

@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\EntityRepository;
+use ArdidBundle\Entity\Empleado;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
@@ -15,11 +16,12 @@ class PagoController extends Controller
      * @Route("/consulta/pago", name="consulta_pago")
      */
     public function listaAction(Request $request)
-    {
+    {  
+        $em = $this->getDoctrine()->getManager(); 
         $arUsuario = $this->getUser();  
-        $em = $this->getDoctrine()->getManager();   
-        $arPagos = $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
-
+        $arEmpleado = new  \ArdidBundle\Entity\Empleado();
+        $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero'=>$arUsuario->getUsername()));
+        $arPagos = $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arEmpleado->getCodigoEmpleadoPk()));
         return $this->render('ArdidBundle:Consulta:pago.html.twig', array(
                     'arPagos' => $arPagos
         ));
@@ -33,8 +35,8 @@ class PagoController extends Controller
     {
         $em = $this->getDoctrine()->getManager(); 
         $arUsuario = $this->getUser(); 
-        $arPagos= $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arUsuario->getCodigoEmpleadoFk()));
-        $arPagoDetalles = $this->getDoctrine()->getRepository('ArdidBundle:PagoDetalle')->findBy(array('codigoPagoFk' => $codigoPago));
+        $arPagos= $em->getRepository('ArdidBundle:Pago')->find($codigoPago);
+        $arPagoDetalles = $this->getDoctrine()->getRepository('ArdidBundle:PagoDetalle')->findBy(array('numeroFk' => $arPagos->getNumero()));
         $form = $this->createFormBuilder()            
             ->add('BtnImprimir', SubmitType::class, array('label'  => 'Imprimir',))           
             //->add('BtnEnviarCorreo', SubmitType::class, array('label'  => 'Correo',))           
@@ -43,11 +45,11 @@ class PagoController extends Controller
         if($form->isValid()) {
             if ($form->get('BtnImprimir')->isClicked()) {
                 $objFormatoPago = new \ArdidBundle\Formato\FormatoPago();
-                $objFormatoPago->Generar($em, $codigoPago);
+                $objFormatoPago->Generar($em, $codigoPago, $arUsuario->getCodigoEmpresaFk());
             }
         }
         return $this->render('ArdidBundle:Consulta:pagoDetalle.html.twig', array(
-                    'arPagos' => $arPagos, 'arUsuario'=>$arUsuario, 'arPagoDetalles'=>$arPagoDetalles,
+                    'arPagos' => $arPagos,  'arPagoDetalles'=>$arPagoDetalles, 'em'=>$em, 'arUsuario'=>$arUsuario,
                     'form' => $form->createView() 
         ));
     }
