@@ -1,6 +1,6 @@
 <?php
 
-namespace ArdidBundle\Controller;
+namespace ArdidBundle\Controller\Seguridad;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

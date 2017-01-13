@@ -15,34 +15,28 @@
         <!-- Top content -->
         <div class="container">
             <div class="card card-container">
-                <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+
                 <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-                <p id="profile-name" class="profile-name-card"></p>
+                <p id="profile-name" class="profile-name-card"></p>                
+                {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                {{ form_errors(form) }}
                 <form class="form-signin" action="{{ path('registro') }}"  method="post">
                     <span id="reauth-email" class="reauth-email"></span>
-                   <input name="nombre1" type="text" id="nombre1" class="form-control" placeholder="Primer Nombre..." required>
-                    <input name="nombre2" type="text" id="nombre2" class="form-control" placeholder="Segundo Nombre..." required>
-                    <input name="Apellido1" type="text" id="Apellido1" class="form-control" placeholder="Primer Apellido..." required>
-                    <input name="Apellido2" type="text" id="Apellido2" class="form-control" placeholder="Segundo Apellido..." required>
-                    <select id="tipoIdentificacion" name="tipoIdentificacion" class="form-control">
-                        <option value="1">CC</option>
-                    </select>
-                    <br>
-                    <input name="identificacionNumero" type="text" id="identificacionNumero" class="form-control" placeholder="Identificacion Numero..." >
-                    <input name="password1" type="password" id="password1" class="form-control" placeholder="Clave..." required>
-                    <input name="password2" type="password" id="password2" class="form-control" placeholder="Confirme su Clave..." required>
-                    
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Registrarse</button>
-                      <a href="{{ path('login') }}" class="forgot-password"/>
-                  Volver Atras
-                </a>
-                 
-                </form><!-- /form -->
-          
+                    {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Numero de identificacion'} }) }}
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Correo electronico'} }) }}
+                    {{ form_widget(form.password.first, { 'attr': {'class': 'form-control', 'placeholder': 'Contraseña'} }) }}
+                    {{ form_widget(form.password.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repetir contraseña'} }) }}
+                    <br />
+                    {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-lg btn-primary btn-block btn-signin'} }) }}                    
+                    <br />
+                    <a href="{{ path('login') }}" class="forgot-password"/>Volver Atras</a>
+
+                {{ form_end(form) }}
+
             </div><!-- /card-container -->
         </div><!-- /container -->
         <!-- Javascript -->
-        
+
         <!--[if lt IE 10]>
         <script src="assets/js/placeholder.js"></script>
         <![endif]-->
