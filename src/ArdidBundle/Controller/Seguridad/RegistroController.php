@@ -18,7 +18,8 @@ class RegistroController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $arUser = new \ArdidBundle\Entity\User();       
         $form = $this->createForm(UserType::class, $arUser);      
-        $form->handleRequest($request);        
+        $form->handleRequest($request);   
+        $mensaje="";
         if ($form->isSubmitted()) {
             if ($form->isValid()) {                
                 $arUser = $form->getData();
@@ -33,7 +34,7 @@ class RegistroController extends Controller {
                 echo "Las contraseñas no coinciden o el correo electronico no es valido";
             }
         } 
-        return $this->render('ArdidBundle:Registro:registro.html.twig', array(
+        return $this->render('ArdidBundle:Registro:registro.html.twig', array('mensaje'=>$mensaje,
                     'form' => $form->createView()));
     }
 
