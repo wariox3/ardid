@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Ardid App!{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/web/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/responsive-slider.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/animate.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/style.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/styles.css') }}" type="text/css" rel="stylesheet" />          
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/web/jquery-2.1.1.min.js') }}"></script>           
+            <script src="{{ asset('js/web/bootstrap.min.js') }}"></script>           
+            <script src="{{ asset('js/web/responsive-slider.js') }}"></script>           
+            <script src="{{ asset('js/web/wow.min.js') }}"></script>           
+            <script src="{{ asset('js/web/jquery.easing.min.js') }}"></script>           
+            <script src="{{ asset('js/web/custom.js') }}"></script>           
+            <script src="{{ asset('js/web/jquery.min.js') }}"></script>           
+        {% endblock %}        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>        
+        {% block body %}  
+            <div class="container-fluid navbar-fixed-top">
+                <div class="navbar-header">
+                    <div class="navbar-brand ">
+                        <a href="index.html"><h1><i>Elempleado.co</i></h1></a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="index.html">Inicio</a></li>
+                        <li role="presentation"><a href="blog.html">Noticias</a></li>
+                        <li role="presentation"><a href="portfolio.html">Portafolio</a></li>
+                        <li role="presentation"><a href="contact.html">Contactenos</a></li>						
+                    </ul>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            {% block content %}
+
+            {% endblock %}     
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="widget">
+                            <h5 class="widgetheading">Nam libero tempore</h5>						
+                            <p>soluta nobis est eligendi optio cumque nihil impedit quo minus id
+                                excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
+
+                            </p>						
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget">
+                            <h5 class="widgetheading">Pages</h5>
+                            <ul class="link-list">
+                                <li><a href="#">Press release</a></li>
+                                <li><a href="#">Terms and conditions</a></li>
+                                <li><a href="#">Privacy policy</a></li>
+                                <li><a href="#">Career center</a></li>
+                                <li><a href="#">Contact us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="widget">
+                            <h5 class="widgetheading">Latest posts</h5>
+                            <ul class="link-list">
+                                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                                <li><a href="#">Pellentesque et pulvinar enim</a></li>
+                                <li><a href="#">Natus error sit voluptatem </a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="sub-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <ul class="social-network">
+                                <li><a  href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
+                                <li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
+                                <li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin fa-1x"></i></a></li>
+                                <li><a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest fa-1x"></i></a></li>
+                                <li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="copyright" style="text-align: center">
+                                <ul class="info">
+                                    <li><i class="fa fa-phone"></i> <b>¿Necesitas ayuda?</b> 444-81-20 <b>EXT:</b>122  -  <a href="#"><i class="fa fa-envelope"></i> sogasoporte2@gmail.com</a></li>
+                                </ul>
+                                <a style="text-align:center"><b>&copy;SOGA- All right reserved.</b></a>
+                                <div class="credits">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </footer>            
+        {% endblock %}   
+        <script>wow = new WOW({}).init();</script>
+    </body>
+</html>
