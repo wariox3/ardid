@@ -66,7 +66,24 @@ class PagoDetalle
     /**
      * @ORM\Column(name="dias", type="integer",nullable=true)
      */
-    private $dias = 0;                                   
+    private $dias = 0;    
+    
+
+    /**
+     * @ORM\Column(name="vr_hora", type="float",nullable=true)
+     */
+    private $vrHora = 0;    
+    
+    /**
+     * @ORM\Column(name="vr_devengado", type="float",nullable=true)
+     */
+    private $vrDevengado = 0;    
+    
+    
+    /**
+     * @ORM\Column(name="vr_deduccion", type="float",nullable=true)
+     */
+    private $vrDeduccion = 0;    
     
    
      /**
@@ -74,10 +91,6 @@ class PagoDetalle
      * @ORM\JoinColumn(name="codigo_empresa_fk", referencedColumnName="codigo_empresa_pk")
      */
     protected $empresaRel;    
-
-   
-
-    
 
 
     /**
@@ -165,7 +178,7 @@ class PagoDetalle
     /**
      * Set concepto
      *
-     * @param integer $concepto
+     * @param string $concepto
      *
      * @return PagoDetalle
      */
@@ -179,7 +192,7 @@ class PagoDetalle
     /**
      * Get concepto
      *
-     * @return integer
+     * @return string
      */
     public function getConcepto()
     {
@@ -328,6 +341,78 @@ class PagoDetalle
     public function getDias()
     {
         return $this->dias;
+    }
+
+    /**
+     * Set vrHora
+     *
+     * @param float $vrHora
+     *
+     * @return PagoDetalle
+     */
+    public function setVrHora($vrHora)
+    {
+        $this->vrHora = $vrHora;
+
+        return $this;
+    }
+
+    /**
+     * Get vrHora
+     *
+     * @return float
+     */
+    public function getVrHora()
+    {
+        return $this->vrHora;
+    }
+
+    /**
+     * Set vrDevengado
+     *
+     * @param float $vrDevengado
+     *
+     * @return PagoDetalle
+     */
+    public function setVrDevengado($vrDevengado)
+    {
+        $this->vrDevengado = $vrDevengado;
+
+        return $this;
+    }
+
+    /**
+     * Get vrDevengado
+     *
+     * @return float
+     */
+    public function getVrDevengado()
+    {
+        return $this->vrDevengado;
+    }
+
+    /**
+     * Set vrDeduccion
+     *
+     * @param float $vrDeduccion
+     *
+     * @return PagoDetalle
+     */
+    public function setVrDeduccion($vrDeduccion)
+    {
+        $this->vrDeduccion = $vrDeduccion;
+
+        return $this;
+    }
+
+    /**
+     * Get vrDeduccion
+     *
+     * @return float
+     */
+    public function getVrDeduccion()
+    {
+        return $this->vrDeduccion;
     }
 
     /**

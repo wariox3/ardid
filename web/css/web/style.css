@@ -178,7 +178,7 @@ a:hover {
 	position: absolute;
 	right: 15%;
 	top: calc(50% - 150px);
-	font-size:40px;
+	font-size:25px;
 	left: 15%;
 	z-index: 10;
 	padding-bottom: 0px;
@@ -659,4 +659,23 @@ ul.social-network li a {
 
 #sendmessage.show, #errormessage.show, .show {
 	display:block;
+}
+
+.class1 {
+	padding:20px 60px;
+	font-size:20px;
+	background:#6d9c91;
+	color:#fff;
+	border-radius:0;
+	border-color:#fff;
+	
+}
+
+.class2{
+	padding:20px 60px;
+	font-size:20px;
+	background:#fff;
+	color:#272727;
+	border-radius:0;
+	
 }

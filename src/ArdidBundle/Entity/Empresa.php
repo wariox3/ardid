@@ -8,41 +8,50 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="empresa")
  * @ORM\Entity(repositoryClass="ArdidBundle\Repository\EmpresaRepository")
  */
-class Empresa
-{
+class Empresa {
+
     /**
      * @ORM\Id
      * @ORM\Column(name="codigo_empresa_pk", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $codigoEmpresaPk;       
-        
+    private $codigoEmpresaPk;
+
     /**
      * @ORM\Column(name="nombre", type="string", length=60, nullable=true)
-     */    
+     */
     private $nombre;
-                   
-     /**
+
+    /**
+     * @ORM\Column(name="direccion", type="string", length=60, nullable=true)
+     */
+    private $direccion;
+
+    /**
+     * @ORM\Column(name="telefono", type="string", length=60, nullable=true)
+     */
+    private $telefono;
+
+    /**
      * @ORM\Column(name="nit", type="string", length=20, nullable=true)
-     */    
+     */
     private $nit;
-    
-     /**
+
+    /**
      * @ORM\Column(name="digito_verificacion", type="string", length=1, nullable=true)
-     */    
-    private $digitoVerificacion;    
-    
+     */
+    private $digitoVerificacion;
+
     /**
      * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="empresaRel")
      */
-    protected $pagosDetallesEmpresaRel;    
-   
-     /**
+    protected $pagosDetallesEmpresaRel;
+
+    /**
      * @ORM\OneToMany(targetEntity="Pago", mappedBy="empresaRel")
      */
-    protected $pagosEmpresaRel;   
-    
-  
+    protected $pagosEmpresaRel;
+
 
     /**
      * Constructor
@@ -85,6 +94,54 @@ class Empresa
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set direccion
+     *
+     * @param string $direccion
+     *
+     * @return Empresa
+     */
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * Get direccion
+     *
+     * @return string
+     */
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     *
+     * @return Empresa
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
     }
 
     /**

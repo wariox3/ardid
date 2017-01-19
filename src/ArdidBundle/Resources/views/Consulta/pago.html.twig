@@ -2,44 +2,60 @@
 {% block title %}Pagos lista{% endblock %} 
 {% block content %}
 
-<div class="container">
-  <h2>PAGOS</h2>
-  <table class="table table-striped table-bordered table-condensed">
-    <thead>
-      <tr>
-          <th>ID</th>
-          <th>PAGO TIPO</th>
-          <th>NUMERO</th>
-          <th>EMPRESA</th>
-          <th>EMPLEADO</th>
-          <th>DESDE</th>
-          <th>HASTA</th>
-          <th>DEDUCCION</th>
-          <th>DEVENGADO</th>
-          <th>NETO</th>
-          <th></th>
-      </tr>
-    </thead>
-    <tbody>
-        
-    {% for arPagos in arPagos %}
-     <tr>
-         <th scope="row">{{arPagos.codigoPagoPk}}</th> 
-        <td>{{arPagos.pagoTipoRel.nombre}}</td>
-         <td style="text-align: right">{{arPagos.numero}}</td>
-         <td>{{arPagos.empresaRel.nombre}}</td>
-         <td>{{arPagos.empleadoRel.nombre1}}</td>
-         <td>{{arPagos.fechaDesde|date('Y-m-d')}}</td>
-         <td>{{arPagos.fechaHasta|date('Y-m-d')}}</td>
-         <td style="text-align: right">{{arPagos.vrDeducciones}}</td>
-         <td style="text-align: right">{{arPagos.vrDevengado}}</td>
-         <td style="text-align: right">{{arPagos.vrNeto}}</td>
-         <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=22 height=22></a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+    <div class="container">
+        <h2>PAGOS</h2>
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>PAGO TIPO</th>
+                    <th>NUMERO</th>
+                    <th>EMPLEADO</th>
+                    <th>EMPRESA</th>
+                    <th>CARGO</th>
+                    <th>CENTRO COSTOS</th>
+                    <th>ZONA</th>
+                    <th>PERIODO PAGO</th>
+                    <th>CUENTA</th>
+                    <th>BANCO</th>
+                    <th>PENSION</th>
+                    <th>SALUD</th>
+                    <th>DESDE</th>
+                    <th>HASTA</th>
+                    <th>DEDUCCION</th>
+                    <th>DEVENGADO</th>
+                    <th>NETO</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for arPagos in arPagos %}
+                    <tr>
+                        <th scope="row">{{arPagos.codigoPagoPk}}</th> 
+                        <td>{{arPagos.pagoTipoRel.nombre}}</td>
+                        <td style="text-align: right">{{arPagos.numero}}</td>
+                        <td>{{arPagos.empleadoRel.nombre1}}</td>
+                        <td>{{arPagos.empresaRel.nombre}}</td>
+                        <td>{{arPagos.cargo}}</td>
+                        <td>{{arPagos.centroCostos}}</td>
+                        <td>{{arPagos.zona}}</td>
+                        <td>{{arPagos.periodoPago}}</td>
+                        <td>{{arPagos.cuenta}}</td>
+                        <td>{{arPagos.banco}}</td>
+                        <td>{{arPagos.pension}}</td>
+                        <td>{{arPagos.salud}}</td>
+                        <td>{{arPagos.fechaDesde|date('Y-m-d')}}</td>
+                        <td>{{arPagos.fechaHasta|date('Y-m-d')}}</td>
+                        <td style="text-align: right">{{arPagos.vrDeducciones}}</td>
+                        <td style="text-align: right">{{arPagos.vrDevengado}}</td>
+                        <td style="text-align: right">{{arPagos.vrNeto}}</td>
+                        <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=22 height=22></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
 
