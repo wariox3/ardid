@@ -1,0 +1,42 @@
+{# empty Twig template #}
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>ArdidApp</title>
+        {% block stylesheets %}   
+            <link href="{{ asset('login/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />                        
+        {% endblock %}
+        <link href="{{ asset('login/css/styles.css') }}" type="text/css" rel="stylesheet" /> 
+    </head>
+    <body> 
+        <!-- Top content -->
+        <div class="container">
+            <div class="card card-container">
+                <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                <p id="profile-name" class="profile-name-card"></p>                
+                {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+                {{ form_errors(form) }}
+                <form class="form-signin" action="{{ path('registro') }}"  method="post">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Numero de identificacion'} }) }}
+                    <br />
+                    {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Correo electronico'} }) }}
+                    <br />
+                    <br />
+                    {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-lg btn-primary btn-block btn-signin'} }) }}                    
+                    <br />
+                    {% if mensaje != null%}
+                        <div align="center">
+                             <i> <h3  class="alert-danger">{{mensaje}}</h3></i>
+                        </div>
+                    {% endif%}
+                       <br />
+                    <a href="{{ path('login') }}" class="forgot-password"/>Volver atras</a>
+                    {{ form_end(form) }}
+            </div>
+    </body>
+</html>    
+
+

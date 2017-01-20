@@ -18,24 +18,19 @@ class RegistroController extends Controller {
     public function registroAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $arUser = new \ArdidBundle\Entity\User();
-
         $form = $this->createForm(UserType::class, $arUser);
         $form->handleRequest($request);
         $arUser = $em->getRepository('ArdidBundle:User')->findOneBy(array('username' => $form->get('username')->getData()));
         $mensaje = "";
         if ($form->isSubmitted()) {
-            //$strSql1 = "SELECT id FROM user WHERE id = " . $codigoEmpresa . " AND numero = '" . $numero . "'";
-
             if ($form->isValid()) {
                 $arUser = $form->getData();
                 $factory = $this->get('security.encoder_factory');
                 $encoder = $factory->getEncoder($arUser);
                 $password = $encoder->encodePassword($arUser->getPassword(), $arUser->getSalt());
-                // $arUser->setPassword($password);
                 $arUsuarios = new \ArdidBundle\Entity\User();
                 $arUsuarios = $em->getRepository('ArdidBundle:User')->findAll();
                 $validar = true;
-
                 foreach ($arUsuarios as $arUsuarios) {
                     $identificacion = $arUsuarios->getUsername();
                     $email = $arUsuarios->getEmail();
@@ -59,5 +54,4 @@ class RegistroController extends Controller {
                     'form' => $form->createView()
         ));
     }
-
 }
