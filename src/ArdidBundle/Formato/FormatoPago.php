@@ -150,7 +150,7 @@ class FormatoPago extends \FPDF {
         $pdf->Cell(22, 6, "CENTRO COSTOS:", 1, 0, 'L', 1);
         $pdf->SetFont('Arial', '', 7);
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->Cell(78, 6, $arPagos->getCentroCostos(), 1, 0, 'L', 1);
+        $pdf->Cell(78, 6, $arPagos->getGrupoDePago(), 1, 0, 'L', 1);
         $pdf->SetFont('Arial', 'B', 6.5);
         $pdf->SetFillColor(200, 200, 200);
         $pdf->Cell(24, 6, "DESE:", 1, 0, 'L', 1);
@@ -182,7 +182,7 @@ class FormatoPago extends \FPDF {
         $pdf->Cell(24, 6, "SALARIO:", 1, 0, 'L', 1);
         $pdf->SetFont('Arial', '', 7);
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->Cell(24, 6,$arPagos->getSalario(), 1, 0, 'R', 1);
+        $pdf->Cell(24, 6,$arPagos->getVrSalario(), 1, 0, 'R', 1);
     
         $arPagoDetalles = new \ArdidBundle\Entity\PagoDetalle();
         $arPagoDetalles = self::$em->getRepository('ArdidBundle:PagoDetalle')->findBy(array('numeroFk' => $arPagos->getNumero()));
