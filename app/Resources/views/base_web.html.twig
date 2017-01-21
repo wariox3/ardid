@@ -1,120 +1,128 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+     
         <title>{% block title %}Ardid App!{% endblock %}</title>
         {% block stylesheets %}
-            <link href="{{ asset('css/web/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />          
-            <link href="{{ asset('css/web/responsive-slider.css') }}" type="text/css" rel="stylesheet" />          
-            <link href="{{ asset('css/web/animate.css') }}" type="text/css" rel="stylesheet" />          
-            <link href="{{ asset('css/web/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />          
-            <link href="{{ asset('css/web/style.css') }}" type="text/css" rel="stylesheet" />          
-            <link href="{{ asset('css/web/styles.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/freelancer.min.css') }}" type="text/css" rel="stylesheet" />          
+            <link href="{{ asset('css/web/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/web/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />            
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+            <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
         {% endblock %}
         {% block javascripts %}
-            <script src="{{ asset('js/web/jquery-2.1.1.min.js') }}"></script>           
-            <script src="{{ asset('js/web/bootstrap.min.js') }}"></script>           
-            <script src="{{ asset('js/web/responsive-slider.js') }}"></script>           
-            <script src="{{ asset('js/web/wow.min.js') }}"></script>           
-            <script src="{{ asset('js/web/jquery.easing.min.js') }}"></script>           
-            <script src="{{ asset('js/web/custom.js') }}"></script>           
-            <script src="{{ asset('js/web/jquery.min.js') }}"></script>           
+            <script src="{{ asset('js/web/jquery.min.js') }}"></script> 
+            <script src="{{ asset('js/web/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/web/contact_me.js') }}"></script>
+            <script src="{{ asset('js/web/freelancer.min.js') }}"></script>
+            <script src="{{ asset('js/web/jqBootstrapValidation.js') }}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
         {% endblock %}        
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>        
         {% block body %}  
-            <div class="container-fluid navbar-fixed-top">
-                <div class="navbar-header">
-                    <div class="navbar-brand ">
-                        <a href="index.html"><h1><i>Elempleado.co</i></h1></a>
+            <!-- Navigation -->
+            <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                        </button>
+                        <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
                     </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="hidden">
+                                <a href="#page-top"></a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="#portfolio">Portfolio</a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="#about">About</a>
+                            </li>
+                            <li class="page-scroll">
+                                <a href="#contact">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
                 </div>
-                <div class="menu">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="index.html">Inicio</a></li>
-                        <li role="presentation"><a href="blog.html">Noticias</a></li>
-                        <li role="presentation"><a href="portfolio.html">Portafolio</a></li>
-                        <li role="presentation"><a href="contact.html">Contactenos</a></li>						
-                    </ul>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            {% block content %}
+                <!-- /.container-fluid -->
+            </nav>
 
-            {% endblock %}     
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <h5 class="widgetheading">Nam libero tempore</h5>						
-                            <p>soluta nobis est eligendi optio cumque nihil impedit quo minus id
-                                excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui
-
-                            </p>						
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <h5 class="widgetheading">Pages</h5>
-                            <ul class="link-list">
-                                <li><a href="#">Press release</a></li>
-                                <li><a href="#">Terms and conditions</a></li>
-                                <li><a href="#">Privacy policy</a></li>
-                                <li><a href="#">Career center</a></li>
-                                <li><a href="#">Contact us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="widget">
-                            <h5 class="widgetheading">Latest posts</h5>
-                            <ul class="link-list">
-                                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="#">Pellentesque et pulvinar enim</a></li>
-                                <li><a href="#">Natus error sit voluptatem </a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="sub-footer">
+            <!-- Header -->
+            <header>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <ul class="social-network">
-                                <li><a  href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook fa-1x"></i></a></li>
-                                <li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter fa-1x"></i></a></li>
-                                <li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin fa-1x"></i></a></li>
-                                <li><a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest fa-1x"></i></a></li>
-                                <li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus fa-1x"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="copyright" style="text-align: center">
-                                <ul class="info">
-                                    <li><i class="fa fa-phone"></i> <b>¿Necesitas ayuda?</b> 444-81-20 <b>EXT:</b>122  -  <a href="#"><i class="fa fa-envelope"></i> sogasoporte2@gmail.com</a></li>
-                                </ul>
-                                <a style="text-align:center"><b>&copy;SOGA- All right reserved.</b></a>
-                                <div class="credits">
-                                </div>
+                            <img class="img-responsive"  src="{{ asset('/imagenes/web/profile.png') }}" alt="">
+                            <div class="intro-text">
+                                <span class="name">Start Bootstrap</span>
+                                <hr class="star-light">
+                                <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
                             </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-        </footer>            
+            </header>
+            {% block content %}
+
+
+            {% endblock %}     
+            <!-- Footer -->
+            <footer class="text-center">
+                <div class="footer-above">
+                    <div class="container">
+                        <div class="row">
+                            <div class="footer-col col-md-4">
+                                <h3>Location</h3>
+                                <p>3481 Melrose Place
+                                    <br>Beverly Hills, CA 90210</p>
+                            </div>
+                            <div class="footer-col col-md-4">
+                                <h3>Around the Web</h3>
+                                <ul class="list-inline">
+                                    <li>
+                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="footer-col col-md-4">
+                                <h3>About Freelancer</h3>
+                                <p>Freelance is a free to use, open source Bootstrap theme created by <a href="http://startbootstrap.com">Start Bootstrap</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-below">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Copyright &copy; Your Website 2016
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         {% endblock %}   
-        <script>wow = new WOW({}).init();</script>
+
     </body>
-</html>
+</html> 

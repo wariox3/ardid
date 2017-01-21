@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
 {% block title %}Pagos lista{% endblock %} 
 {% block content %}
-
     <div class="container">
         <h2>PAGOS</h2>
         <table class="table table-striped table-bordered table-condensed">
@@ -36,7 +35,7 @@
                         <th scope="row">{{arPagos.codigoPagoPk}}</th> 
                         <td>{{arPagos.pagoTipoRel.nombre}}</td>
                         <td style="text-align: right">{{arPagos.numero}}</td>
-                        <td>{{arPagos.empleadoRel.nombre1}}</td>
+                        <td>{{arPagos.empleadoRel.nombreCorto | default('')}}</td>
                         <td>{{arPagos.empresaRel.nombre}}</td>
                         <td>{{arPagos.cargo}}</td>
                         <td>{{arPagos.grupoDePago}}</td>
@@ -50,8 +49,8 @@
                         <td>{{arPagos.fechaHasta|date('Y-m-d')}}</td>
                         <td style="text-align: right">{{arPagos.vrSalario}}</td>
                         <td style="text-align: right">{{arPagos.vrDeducciones}}</td>
-                        <td style="text-align: right">{{arPagos.vrDevengado}}</td>
-                        <td style="text-align: right">{{arPagos.vrNeto}}</td>
+                        <td style="text-align: right">{{arPagos.vrDevengado}}</td>                        
+                        <td style="text-align: right">{{ arPagos.vrNeto | number_format(0, '.', ',') }}</td> 
                         <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=22 height=22></a></td>
                     </tr>
                 {% endfor %}

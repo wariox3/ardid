@@ -34,6 +34,11 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @ORM\Column(name="codigo_verificacion", type="string", length=100)
+     */
+    private $codigoVerificacion;    
+    
+    /**
      * @ORM\Column(name="codigo_empleado_fk", type="integer", nullable=true)
      */
     private $codigoEmpleadoFk;      
@@ -238,5 +243,29 @@ class User implements UserInterface, \Serializable
     public function getCodigoEmpresaFk()
     {
         return $this->codigoEmpresaFk;
+    }
+
+    /**
+     * Set codigoVerificacion
+     *
+     * @param string $codigoVerificacion
+     *
+     * @return User
+     */
+    public function setCodigoVerificacion($codigoVerificacion)
+    {
+        $this->codigoVerificacion = $codigoVerificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoVerificacion
+     *
+     * @return string
+     */
+    public function getCodigoVerificacion()
+    {
+        return $this->codigoVerificacion;
     }
 }

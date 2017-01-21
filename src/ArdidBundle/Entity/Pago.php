@@ -101,6 +101,11 @@ class Pago {
      * @ORM\Column(name="vr_neto", type="float", nullable=true)
      */
     private $vrNeto = 0;
+    
+     /**
+     * @ORM\Column(name="vr_salario_empleado", type="float", nullable=true)
+     */
+    private $vrSalarioEmpleado = 0;
 
     /**
      * @ORM\Column(name="vr_devengado", type="float", nullable=true)
@@ -124,6 +129,20 @@ class Pago {
      * @ORM\JoinColumn(name="codigo_pago_tipo_fk", referencedColumnName="codigo_pago_tipo_pk")
      */
     protected $pagoTipoRel;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="pagoRel")
+     */
+    protected $pagosDetallesPagoRel;
+
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->pagosDetallesPagoRel = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get codigoPagoPk
@@ -544,6 +563,30 @@ class Pago {
     }
 
     /**
+     * Set vrSalarioEmpleado
+     *
+     * @param float $vrSalarioEmpleado
+     *
+     * @return Pago
+     */
+    public function setVrSalarioEmpleado($vrSalarioEmpleado)
+    {
+        $this->vrSalarioEmpleado = $vrSalarioEmpleado;
+
+        return $this;
+    }
+
+    /**
+     * Get vrSalarioEmpleado
+     *
+     * @return float
+     */
+    public function getVrSalarioEmpleado()
+    {
+        return $this->vrSalarioEmpleado;
+    }
+
+    /**
      * Set vrDevengado
      *
      * @param float $vrDevengado
@@ -637,5 +680,39 @@ class Pago {
     public function getPagoTipoRel()
     {
         return $this->pagoTipoRel;
+    }
+
+    /**
+     * Add pagosDetallesPagoRel
+     *
+     * @param \ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel
+     *
+     * @return Pago
+     */
+    public function addPagosDetallesPagoRel(\ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel)
+    {
+        $this->pagosDetallesPagoRel[] = $pagosDetallesPagoRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove pagosDetallesPagoRel
+     *
+     * @param \ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel
+     */
+    public function removePagosDetallesPagoRel(\ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel)
+    {
+        $this->pagosDetallesPagoRel->removeElement($pagosDetallesPagoRel);
+    }
+
+    /**
+     * Get pagosDetallesPagoRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPagosDetallesPagoRel()
+    {
+        return $this->pagosDetallesPagoRel;
     }
 }

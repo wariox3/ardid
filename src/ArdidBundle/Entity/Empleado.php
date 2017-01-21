@@ -52,6 +52,11 @@ class Empleado
      */    
     private $nombreCorto;
     
+     /**
+     * @ORM\Column(name="correo", type="string", length=240, nullable=true)
+     */    
+    private $correo;
+    
     /**
      * @ORM\OneToMany(targetEntity="Pago", mappedBy="empleadoRel")
      */
@@ -63,6 +68,7 @@ class Empleado
      */
     protected $identificacionTipoRel;
    
+    
     /**
      * Constructor
      */
@@ -247,6 +253,30 @@ class Empleado
     public function getNombreCorto()
     {
         return $this->nombreCorto;
+    }
+
+    /**
+     * Set correo
+     *
+     * @param string $correo
+     *
+     * @return Empleado
+     */
+    public function setCorreo($correo)
+    {
+        $this->correo = $correo;
+
+        return $this;
+    }
+
+    /**
+     * Get correo
+     *
+     * @return string
+     */
+    public function getCorreo()
+    {
+        return $this->correo;
     }
 
     /**

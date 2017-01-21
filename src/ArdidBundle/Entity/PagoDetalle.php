@@ -8,89 +8,86 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="pago_detalle")
  * @ORM\Entity(repositoryClass="ArdidBundle\Repository\PagoDetalleRepository")
  */
-class PagoDetalle
-{
+class PagoDetalle {
+
     /**
      * @ORM\Id
      * @ORM\Column(name="codigo_pago_detalle_pk", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $codigoPagoDetallePk;           
+    private $codigoPagoDetallePk;
+
+    /**
+     * @ORM\Column(name="codigo", type="integer",nullable=true)
+     */
+    private $codigo;    
     
     /**
      * @ORM\Column(name="codigo_empresa_fk", type="integer",nullable=true)
      */
-    private $codigoEmpresaFk; 
+    private $codigoEmpresaFk;
+
+    /**
+     * @ORM\Column(name="numero", type="integer",nullable=true)
+     */
+    private $numero;    
     
     /**
-     * @ORM\Column(name="codigo_numero_fk", type="integer",nullable=true)
+     * @ORM\Column(name="codigo_pago_fk", type="integer",nullable=true)
      */
-    private $numeroFk; 
-    
+    private $codigoPagoFk;
+
     /**
      * @ORM\Column(name="codigo_concepto_fk", type="integer",nullable=true)
      */
     private $codigoConceptoFk;
-    
+
     /**
-     * @ORM\Column(name="concepto", type="string",nullable=true)
+     * @ORM\Column(name="nombre_concepto", type="string",nullable=true)
      */
-    private $concepto;
-    
+    private $nombreConcepto;
+
     /**
      * @ORM\Column(name="vr_pago", type="float",nullable=true)
      */
-    private $vrPago = 0;     
+    private $vrPago = 0;
 
     /**
      * @ORM\Column(name="operacion", type="integer",nullable=true)
      */
     private $operacion = 0;
-    
-    /**
-     * @ORM\Column(name="vr_pago_neto", type="float",nullable=true)
-     */
-    private $vrNeto= 0;    
-    
+
     /**
      * @ORM\Column(name="horas", type="float",nullable=true)
      */
-    private $horas = 0;    
-    
-    
+    private $horas = 0;
+
     /**
      * @ORM\Column(name="porcentaje", type="float",nullable=true)
      */
-    private $porcentaje = 0;    
-    
+    private $porcentaje = 0;
+
     /**
      * @ORM\Column(name="dias", type="integer",nullable=true)
      */
-    private $dias = 0;    
-    
+    private $dias = 0;
 
     /**
      * @ORM\Column(name="vr_hora", type="float",nullable=true)
      */
-    private $vrHora = 0;    
-    
+    private $vrHora = 0;
+
     /**
-     * @ORM\Column(name="vr_devengado", type="float",nullable=true)
-     */
-    private $vrDevengado = 0;    
-    
-    
-    /**
-     * @ORM\Column(name="vr_deduccion", type="float",nullable=true)
-     */
-    private $vrDeduccion = 0;    
-    
-   
-     /**
      * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="pagosDetallesEmpresaRel")
      * @ORM\JoinColumn(name="codigo_empresa_fk", referencedColumnName="codigo_empresa_pk")
      */
-    protected $empresaRel;    
+    protected $empresaRel;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="pago", inversedBy="pagosDetallesPagoRel")
+     * @ORM\JoinColumn(name="codigo_pago_fk", referencedColumnName="codigo_pago_pk")
+     */
+    protected $pagoRel;
 
 
     /**
@@ -101,6 +98,30 @@ class PagoDetalle
     public function getCodigoPagoDetallePk()
     {
         return $this->codigoPagoDetallePk;
+    }
+
+    /**
+     * Set codigo
+     *
+     * @param integer $codigo
+     *
+     * @return PagoDetalle
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return integer
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
 
     /**
@@ -128,27 +149,27 @@ class PagoDetalle
     }
 
     /**
-     * Set numeroFk
+     * Set codigoPagoFk
      *
-     * @param integer $numeroFk
+     * @param integer $codigoPagoFk
      *
      * @return PagoDetalle
      */
-    public function setNumeroFk($numeroFk)
+    public function setCodigoPagoFk($codigoPagoFk)
     {
-        $this->numeroFk = $numeroFk;
+        $this->codigoPagoFk = $codigoPagoFk;
 
         return $this;
     }
 
     /**
-     * Get numeroFk
+     * Get codigoPagoFk
      *
      * @return integer
      */
-    public function getNumeroFk()
+    public function getCodigoPagoFk()
     {
-        return $this->numeroFk;
+        return $this->codigoPagoFk;
     }
 
     /**
@@ -176,27 +197,27 @@ class PagoDetalle
     }
 
     /**
-     * Set concepto
+     * Set nombreConcepto
      *
-     * @param string $concepto
+     * @param string $nombreConcepto
      *
      * @return PagoDetalle
      */
-    public function setConcepto($concepto)
+    public function setNombreConcepto($nombreConcepto)
     {
-        $this->concepto = $concepto;
+        $this->nombreConcepto = $nombreConcepto;
 
         return $this;
     }
 
     /**
-     * Get concepto
+     * Get nombreConcepto
      *
      * @return string
      */
-    public function getConcepto()
+    public function getNombreConcepto()
     {
-        return $this->concepto;
+        return $this->nombreConcepto;
     }
 
     /**
@@ -245,30 +266,6 @@ class PagoDetalle
     public function getOperacion()
     {
         return $this->operacion;
-    }
-
-    /**
-     * Set vrNeto
-     *
-     * @param float $vrNeto
-     *
-     * @return PagoDetalle
-     */
-    public function setVrNeto($vrNeto)
-    {
-        $this->vrNeto = $vrNeto;
-
-        return $this;
-    }
-
-    /**
-     * Get vrNeto
-     *
-     * @return float
-     */
-    public function getVrNeto()
-    {
-        return $this->vrNeto;
     }
 
     /**
@@ -368,54 +365,6 @@ class PagoDetalle
     }
 
     /**
-     * Set vrDevengado
-     *
-     * @param float $vrDevengado
-     *
-     * @return PagoDetalle
-     */
-    public function setVrDevengado($vrDevengado)
-    {
-        $this->vrDevengado = $vrDevengado;
-
-        return $this;
-    }
-
-    /**
-     * Get vrDevengado
-     *
-     * @return float
-     */
-    public function getVrDevengado()
-    {
-        return $this->vrDevengado;
-    }
-
-    /**
-     * Set vrDeduccion
-     *
-     * @param float $vrDeduccion
-     *
-     * @return PagoDetalle
-     */
-    public function setVrDeduccion($vrDeduccion)
-    {
-        $this->vrDeduccion = $vrDeduccion;
-
-        return $this;
-    }
-
-    /**
-     * Get vrDeduccion
-     *
-     * @return float
-     */
-    public function getVrDeduccion()
-    {
-        return $this->vrDeduccion;
-    }
-
-    /**
      * Set empresaRel
      *
      * @param \ArdidBundle\Entity\Empresa $empresaRel
@@ -437,5 +386,53 @@ class PagoDetalle
     public function getEmpresaRel()
     {
         return $this->empresaRel;
+    }
+
+    /**
+     * Set pagoRel
+     *
+     * @param \ArdidBundle\Entity\pago $pagoRel
+     *
+     * @return PagoDetalle
+     */
+    public function setPagoRel(\ArdidBundle\Entity\pago $pagoRel = null)
+    {
+        $this->pagoRel = $pagoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get pagoRel
+     *
+     * @return \ArdidBundle\Entity\pago
+     */
+    public function getPagoRel()
+    {
+        return $this->pagoRel;
+    }
+
+    /**
+     * Set numero
+     *
+     * @param integer $numero
+     *
+     * @return PagoDetalle
+     */
+    public function setNumero($numero)
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    /**
+     * Get numero
+     *
+     * @return integer
+     */
+    public function getNumero()
+    {
+        return $this->numero;
     }
 }
