@@ -23,7 +23,7 @@ class SeguridadController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('ArdidBundle:seguridad:login.html.twig', array(
+        return $this->render('ArdidBundle:Seguridad:login.html.twig', array(
             'last_username' => $lastUsername,
             'error'         => $error,
         ));        
@@ -38,38 +38,58 @@ class SeguridadController extends Controller
     }    
     
     /**
-     * @Route("/registrar", name="registrar")
+     * @Route("/registro", name="registro")
      */
-    public function registrarAction(Request $request)
-    {
-        // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
-
-            // 4) save the User!
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            return $this->redirectToRoute('replace_with_some_route');
+    public function registroAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $arUser = new \ArdidBundle\Entity\User();
+        $form = $this->createForm(UserType::class, $arUser);
+        $form->handleRequest($request);        
+        $mensaje = "";
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $arUser = $form->getData();
+                $factory = $this->get('security.encoder_factory');
+                $encoder = $factory->getEncoder($arUser);
+                $password = $encoder->encodePassword($arUser->getPassword(), $arUser->getSalt());
+                $arUsuarioValidar = new \ArdidBundle\Entity\User();
+                $arUsuarioValidar = $em->getRepository('ArdidBundle:User')->findBy(array('username' => $arUser->getUsername()));
+                if($arUsuarioValidar) {
+                    $mensaje = "El usuario ya existe, intente restablecer la contraseña";
+                } else {
+                    $arEmpleado = new \ArdidBundle\Entity\Empleado();
+                    $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero' => $arUser->getUsername()));                    
+                    if($arEmpleado) {
+                        if($arUser->getEmail() == $arEmpleado->getCorreo()) {
+                            $an = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-)(.:,;";
+                            $su = strlen($an) - 1;
+                            $codigo = substr($an, rand(0, $su), 1) .
+                                    substr($an, rand(0, $su), 1) .
+                                    substr($an, rand(0, $su), 1) .
+                                    substr($an, rand(0, $su), 1) .
+                                    substr($an, rand(0, $su), 1) .
+                                    substr($an, rand(0, $su), 1); 
+                            $arUser->setCodigoVerificacion($codigo);
+                            $arUser->setPassword($password);
+                            $arUser->setCodigoEmpleadoFk($arEmpleado->getCodigoEmpleadoPk());
+                            //$arUser->setIsActive(1);
+                            $em->persist($arUser);
+                            $em->flush();                            
+                            return $this->redirect($this->generateUrl('login'));                                                    
+                        } else {
+                            $mensaje = "Correo electronico diferente al registrado en empleado: " . $arEmpleado->getCorreo();
+                        }
+                    } else {
+                        $mensaje = "Este numero de identificacion no registra movimientos en la plataforma, no se puede crear el usuario";
+                    }
+                }                
+            } else {
+                $mensaje = "Verifique las contraseñas y un correo valido";
+            }
         }
-
-        return $this->render(
-            'registration/register.html.twig',
-            array('form' => $form->createView())
-        );
-    }           
+        return $this->render('ArdidBundle:Seguridad:registro.html.twig', array('mensaje' => $mensaje,
+                    'form' => $form->createView()
+        ));
+    }         
       
 }
