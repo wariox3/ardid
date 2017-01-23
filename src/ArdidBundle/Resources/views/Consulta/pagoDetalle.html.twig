@@ -19,7 +19,8 @@
                                 <th style="text-align: right">DIAS</th>
                                 <th style="text-align: right">VR.HORA</th>
                                 <th style="text-align: right">PORCENTAJE</th>
-                                <th style="text-align: right">PAGO</th>
+                                <th style="text-align: right">DEVENGADO</th>
+                                <th style="text-align: right">DEDUCCION</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,9 +30,20 @@
                                     <td>{{arPagoDetalles.nombreConcepto}}</td> 
                                     <td style="text-align: right">{{arPagoDetalles.horas}}</td>
                                     <td style="text-align: right">{{arPagoDetalles.dias}}</td>
-                                    <td style="text-align: right">{{arPagoDetalles.vrHora}}</td>
+                                    <td style="text-align: right">{{ arPagoDetalles.vrHora | number_format(0, '.', ',') }}</td>
                                     <td style="text-align: right">{{arPagoDetalles.porcentaje}}</td>
-                                    <td style="text-align: right">{{arPagoDetalles.vrPago}}</td> 
+                                    {% if arPagoDetalles.operacion == 1 %}
+                                        <td style="text-align: right">{{ arPagoDetalles.vrPago | number_format(0, '.', ',') }}</td> 
+                                        <td style="text-align: right">0</td>
+                                    {% endif %}
+                                    {% if arPagoDetalles.operacion == -1 %}
+                                        <td style="text-align: right">0</td>
+                                        <td style="text-align: right">{{ arPagoDetalles.vrPago | number_format(0, '.', ',') }}</td>                                        
+                                    {% endif %}
+                                    {% if arPagoDetalles.operacion == 0 %}
+                                        <td style="text-align: right">0</td>
+                                        <td style="text-align: right">0</td>                                         
+                                    {% endif %}                                    
                                 </tr>
                             {% endfor %}                           
                         </tbody>
