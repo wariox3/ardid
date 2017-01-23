@@ -72,6 +72,7 @@ class SeguridadController extends Controller
                             $arUser->setCodigoVerificacion($codigo);
                             $arUser->setPassword($password);
                             $arUser->setCodigoEmpleadoFk($arEmpleado->getCodigoEmpleadoPk());
+                            $arUser->setNombreCorto($arEmpleado->getNombre1() . " " . $arEmpleado->getNombre2());
                             //$arUser->setIsActive(1);
                             $em->persist($arUser);
                             $em->flush();                            

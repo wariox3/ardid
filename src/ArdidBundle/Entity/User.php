@@ -49,14 +49,10 @@ class User implements UserInterface, \Serializable
     private $codigoEmpresaFk;    
 
     /**
-     * @ORM\Column(name="nombre1", type="string", length=50, unique=true)
+     * @ORM\Column(name="nombre_corto", type="string", length=50, nullable=true)
      */
-    private $nombre1;    
-
-    /**
-     * @ORM\Column(name="nombre2", type="string", length=50, unique=true)
-     */
-    private $nombre2;    
+    private $nombreCorto;    
+   
     
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -324,5 +320,29 @@ class User implements UserInterface, \Serializable
     public function getNombre2()
     {
         return $this->nombre2;
+    }
+
+    /**
+     * Set nombreCorto
+     *
+     * @param string $nombreCorto
+     *
+     * @return User
+     */
+    public function setNombreCorto($nombreCorto)
+    {
+        $this->nombreCorto = $nombreCorto;
+
+        return $this;
+    }
+
+    /**
+     * Get nombreCorto
+     *
+     * @return string
+     */
+    public function getNombreCorto()
+    {
+        return $this->nombreCorto;
     }
 }
