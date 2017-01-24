@@ -1,6 +1,7 @@
 {% extends '::base2.html.twig' %}
 {% block title %}Ardid app{% endblock %}
 {% block content %}
+     
     <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
     <div class="row">
         <div class="col-xs-12">
@@ -22,13 +23,16 @@
                                 <th>Periodo</th>
                                 <th>Desde</th>
                                 <th>Hasta</th>
-                                <th>Salario</th>
-                                <th>Deducciones</th>
-                                <th>Devengados</th>
-                                <th>Neto</th>
+                                <th style="text-align: right">Salario</th>
+                                <th style="text-align: right">Deducciones</th>
+                                <th style="text-align: right">Devengados</th>
+                                <th style="text-align: right">Neto</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </thead>
+                        {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+    {{ form_errors(form) }}
                         <tbody>
                             {% for arPagos in arPagos %}
                                 <tr>
@@ -45,7 +49,8 @@
                                     <td style="text-align: right">{{ arPagos.vrDeducciones | number_format(0, '.', ',') }}</td>
                                     <td style="text-align: right">{{ arPagos.vrSalario | number_format(0, '.', ',') }}</td>
                                     <td style="text-align: right">{{ arPagos.vrNeto | number_format(0, '.', ',') }}</td> 
-                                    <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=22 height=22></a></td>
+                                    <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/new-window.png') }}" width=22 height=22></a></td>
+                                    <td><button class="btn btn-default btn-xs" type="submit" name="opImprimir" value="{{ arPagos.codigoPagoPk }}">Imprimir</button>     </td>
                                 </tr>
                             {% endfor %}                           
                         </tbody>
@@ -58,5 +63,7 @@
         </div>
         <!-- /.col -->
     </div>   
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 {% endblock %}
 

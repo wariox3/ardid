@@ -20,8 +20,19 @@ class PagoController extends Controller {
         $arEmpleado = new \ArdidBundle\Entity\Empleado();
         $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero' => $arUsuario->getUsername()));
         $arPagos = $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arEmpleado->getCodigoEmpleadoPk()));
+        $form = $this->createFormBuilder()
+                ->getForm();
+        $form->handleRequest($request);
+        if ($form->isValid()) {            
+            if($request->request->get('opImprimir')) {
+                $codigoPago = $request->request->get('opImprimir');
+                $objFormatoPago = new \ArdidBundle\Formato\FormatoPago();
+                $objFormatoPago->Generar($em, $codigoPago);               
+            }
+        }
         return $this->render('ArdidBundle:Consulta:pago.html.twig', array(
-                    'arPagos' => $arPagos
+                    'arPagos' => $arPagos,
+                    'form'=> $form->createView()
         ));
     }
 

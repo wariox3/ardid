@@ -34,7 +34,7 @@ class FormatoPago extends \FPDF {
         $this->SetFont('Arial', 'B', 10);
         //Logo
         $this->SetXY(53, 3);
-        $this->Image('imagenes/logos/'.$arEmpresa->getNit().'.jpg', 12, 5, 35, 17);
+        $this->Image('imagenes/logos/logo'.$arEmpresa->getCodigoEmpresaPk().'.jpg', 12, 5, 35, 17);
         //INFORMACIÓN EMPRESA
         $this->Cell(150, 7, "COMPROBANTE PAGO NOMINA", 0, 0, 'C', 1); //$this->Cell(150, 7, utf8_decode("COMPROBANTE PAGO ". $arPago->getPagoTipoRel()->getNombre().""), 0, 0, 'C', 1);
         $this->SetXY(53, 11);
