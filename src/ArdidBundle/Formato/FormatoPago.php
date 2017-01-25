@@ -215,27 +215,27 @@ class FormatoPago extends \FPDF {
         }
 
         //TOTALES
-        $pdf->Ln(2);
-        $pdf->SetXY(145, 116);
+       // $pdf->Ln(2);
+        
+        $w=$pdf->getY();
+        $w=$w+5;    
+        $pdf->SetXY(145, $w);
         $pdf->SetFillColor(200, 200, 200);
         $pdf->Cell(30, 5, "TOTAL DEVENGADO", 1, 0, 'R', true);
         $pdf->Cell(30, 5, number_format($arPago->getVrDevengado(), 0, '.', ','), 1, 0, 'R');
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->SetXY(145, 121);
+        $pdf->SetXY(145,$w + 5);
         $pdf->SetFillColor(200, 200, 200);
         $pdf->Cell(30, 5, "TOTAL DEDUCCIONES", 1, 0, 'R', true);
         $pdf->Cell(30, 5, number_format($arPago->getVrDeducciones(), 0, '.', ','), 1, 0, 'R');
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->SetXY(145, 126);
+        $pdf->SetXY(145, $w +10);
         $pdf->SetFillColor(200, 200, 200);
         $pdf->Cell(30, 5, "NETO PAGAR", 1, 0, 'R', true);
         $pdf->Cell(30, 5, number_format($arPago->getvrNeto(), 0, '.', ','), 1, 0, 'R');
         $pdf->SetFillColor(255, 255, 255);
         $pdf->Ln(-8);
 
-
-        //$pdf->Ln(5);
-        //$pdf->Ln(8);
         $pdf->SetFont('Arial', 'B', 7);
     }
 
