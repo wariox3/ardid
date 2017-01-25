@@ -38,9 +38,9 @@ class Pago {
     private $cargo;
 
     /**
-     * @ORM\Column(name="grupo_de_pago", type="string", nullable=true)
+     * @ORM\Column(name="grupo_pago", type="string", nullable=true)
      */
-    private $grupoDePago;
+    private $grupoPago;
 
     /**
      * @ORM\Column(name="zona", type="string", nullable=true)
@@ -71,12 +71,12 @@ class Pago {
      * @ORM\Column(name="salud", type="string", nullable=true)
      */
     private $salud;
-
+    
     /**
-     * @ORM\Column(name="vr_salario", type="string", nullable=true)
+     * @ORM\Column(name="vr_salario", type="float", nullable=true)
      */
-    private $vrSalario;
-
+    private $vrSalario = 0;    
+    
     /**
      * @ORM\Column(name="fecha_desde", type="date", nullable=true)
      */
@@ -134,7 +134,6 @@ class Pago {
      * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="pagoRel")
      */
     protected $pagosDetallesPagoRel;
-
     
     /**
      * Constructor
@@ -251,27 +250,27 @@ class Pago {
     }
 
     /**
-     * Set grupoDePago
+     * Set grupoPago
      *
-     * @param string $grupoDePago
+     * @param string $grupoPago
      *
      * @return Pago
      */
-    public function setGrupoDePago($grupoDePago)
+    public function setGrupoPago($grupoPago)
     {
-        $this->grupoDePago = $grupoDePago;
+        $this->grupoPago = $grupoPago;
 
         return $this;
     }
 
     /**
-     * Get grupoDePago
+     * Get grupoPago
      *
      * @return string
      */
-    public function getGrupoDePago()
+    public function getGrupoPago()
     {
-        return $this->grupoDePago;
+        return $this->grupoPago;
     }
 
     /**
@@ -421,7 +420,7 @@ class Pago {
     /**
      * Set vrSalario
      *
-     * @param string $vrSalario
+     * @param float $vrSalario
      *
      * @return Pago
      */
@@ -435,7 +434,7 @@ class Pago {
     /**
      * Get vrSalario
      *
-     * @return string
+     * @return float
      */
     public function getVrSalario()
     {

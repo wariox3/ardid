@@ -23,7 +23,7 @@ class Empleado
     private $codigoIdentificacionTipoFk; 
      
     /**
-     * @ORM\Column(name="identificacion_numero", type="integer", length=30)
+     * @ORM\Column(name="identificacion_numero", length=30, nullable=true)
      */
     private $identificacionNumero; 
     
@@ -55,19 +55,23 @@ class Empleado
      /**
      * @ORM\Column(name="correo", type="string", length=240, nullable=true)
      */    
-    private $correo;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Pago", mappedBy="empleadoRel")
-     */
-    protected $pagosEmpleadoRel;
+    private $correo;    
     
     /**
      * @ORM\ManyToOne(targetEntity="IdentificacionTipo", inversedBy="empleadosIdentificacionTipoRel")
      * @ORM\JoinColumn(name="codigo_identificacion_tipo_fk", referencedColumnName="codigo_identificacion_tipo_pk")
      */
     protected $identificacionTipoRel;
-   
+
+    /**
+     * @ORM\OneToMany(targetEntity="Pago", mappedBy="empleadoRel")
+     */
+    protected $pagosEmpleadoRel;    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Contrato", mappedBy="empleadoRel")
+     */
+    protected $contratosEmpleadoRel;  
     
     /**
      * Constructor
@@ -75,6 +79,7 @@ class Empleado
     public function __construct()
     {
         $this->pagosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contratosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -114,7 +119,7 @@ class Empleado
     /**
      * Set identificacionNumero
      *
-     * @param integer $identificacionNumero
+     * @param string $identificacionNumero
      *
      * @return Empleado
      */
@@ -128,7 +133,7 @@ class Empleado
     /**
      * Get identificacionNumero
      *
-     * @return integer
+     * @return string
      */
     public function getIdentificacionNumero()
     {
@@ -280,6 +285,30 @@ class Empleado
     }
 
     /**
+     * Set identificacionTipoRel
+     *
+     * @param \ArdidBundle\Entity\IdentificacionTipo $identificacionTipoRel
+     *
+     * @return Empleado
+     */
+    public function setIdentificacionTipoRel(\ArdidBundle\Entity\IdentificacionTipo $identificacionTipoRel = null)
+    {
+        $this->identificacionTipoRel = $identificacionTipoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get identificacionTipoRel
+     *
+     * @return \ArdidBundle\Entity\IdentificacionTipo
+     */
+    public function getIdentificacionTipoRel()
+    {
+        return $this->identificacionTipoRel;
+    }
+
+    /**
      * Add pagosEmpleadoRel
      *
      * @param \ArdidBundle\Entity\Pago $pagosEmpleadoRel
@@ -314,26 +343,36 @@ class Empleado
     }
 
     /**
-     * Set identificacionTipoRel
+     * Add contratosEmpleadoRel
      *
-     * @param \ArdidBundle\Entity\IdentificacionTipo $identificacionTipoRel
+     * @param \ArdidBundle\Entity\Contrato $contratosEmpleadoRel
      *
      * @return Empleado
      */
-    public function setIdentificacionTipoRel(\ArdidBundle\Entity\IdentificacionTipo $identificacionTipoRel = null)
+    public function addContratosEmpleadoRel(\ArdidBundle\Entity\Contrato $contratosEmpleadoRel)
     {
-        $this->identificacionTipoRel = $identificacionTipoRel;
+        $this->contratosEmpleadoRel[] = $contratosEmpleadoRel;
 
         return $this;
     }
 
     /**
-     * Get identificacionTipoRel
+     * Remove contratosEmpleadoRel
      *
-     * @return \ArdidBundle\Entity\IdentificacionTipo
+     * @param \ArdidBundle\Entity\Contrato $contratosEmpleadoRel
      */
-    public function getIdentificacionTipoRel()
+    public function removeContratosEmpleadoRel(\ArdidBundle\Entity\Contrato $contratosEmpleadoRel)
     {
-        return $this->identificacionTipoRel;
+        $this->contratosEmpleadoRel->removeElement($contratosEmpleadoRel);
+    }
+
+    /**
+     * Get contratosEmpleadoRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContratosEmpleadoRel()
+    {
+        return $this->contratosEmpleadoRel;
     }
 }

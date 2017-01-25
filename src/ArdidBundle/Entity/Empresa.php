@@ -52,7 +52,11 @@ class Empresa {
      */
     protected $pagosEmpresaRel;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Contrato", mappedBy="empresaRel")
+     */
+    protected $contratosEmpresaRel;    
+    
     /**
      * Constructor
      */
@@ -60,6 +64,7 @@ class Empresa {
     {
         $this->pagosDetallesEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pagosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contratosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -258,5 +263,39 @@ class Empresa {
     public function getPagosEmpresaRel()
     {
         return $this->pagosEmpresaRel;
+    }
+
+    /**
+     * Add contratosEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Contrato $contratosEmpresaRel
+     *
+     * @return Empresa
+     */
+    public function addContratosEmpresaRel(\ArdidBundle\Entity\Contrato $contratosEmpresaRel)
+    {
+        $this->contratosEmpresaRel[] = $contratosEmpresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove contratosEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Contrato $contratosEmpresaRel
+     */
+    public function removeContratosEmpresaRel(\ArdidBundle\Entity\Contrato $contratosEmpresaRel)
+    {
+        $this->contratosEmpresaRel->removeElement($contratosEmpresaRel);
+    }
+
+    /**
+     * Get contratosEmpresaRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContratosEmpresaRel()
+    {
+        return $this->contratosEmpresaRel;
     }
 }
