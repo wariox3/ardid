@@ -30,7 +30,7 @@ class FormatoCertificadoIngresos extends \FPDF {
         $this->SetFillColor(200, 200, 200);
         $this->SetFont('Arial', 'B', 10);
         //Logo
-        $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 12, 12, 35, 17);
+       $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 12, 12, 35, 17);
     }
 
     public function EncabezadoDetalles() {
