@@ -47,7 +47,7 @@ class FormatoCertificadoIngresos extends \FPDF {
         $arContrato = new \ArdidBundle\Entity\Contrato;
         $arContrato = self::$em->getRepository('ArdidBundle:Contrato')->find(self::$codigoContrato);                
         
-        $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->find(1);
+        $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->find(2);
         $contenido = $arContenido->getContenido();                                       
         
         $fecha = new \DateTime('now');
