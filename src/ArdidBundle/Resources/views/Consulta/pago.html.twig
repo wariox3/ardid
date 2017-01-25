@@ -1,7 +1,7 @@
 {% extends '::base2.html.twig' %}
 {% block title %}Ardid app{% endblock %}
 {% block content %}
-     
+
     <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
     <div class="row">
         <div class="col-xs-12">
@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
-    {{ form_errors(form) }}
+                        {{ form_errors(form) }}
                         <tbody>
                             {% for arPagos in arPagos %}
                                 <tr>
@@ -40,7 +40,7 @@
                                     <td>{{arPagos.pagoTipoRel.nombre}}</td>
                                     <td style="text-align: right">{{arPagos.numero}}</td>
                                     <td>{{arPagos.empresaRel.nombre}}</td>
-                                    <td>{{arPagos.grupoDePago}}</td>
+                                    <td>{{arPagos.grupoPago}}</td>
                                     <td>{{arPagos.zona}}</td>
                                     <td>{{arPagos.periodoPago}}</td>                                    
                                     <td>{{arPagos.fechaDesde|date('Y-m-d')}}</td>
