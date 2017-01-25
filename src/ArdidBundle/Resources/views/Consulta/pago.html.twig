@@ -49,8 +49,8 @@
                                     <td style="text-align: right">{{ arPagos.vrDeducciones | number_format(0, '.', ',') }}</td>
                                     <td style="text-align: right">{{ arPagos.vrSalario | number_format(0, '.', ',') }}</td>
                                     <td style="text-align: right">{{ arPagos.vrNeto | number_format(0, '.', ',') }}</td> 
+                                    <td><button class="btn btn-default btn-xs" type="submit" name="opImprimir" value="{{ arPagos.codigoPagoPk }}"><b>Imprimir</b></button>     </td>
                                     <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/new-window.png') }}" width=22 height=22></a></td>
-                                    <td><button class="btn btn-default btn-xs" type="submit" name="opImprimir" value="{{ arPagos.codigoPagoPk }}">Imprimir</button>     </td>
                                 </tr>
                             {% endfor %}                           
                         </tbody>
