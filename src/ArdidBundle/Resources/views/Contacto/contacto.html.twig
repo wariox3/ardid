@@ -1,14 +1,22 @@
 {% extends '::base2.html.twig' %}
 {% block content %}
- 
-  
-      <section class="content">
-        <section id="introduction">
+
+
+    <section class="content">
+        <section id="introduction" >
             <h2 class="page-header"><a href="#introduction">Contactenos</a></h2>
             <p class="lead">
                 <b>ARDID</b>  en esta seccion de ardid sus empleados podran contactarse de manera facil y rapida para resolver inquietudes,
             </p>
+            <form class="form-signin col-xs-6"  action="{{ path('login') }}" method="post"  >
+                <div align="center">
+                <input type="text" class="form-control" placeholder="Motivo queja o reclamo"> <br><br>
+                <textarea class="form-control" rows="3" placeholder="Describa su queja o reclamo"></textarea> <br>                   
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
         </section><!-- /#introduction -->
     </section>  
-   
+
+
 {% endblock %}
