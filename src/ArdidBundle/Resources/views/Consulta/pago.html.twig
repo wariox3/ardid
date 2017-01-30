@@ -1,69 +1,79 @@
 {% extends '::base2.html.twig' %}
 {% block title %}Ardid app{% endblock %}
 {% block content %}
-
-    <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Lista: Pago</h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Tipo</th>
-                                <th>Numero</th>
-                                <th>Empresa</th>                                
-                                <th>Grupo</th>
-                                <th>Zona</th>
-                                <th>Periodo</th>
-                                <th>Desde</th>
-                                <th>Hasta</th>
-                                <th style="text-align: right">Salario</th>
-                                <th style="text-align: right">Deducciones</th>
-                                <th style="text-align: right">Devengados</th>
-                                <th style="text-align: right">Neto</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
-                        {{ form_errors(form) }}
-                        <tbody>
-                            {% for arPagos in arPagos %}
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Consulta
+            <small>Pago</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{ path('inicio') }}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="{{ path('inicio') }}"><i class="fa fa-files-o"></i> Consulta</a></li>
+            <li class="active">Pago</li>
+        </ol>
+    </section>
+    <section class="content">
+        <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
                                 <tr>
-                                    <th scope="row">{{arPagos.codigoPagoPk}}</th> 
-                                    <td>{{arPagos.pagoTipoRel.nombre}}</td>
-                                    <td style="text-align: right">{{arPagos.numero}}</td>
-                                    <td>{{arPagos.empresaRel.nombre}}</td>
-                                    <td>{{arPagos.grupoPago}}</td>
-                                    <td>{{arPagos.zona}}</td>
-                                    <td>{{arPagos.periodoPago}}</td>                                    
-                                    <td>{{arPagos.fechaDesde|date('Y-m-d')}}</td>
-                                    <td>{{arPagos.fechaHasta|date('Y-m-d')}}</td>                       
-                                    <td style="text-align: right">{{ arPagos.vrSalario | number_format(0, '.', ',') }}</td>
-                                    <td style="text-align: right">{{ arPagos.vrDeducciones | number_format(0, '.', ',') }}</td>
-                                    <td style="text-align: right">{{ arPagos.vrDevengado | number_format(0, '.', ',') }}</td>
-                                    <td style="text-align: right">{{ arPagos.vrNeto | number_format(0, '.', ',') }}</td> 
-                                    <td><button class="btn btn-default btn-xs" type="submit" name="opImprimir" value="{{ arPagos.codigoPagoPk }}"><b>Imprimir</b></button>     </td>
-                                    <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/new-window.png') }}" width=22 height=22></a></td>
+                                    <th>Id</th>
+                                    <th>Tipo</th>
+                                    <th>Numero</th>
+                                    <th>Empresa</th>                                
+                                    <th>Grupo</th>
+                                    <th>Zona</th>
+                                    <th>Periodo</th>
+                                    <th>Desde</th>
+                                    <th>Hasta</th>
+                                    <th style="text-align: right">Salario</th>
+                                    <th style="text-align: right">Deducciones</th>
+                                    <th style="text-align: right">Devengados</th>
+                                    <th style="text-align: right">Neto</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
-                            {% endfor %}                           
-                        </tbody>
-                    </table>
+                            </thead>
+                            {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+                            {{ form_errors(form) }}
+                            <tbody>
+                                {% for arPagos in arPagos %}
+                                    <tr>
+                                        <th scope="row">{{arPagos.codigoPagoPk}}</th> 
+                                        <td>{{arPagos.pagoTipoRel.nombre}}</td>
+                                        <td style="text-align: right">{{arPagos.numero}}</td>
+                                        <td>{{arPagos.empresaRel.nombre}}</td>
+                                        <td>{{arPagos.grupoPago}}</td>
+                                        <td>{{arPagos.zona}}</td>
+                                        <td>{{arPagos.periodoPago}}</td>                                    
+                                        <td>{{arPagos.fechaDesde|date('Y-m-d')}}</td>
+                                        <td>{{arPagos.fechaHasta|date('Y-m-d')}}</td>                       
+                                        <td style="text-align: right">{{ arPagos.vrSalario | number_format(0, '.', ',') }}</td>
+                                        <td style="text-align: right">{{ arPagos.vrDeducciones | number_format(0, '.', ',') }}</td>
+                                        <td style="text-align: right">{{ arPagos.vrDevengado | number_format(0, '.', ',') }}</td>
+                                        <td style="text-align: right">{{ arPagos.vrNeto | number_format(0, '.', ',') }}</td> 
+                                        <td><button class="btn btn-default btn-xs" type="submit" name="opImprimir" value="{{ arPagos.codigoPagoPk }}"><b>Imprimir</b></button>     </td>
+                                        <td style="text-align: center"><a href="{{ path('consulta_pago_detalle', { 'codigoPago': arPagos.codigoPagoPk }) }}"><img src="{{ asset('imagenes/new-window.png') }}" width=22 height=22></a></td>
+                                    </tr>
+                                {% endfor %}                           
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
                 </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
+                <!-- /.box -->
 
-        </div>
-        <!-- /.col -->
-    </div>   
-    {{ form_rest(form) }}
-    {{ form_end(form) }}
+            </div>
+            <!-- /.col -->
+        </div>   
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </section>
 {% endblock %}
 

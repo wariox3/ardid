@@ -29,52 +29,42 @@
             <div class="register-logo">
                 <a href="#"><b>Ardid</b>V1</a>
             </div>
-
             <div class="register-box-body">
-                <p class="login-box-msg">Registro nuevo usuario</p>
+                <p class="login-box-msg">Cambiar clave</p>
                 {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
                 {{ form_errors(form) }}
-                
                     <div class="form-group has-feedback">
-                        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Numero de identificacion'} }) }}        
-                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">        
-                        {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Correo electronico'} }) }}
-                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    </div>
-                    <div class="form-group has-feedback">
-                        {{ form_widget(form.password.first, { 'attr': {'class': 'form-control', 'placeholder': 'Clave'} }) }}        
+                        {{ form_widget(form.TxtClave.first, { 'attr': {'class': 'form-control', 'placeholder': 'Nueva clave'} }) }}        
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        {{ form_widget(form.password.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repetir contraseña'} }) }}
+                        {{ form_widget(form.TxtClave.second, { 'attr': {'class': 'form-control', 'placeholder': 'Repetir clave'} }) }}
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
                     <div class="row">
                         <div class="col-xs-8">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox"> Estoy de acuerdo <a href="#">terminos</a>
+                                    
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-xs-4">
-                            {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-primary btn-block btn-flat'} }) }}                              
+                            {{ form_widget(form.BtnCambiar, { 'attr': {'class': 'btn btn-primary btn-block btn-flat'} }) }}                              
                         </div>
                         <!-- /.col -->
                     </div>
                
                 {{ form_end(form) }}
                 <br />
-                <a href="{{ path('login') }}" class="text-center">Volver a inicio sesion</a>
+                {% for flashMessage in app.session.flashbag.get('suceso') %}
+                    <div id="informacion" class="alert alert-info fade in" >
+                         <button type="button" class="close" data-dismiss="alert">&times;</button>
+                         <p>{{ flashMessage }}</p>
+                     </div>                
+                {% endfor %}                  
             </div>
-            {% if mensaje != null%}
-                <div align="center">
-                    <i> <h4  class="alert-danger">{{mensaje}}</h4></i>
-                </div>
-            {% endif%}    
             <!-- /.form-box -->
         </div>
         <!-- /.register-box -->

@@ -149,7 +149,7 @@ class FormatoPago extends \FPDF {
         $pdf->Cell(22, 6, "CENTRO COSTOS:", 1, 0, 'L', 1);
         $pdf->SetFont('Arial', '', 7);
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->Cell(78, 6, $arPago->getGrupoDePago(), 1, 0, 'L', 1);
+        $pdf->Cell(78, 6, $arPago->getGrupoPago(), 1, 0, 'L', 1);
         $pdf->SetFont('Arial', 'B', 6.5);
         $pdf->SetFillColor(200, 200, 200);
         $pdf->Cell(24, 6, "DESE:", 1, 0, 'L', 1);
