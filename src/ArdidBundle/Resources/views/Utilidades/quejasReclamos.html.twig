@@ -1,15 +1,31 @@
 {% extends '::base2.html.twig' %}
 {% block content %}
- 
-  
-      <section class="content">
-        <section id="introduction">
-            <h2 class="page-header"><a href="#introduction">Quejas y reclamos</a></h2>
-            <p class="lead">
-                <b>ARDID</b>  en esta seccion de ardid sus empleados podran enviar informes de quejas y reclamos 
-                los cuales podran ser contestados de manera facil y agil.
-            </p>
-        </section><!-- /#introduction -->
+    <section class="content-header">
+        <h1>
+            Utilidades
+            <small>Quejas y reclamos</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li class="active">Quejas y reclamos</li>
+        </ol>
     </section>  
-   
+    <section class="content">        	
+        <div class="page-header">
+            <h3>Quejas y reclamos</h3>
+        </div>
+        {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+        {{ form_errors(form) }}
+        <div class="panel panel-default">
+            <div class="panel-heading">Quejas y reclamos</div>
+            <div class="panel-body"> 
+                <input type="text" class="form-control" placeholder="..."> <br><br>
+                <textarea class="form-control" rows="3" placeholder="..."></textarea> <br>                   
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </div> 
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+        <br/><br/><br/><br/>
+    </section>
 {% endblock %}
