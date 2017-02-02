@@ -34,7 +34,7 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(name="codigo_verificacion", type="string", length=100)
+     * @ORM\Column(name="codigo_verificacion", type="string", length=100, nullable=true)
      */
     private $codigoVerificacion;    
     

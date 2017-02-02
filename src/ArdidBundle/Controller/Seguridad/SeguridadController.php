@@ -54,7 +54,7 @@ class SeguridadController extends Controller
                 $arUser = $form->getData();
                 $factory = $this->get('security.encoder_factory');
                 $encoder = $factory->getEncoder($arUser);
-                $password = $encoder->encodePassword($arUser->getPassword(), $arUser->getSalt());
+                $password = $encoder->encodePassword($arUser->getUsername(), $arUser->getSalt());
                 $arUsuarioValidar = new \ArdidBundle\Entity\User();
                 $arUsuarioValidar = $em->getRepository('ArdidBundle:User')->findBy(array('username' => $arUser->getUsername()));
                 if($arUsuarioValidar) {
@@ -63,26 +63,13 @@ class SeguridadController extends Controller
                     $arEmpleado = new \ArdidBundle\Entity\Empleado();
                     $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero' => $arUser->getUsername()));
                     if($arEmpleado) {
-                        if($arUser->getEmail() == $arEmpleado->getCorreo()) {
-                            $an = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-)(.:,;";
-                            $su = strlen($an) - 1;
-                            $codigo = substr($an, rand(0, $su), 1) .
-                                    substr($an, rand(0, $su), 1) .
-                                    substr($an, rand(0, $su), 1) .
-                                    substr($an, rand(0, $su), 1) .
-                                    substr($an, rand(0, $su), 1) .
-                                    substr($an, rand(0, $su), 1);
-                            $arUser->setCodigoVerificacion($codigo);
-                            $arUser->setPassword($password);
-                            $arUser->setCodigoEmpleadoFk($arEmpleado->getCodigoEmpleadoPk());
-                            $arUser->setNombreCorto($arEmpleado->getNombre1() . " " . $arEmpleado->getNombre2());
-                            //$arUser->setIsActive(1);
-                            $em->persist($arUser);
-                            $em->flush();
-                            return $this->redirect($this->generateUrl('login'));
-                        } else {
-                            $mensaje = "Correo electronico diferente al registrado en empleado: " . $arEmpleado->getCorreo();
-                        }
+                        $arUser->setPassword($password);
+                        $arUser->setCodigoEmpleadoFk($arEmpleado->getCodigoEmpleadoPk());
+                        $arUser->setNombreCorto($arEmpleado->getNombre1() . " " . $arEmpleado->getNombre2());
+                        //$arUser->setIsActive(1);
+                        $em->persist($arUser);
+                        $em->flush();
+                        return $this->redirect($this->generateUrl('login'));                        
                     } else {
                         $mensaje = "Este numero de identificacion no registra movimientos en la plataforma, no se puede crear el usuario";
                     }
