@@ -1,6 +1,19 @@
 {% extends '::base2.html.twig' %}
 {% block title %}Pagos lista{% endblock %} 
 {% block content %}
+   
+      <section class="content-header">
+        <h1>
+            Consultas
+            <small>Pago Detalle: detalle</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i> Consultas</a></li>
+            <li><a href="#"><i class="fa fa-bars"></i> Pago</a></li>
+            <li class="active">Detalle</li>
+        </ol>
+    </section>
     <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
     <div class="row">
         <div class="col-xs-12">

@@ -2,15 +2,16 @@
 {% block title %}Ardid app{% endblock %}
 {% block content %}
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+  <section class="content-header">
         <h1>
-            Consulta
-            <small>Pago</small>
+            Consultas
+            <small>Pago: lista</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{ path('inicio') }}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="{{ path('inicio') }}"><i class="fa fa-files-o"></i> Consulta</a></li>
-            <li class="active">Pago</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i> Consultas</a></li>
+            <li><a href="#"><i class="fa fa-bars"></i> Pago</a></li>
+            <li class="active">Lista</li>
         </ol>
     </section>
     <section class="content">
@@ -18,6 +19,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+                       <div class="box-header">
+                    <h3 class="box-title">Pago</h3>
+                </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example2" class="table table-bordered table-hover">

@@ -1,13 +1,25 @@
 {% extends '::base2.html.twig' %}
 {% block title %}Ardid app{% endblock %}
 {% block content %}
-     
+       <section class="content-header">
+        <h1>
+            Consultas
+            <small>Certificado laboral: lista</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="#"><i class="fa fa-calendar"></i> Consultas</a></li>
+            <li><a href="#"><i class="fa fa-bars"></i> Certificado laboral</a></li>
+            <li class="active">Lista</li>
+        </ol>
+    </section>
+       <section class="content">  
     <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Lista: Contrato certificado laboral</h3>
+                    <h3 class="box-title">Contrato certificado laboral</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -57,5 +69,6 @@
     </div>   
     {{ form_rest(form) }}
     {{ form_end(form) }}
+    </section>  
 {% endblock %}
 
