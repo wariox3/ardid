@@ -41,6 +41,11 @@ class Empresa {
      * @ORM\Column(name="digito_verificacion", type="string", length=1, nullable=true)
      */
     private $digitoVerificacion;
+    
+    /**
+     * @ORM\Column(name="abreviatura", type="string", length=60, nullable=true)
+     */
+    private $abreviatura;
 
     /**
      * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="empresaRel")
@@ -202,6 +207,30 @@ class Empresa {
     public function getDigitoVerificacion()
     {
         return $this->digitoVerificacion;
+    }
+
+    /**
+     * Set abreviatura
+     *
+     * @param string $abreviatura
+     *
+     * @return Empresa
+     */
+    public function setAbreviatura($abreviatura)
+    {
+        $this->abreviatura = $abreviatura;
+
+        return $this;
+    }
+
+    /**
+     * Get abreviatura
+     *
+     * @return string
+     */
+    public function getAbreviatura()
+    {
+        return $this->abreviatura;
     }
 
     /**
