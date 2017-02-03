@@ -26,7 +26,7 @@ class CertificadoIngresosController extends Controller {
         if ($form->isValid()) {            
             if($request->request->get('opImprimir')) {
                 $codigoContrato = $request->request->get('opImprimir');
-                $objFormatoPago = new \ArdidBundle\Formato\FormatoCertificadoIngresos();
+                $objFormatoPago = new \ArdidBundle\Formato\CertificadoIngresos();
                 $objFormatoPago->Generar($em, $codigoContrato);               
             }
         }

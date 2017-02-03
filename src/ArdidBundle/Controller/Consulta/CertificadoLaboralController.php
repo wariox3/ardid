@@ -26,7 +26,7 @@ class CertificadoLaboralController extends Controller {
         if ($form->isValid()) {            
             if($request->request->get('opImprimir')) {
                 $codigoContrato = $request->request->get('opImprimir');
-                $objFormatoPago = new \ArdidBundle\Formato\FormatoCertificadoLaboral();
+                $objFormatoPago = new \ArdidBundle\Formato\CertificadoLaboral();
                 $objFormatoPago->Generar($em, $codigoContrato);               
             }
         }

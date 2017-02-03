@@ -4,7 +4,7 @@ namespace ArdidBundle\Formato;
 
 use Doctrine\ORM\EntityRepository;
 
-class FormatoPago extends \FPDF {
+class Pago extends \FPDF {
 
     public static $em;
     public static $codigoPago;
@@ -12,9 +12,10 @@ class FormatoPago extends \FPDF {
 
     public function Generar($em, $codigoPago) {
         ob_clean();
+        $formato =
         self::$em = $em;
         self::$codigoPago = $codigoPago;
-        $pdf = new FormatoPago('P', 'mm', 'letter');
+        $pdf = new Pago('P', 'mm', 'letter');
         $pdf->AliasNbPages();
         $pdf->AddPage();
         $pdf->SetFont('Times', '', 12);

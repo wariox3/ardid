@@ -4,7 +4,7 @@ namespace ArdidBundle\Formato;
 
 use Doctrine\ORM\EntityRepository;
 
-class FormatoCertificadoLaboral extends \FPDF {
+class CertificadoIngresos extends \FPDF {
 
     public static $em;
     public static $codigoContrato;
@@ -14,7 +14,7 @@ class FormatoCertificadoLaboral extends \FPDF {
         ob_clean();
         self::$em = $em;
         self::$codigoContrato = $codigoContrato;
-        $pdf = new FormatoCertificadoLaboral();
+        $pdf = new CertificadoIngresos();
         $pdf->AliasNbPages();
         $pdf->AddPage();
         $pdf->SetFont('Arial', '', 12);
@@ -30,7 +30,7 @@ class FormatoCertificadoLaboral extends \FPDF {
         $this->SetFillColor(200, 200, 200);
         $this->SetFont('Arial', 'B', 10);
         //Logo
-        $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 12, 12, 35, 17);
+       $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 12, 12, 35, 17);
     }
 
     public function EncabezadoDetalles() {
@@ -44,20 +44,28 @@ class FormatoCertificadoLaboral extends \FPDF {
     public function Body($pdf) {
         $pdf->SetXY(10, 65);
         $pdf->SetFont('Arial', '', 10);
+        
         $arContrato = new \ArdidBundle\Entity\Contrato;
         $arContrato = self::$em->getRepository('ArdidBundle:Contrato')->find(self::$codigoContrato);                
-        
-        $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->find(1);
+        $arContenido = new \ArdidBundle\Entity\Contenido;
+        $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->findOneBy(array('codigoEmpresaFk' => $arContrato->getCodigoEmpresaFk(), 'tipo'=> 1));
         $contenido = $arContenido->getContenido();                                       
-        
         $fecha = new \DateTime('now');
         
-        $contenido = preg_replace('/#1/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#1/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
         $contenido = preg_replace('/#2/', $arContrato->getEmpleadoRel()->getNombreCorto(), $contenido);
-        $contenido = preg_replace('/#3/', $arContrato->getCargo(), $contenido);
-        $contenido = preg_replace('/#4/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d'))), $contenido);
-        $contenido = preg_replace('/#5/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
-        $contenido = preg_replace('/#a/', $fecha->format('Y/m/d'), $contenido);
+        $contenido = preg_replace('/#3/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#4/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#5/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d'))), $contenido);
+        $contenido = preg_replace('/#e/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
+        //$contenido = preg_replace('/#6/', $arContrato->get(), $contenido);
+        $contenido = preg_replace('/#7/',  $arContrato->getCargo(), $contenido);
+        $contenido = preg_replace('/#8/', $arContrato->getVrSalario(), $contenido);
+        $contenido = preg_replace('/#9/', $arContrato->getVrSalario(), $contenido);
+        $contenido = preg_replace('/#a/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#b/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#c/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#d/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
     }

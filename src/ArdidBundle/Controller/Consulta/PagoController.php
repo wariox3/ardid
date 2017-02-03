@@ -26,7 +26,7 @@ class PagoController extends Controller {
         if ($form->isValid()) {            
             if($request->request->get('opImprimir')) {
                 $codigoPago = $request->request->get('opImprimir');
-                $objFormatoPago = new \ArdidBundle\Formato\FormatoPago();
+                $objFormatoPago = new \ArdidBundle\Formato\Pago();
                 $objFormatoPago->Generar($em, $codigoPago);               
             }
         }
