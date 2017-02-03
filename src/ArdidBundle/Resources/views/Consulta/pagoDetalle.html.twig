@@ -5,7 +5,7 @@
       <section class="content-header">
         <h1>
             Consultas
-            <small>Pago Detalle: detalle</small>
+            <small>Pago: detalle</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -14,13 +14,11 @@
             <li class="active">Detalle</li>
         </ol>
     </section>
+     <section class="content">
     <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header">
-                    <h3 class="box-title">Detalle: Pago</h3>
-                </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <table id="example2" class="table table-bordered table-hover">
@@ -81,4 +79,5 @@
     </div>
     {{ form_rest(form) }}
     {{ form_end(form) }}
+     </section>
 {% endblock %}

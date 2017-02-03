@@ -118,7 +118,8 @@ class FormatoPago extends \FPDF {
         $pdf->Cell(24, 6, "BANCO:", 1, 0, 'L', 1);
         $pdf->SetFont('Arial', '', 7);
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->Cell(24, 6, $arPago->getBanco(), 1, 0, 'L', 1);
+        $banco = substr($arPago->getBanco(),0,14); 
+        $pdf->Cell(24, 6, $banco, 1, 0, 'L', 1);
         $pdf->SetFont('Arial', 'B', 6.5);
         $pdf->SetFillColor(200, 200, 200);
         //FILA 3
@@ -140,7 +141,8 @@ class FormatoPago extends \FPDF {
         $pdf->Cell(24, 6, "PENSION:", 1, 0, 'L', 1);
         $pdf->SetFont('Arial', '', 7);
         $pdf->SetFillColor(255, 255, 255);
-        $pdf->Cell(24, 6, $arPago->getPension(), 1, 0, 'L', 1);
+        $pension = substr($arPago->getPension(),0,14);                
+        $pdf->Cell(24, 6,utf8_decode($pension) , 1, 0, 'L', 1);
       
         //FILA 4
         $pdf->SetXY(10, $y + 18);
