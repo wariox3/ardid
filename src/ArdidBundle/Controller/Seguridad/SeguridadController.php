@@ -69,6 +69,7 @@ class SeguridadController extends Controller
                         //$arUser->setIsActive(1);
                         $em->persist($arUser);
                         $em->flush();
+                        $this->get('session')->getFlashBag()->add("suceso", "Su registro fue exitoso ingrese con su numero de identificacion y su contraseña que tambien es su numero de identificacion, por su seguridad recuerde cambiarla cuando ingrese al sistema");
                         return $this->redirect($this->generateUrl('login'));                        
                     } else {
                         $mensaje = "Este numero de identificacion no registra movimientos en la plataforma, no se puede crear el usuario";

@@ -56,15 +56,23 @@
                                 <li class="dropdown messages-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-envelope-o"></i>
-                                        <span class="label label-success">0</span>
+                                        <span class="label label-success">1</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li class="header">Tienes 0 mensajes</li>
+                                        <li class="header">Tienes 1 mensajes</li>
                                         <li>
-                                            <!-- inner menu: contains the actual data -->
                                             <ul class="menu">
-
-                                                <!-- end message -->
+                                                <li><!-- start message -->
+                                                    <a href="#">
+                                                        <div class="pull-left">                                                            
+                                                        </div>
+                                                        <h4>
+                                                            Equipo de soporte
+                                                            <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                        </h4>
+                                                        <p>Ya cambio su clave?</p>
+                                                    </a>
+                                                </li>
 
                                             </ul>
                                         </li>
@@ -74,8 +82,7 @@
                                 <!-- Notifications: style can be found in dropdown.less -->
                                 <li class="dropdown notifications-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-bell-o"></i>
-                                        <span class="label label-warning">0</span>
+                                        <i class="fa fa-bell-o"></i>                                        
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="header">Tienes 0 notificaciones</li>
@@ -92,7 +99,6 @@
                                 <li class="dropdown tasks-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <i class="fa fa-flag-o"></i>
-                                        <span class="label label-danger">0</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="header">Tienes 0 tareas</li>
@@ -199,46 +205,46 @@
                                 </ul>
                             </li>  
                             <li class="treeview">
-                              <a href="#">
-                                <i class="fa fa-laptop"></i>
-                                <span>Utilidades</span>
-                                <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                              </a>
-                              <ul class="treeview-menu">
-                                <li><a href="{{ path('quejas_reclamos') }}"><i class="fa fa-circle-o"></i> Quejas y reclamos</a></li>
-                                <li><a href="{{ path('informacion_empresa') }}"><i class="fa fa-circle-o"></i> Informacion empresa</a></li>
-                                <li><a href="{{ path('liquidar_nomina') }}"><i class="fa fa-circle-o"></i> Liquidar nomina</a></li>
-                              </ul>
+                                <a href="#">
+                                    <i class="fa fa-laptop"></i>
+                                    <span>Utilidades</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('quejas_reclamos') }}"><i class="fa fa-circle-o"></i> Quejas y reclamos</a></li>
+                                    <li><a href="{{ path('informacion_empresa') }}"><i class="fa fa-circle-o"></i> Informacion empresa</a></li>
+                                    <li><a href="{{ path('liquidar_nomina') }}"><i class="fa fa-circle-o"></i> Liquidar nomina</a></li>
+                                </ul>
                             </li>                            
                             <li class="treeview">
-                              <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Estadisticas</span>
-                                <span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                              </a>
-                              <ul class="treeview-menu">
-                                <li><a href="{{ path('estadisticas_pago') }}"><i class="fa fa-circle-o"></i> Pagos</a></li>
-                              </ul>
+                                <a href="#">
+                                    <i class="fa fa-pie-chart"></i>
+                                    <span>Estadisticas</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="{{ path('estadisticas_pago') }}"><i class="fa fa-circle-o"></i> Pagos</a></li>
+                                </ul>
                             </li>  
                             <li>
-                              <a href="#">
-                                <i class="fa fa-envelope"></i> <span>Correo</span>
-                                <span class="pull-right-container">
-                                  <small class="label pull-right bg-yellow">12</small>
-                                  <small class="label pull-right bg-green">16</small>
-                                  <small class="label pull-right bg-red">5</small>
-                                </span>
-                              </a>
+                                <a href="#">
+                                    <i class="fa fa-envelope"></i> <span>Correo</span>
+                                    <span class="pull-right-container">
+                                        <small class="label pull-right bg-yellow">12</small>
+                                        <small class="label pull-right bg-green">16</small>
+                                        <small class="label pull-right bg-red">5</small>
+                                    </span>
+                                </a>
                             </li>                            
                             <li><a href="{{ path('documentacion') }}"><i class="fa fa-book"></i> <span>Documentacion</span></a></li>                            
                             <li class="header">RELACIONADOS</li>
                             <li><a href="{{ path('ayuda') }}"><i class="fa fa-circle-o text-red"></i> <span>Ayuda</span></a></li>
                             <li><a href="{{ path('contacto') }}"><i class="fa fa-circle-o text-yellow"></i> <span>Contactenos</span></a></li>
-                            
+
                         </ul>
                     </section>
                     <!-- /.sidebar -->
@@ -247,11 +253,11 @@
                 <!-- Content Wrapper. Contains page content -->
                 <div class="content-wrapper">
                     {% block content %}                                        
-                 
+
                     {% endblock %}                        
                     <!-- /.content -->
                 </div>
-                                             
+
                 <!-- /.content-wrapper -->
                 <footer class="main-footer">
                     <div class="pull-right hidden-xs">
@@ -455,7 +461,7 @@
                      immediately after the control sidebar -->
                 <div class="control-sidebar-bg"></div>
             </div>        
-            
+
         {% endblock %} 
         {% block javascripts %}
             <!-- jQuery 2.2.3 -->
