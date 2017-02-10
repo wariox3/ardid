@@ -13,18 +13,29 @@ class ReclamoController extends Controller {
     /**
      * @Route("/utilidades/reclamos/", name="reclamo")
      */
-    public function listaAction() {
+    public function listaAction(Request $request) {
         $arUsuario = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $arReclamo = new \ArdidBundle\Entity\Reclamo();
         $arEmpleado = new \ArdidBundle\Entity\Empleado();
         $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero' => $arUsuario->getUsername()));
         $arReclamo = $em->getRepository('ArdidBundle:Reclamo')->findBy(array('codigoEmpleadoFk' => $arEmpleado->getCodigoEmpleadoPk()));
-
         $form = $this->createFormBuilder()
                 ->add('BtnEliminar', SubmitType::class, array('label' => 'Eliminar'))
                 ->getForm();
-
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+          if ($form->get('BtnEliminar')->isClicked()) {
+                $arrSeleccionados = $request->request->get('ChkSeleccionar');
+                foreach ($arrSeleccionados AS $codigoReclamoPk) {
+                    $arReclamo = new \ArdidBundle\Entity\Reclamo();
+                    $arReclamo = $em->getRepository('ArdidBundle:Reclamo')->find($codigoReclamoPk);
+                    $em->remove($arReclamo);
+                }
+                $em->flush();
+            }
+                return $this->redirect($this->generateUrl('reclamo'));                
+        }
         return $this->render('ArdidBundle:Utilidades:reclamo.html.twig', array(
                     'arReclamo' => $arReclamo,
                     'form' => $form->createView()));

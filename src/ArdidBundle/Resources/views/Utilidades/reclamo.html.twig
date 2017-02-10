@@ -12,7 +12,8 @@
         </ol>
     </section>  
     <section class="content">
-        <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
+        {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+        {{ form_errors(form) }}
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -33,8 +34,7 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
-                            {{ form_errors(form) }}
+
                             <tbody>
                              {% for arReclamo in arReclamo %}
                                 <tr>
@@ -47,7 +47,7 @@
                                     <td></td>
                                     <td></td>
                                     <td style="text-align: center"><a href="{{ path('reclamo_detalle', {'codigoReclamoPk': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=20 height=20 title="Editar"></a></td>
-                                    <td><input type="checkbox" name="ChkSeleccionar[]" {#value="{{ arConceptoServicios.codigoConceptoServicioPk }}"#} /></td>
+                                    <td><input type="checkbox" name="ChkSeleccionar[]" value="{{ arReclamo.codigoReclamoPk }}" /></td>
                                 </tr>
                                    {% endfor %}                    
                             </tbody>
