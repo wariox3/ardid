@@ -67,7 +67,13 @@ class Empresa {
      */
     protected $contenidoEmpresaRel;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Reclamo", mappedBy="empresaRel")
+     */
+    protected $quejasReclamosEmpresaRel; 
+    
    
+    
     /**
      * Constructor
      */
@@ -77,6 +83,7 @@ class Empresa {
         $this->pagosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
         $this->contratosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
         $this->contenidoEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->quejasReclamosEmpresaRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -367,5 +374,39 @@ class Empresa {
     public function getContenidoEmpresaRel()
     {
         return $this->contenidoEmpresaRel;
+    }
+
+    /**
+     * Add quejasReclamosEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Reclamo $quejasReclamosEmpresaRel
+     *
+     * @return Empresa
+     */
+    public function addQuejasReclamosEmpresaRel(\ArdidBundle\Entity\Reclamo $quejasReclamosEmpresaRel)
+    {
+        $this->quejasReclamosEmpresaRel[] = $quejasReclamosEmpresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove quejasReclamosEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Reclamo $quejasReclamosEmpresaRel
+     */
+    public function removeQuejasReclamosEmpresaRel(\ArdidBundle\Entity\Reclamo $quejasReclamosEmpresaRel)
+    {
+        $this->quejasReclamosEmpresaRel->removeElement($quejasReclamosEmpresaRel);
+    }
+
+    /**
+     * Get quejasReclamosEmpresaRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuejasReclamosEmpresaRel()
+    {
+        return $this->quejasReclamosEmpresaRel;
     }
 }

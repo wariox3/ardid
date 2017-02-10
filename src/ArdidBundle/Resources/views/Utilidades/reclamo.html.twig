@@ -1,0 +1,71 @@
+{% extends '::base2.html.twig' %}
+{% block content %}
+    <section class="content-header">
+        <h1>
+            Utilidades
+            <small>Reclamo</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Utilidades</a></li>
+            <li class="active">Reclamo</li>
+        </ol>
+    </section>  
+    <section class="content">
+        <link rel="stylesheet" href="{{ asset('recursos/plugins/datatables/dataTables.bootstrap.css') }}">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Empresa</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha solicitud</th>
+                                    <th>Motivo</th>
+                                    <th>Descripcion</th>
+                                    <th>Fecha atendido</th>
+                                    <th>Fecha solucion</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
+                            {{ form_errors(form) }}
+                            <tbody>
+                             {% for arReclamo in arReclamo %}
+                                <tr>
+                                    <td>{{arReclamo.codigoReclamoPk}}</td>
+                                   <td>{{arReclamo.empresaRel.nombre}}</td>
+                                    <td>{{arReclamo.reclamoTipoRel.nombre}}</td>
+                                    <td>{{arReclamo.fechaGeneracion | date('Y/m/d')}}</td>
+                                    <td>{{arReclamo.motivo}}</td>
+                                    <td>{{arReclamo.descripcion}}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align: center"><a href="{{ path('reclamo_detalle', {'codigoReclamoPk': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=20 height=20 title="Editar"></a></td>
+                                    <td><input type="checkbox" name="ChkSeleccionar[]" {#value="{{ arConceptoServicios.codigoConceptoServicioPk }}"#} /></td>
+                                </tr>
+                                   {% endfor %}                    
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+                <div class="btn-toolbar" style="float:right">
+                <div class="btn-group">
+                    <a class="btn btn-default btn-sm" href="{{ path('reclamo_nuevo')}}">Nuevo</a>
+                     {{ form_widget(form.BtnEliminar, { 'attr': {'class': 'btn btn-danger btn-sm'} }) }}</td> 
+                </div>
+            </div>
+                 </div>
+            <!-- /.col -->
+        </div> 
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

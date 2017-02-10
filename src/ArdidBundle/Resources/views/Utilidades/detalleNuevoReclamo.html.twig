@@ -1,0 +1,54 @@
+{% extends '::base2.html.twig' %}
+{% block content %}
+       <section class="content-header">
+        <h1>
+            Utilidades
+            <small>Quejas y reclamos: nuevo</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Utilidades</a></li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Quejas y reclamos</a></li>   
+            <li class="active">Nuevo</li>
+        </ol>
+    </section>    
+    <section class="content">        	
+        {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+        {{ form_errors(form) }}
+        <div class="panel panel-default">
+            <div class="panel-heading">Quejas y reclamos</div>
+            <div class="panel-body">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Nombre:</label>
+                    <div class="col-sm-10">
+                        {{nombre}}
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Tipo:</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.quejaReclamoTipoRel, { 'attr': {'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Motivo:</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.motivo, { 'attr': {'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Descripcion:</label>
+                    <div class="col-sm-10">
+                        {{form_widget(form.descripcion, { 'attr': {'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-default btn-sm" href="{{ path('quejas_reclamos') }}">Cancelar</a>
+            {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-primary btn-sm'} }) }}
+        </div>
+        {{ form_end(form) }}
+        <br/><br/><br/><br/>
+    </section>
+{% endblock %}

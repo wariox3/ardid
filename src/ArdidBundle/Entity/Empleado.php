@@ -74,12 +74,19 @@ class Empleado
     protected $contratosEmpleadoRel;  
     
     /**
+     * @ORM\OneToMany(targetEntity="Reclamo", mappedBy="empleadoRel")
+     */
+    protected $quejasReclamosEmpleadoRel; 
+    
+    
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->pagosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
         $this->contratosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->quejasReclamosEmpleadoRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -374,5 +381,39 @@ class Empleado
     public function getContratosEmpleadoRel()
     {
         return $this->contratosEmpleadoRel;
+    }
+
+    /**
+     * Add quejasReclamosEmpleadoRel
+     *
+     * @param \ArdidBundle\Entity\Reclamo $quejasReclamosEmpleadoRel
+     *
+     * @return Empleado
+     */
+    public function addQuejasReclamosEmpleadoRel(\ArdidBundle\Entity\Reclamo $quejasReclamosEmpleadoRel)
+    {
+        $this->quejasReclamosEmpleadoRel[] = $quejasReclamosEmpleadoRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove quejasReclamosEmpleadoRel
+     *
+     * @param \ArdidBundle\Entity\Reclamo $quejasReclamosEmpleadoRel
+     */
+    public function removeQuejasReclamosEmpleadoRel(\ArdidBundle\Entity\Reclamo $quejasReclamosEmpleadoRel)
+    {
+        $this->quejasReclamosEmpleadoRel->removeElement($quejasReclamosEmpleadoRel);
+    }
+
+    /**
+     * Get quejasReclamosEmpleadoRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getQuejasReclamosEmpleadoRel()
+    {
+        return $this->quejasReclamosEmpleadoRel;
     }
 }
