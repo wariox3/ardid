@@ -97,7 +97,7 @@ class SeguridadController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $numeroIdentificacion = $form->get('TxtNumeroIdentificacion')->getData();
-                $arUsuario = new User();
+                $arUsuario = new User();                
                 $arUsuario = $em->getRepository('ArdidBundle:User')->findOneBy(array('username' => $numeroIdentificacion));
                 if($arUsuario) {
                     $an = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -119,7 +119,7 @@ class SeguridadController extends Controller
                     $message = \Swift_Message::newInstance()
                         ->setSubject('Solicitud cambio clave')
                         ->setFrom('sogainformacion@gmail.com', "ArdidApp" )
-                        ->setTo(strtolower('maestradaz3@gmail.com'))
+                        ->setTo(strtolower($arUsuario->getEmail()))
                         ->setBody($strMensaje,'text/html');
                     $this->get('mailer')->send($message); 
                     $this->get('session')->getFlashBag()->add("suceso", "Se envio un correo a la direccion " . $arUsuario->getEmail() . " con un enlace para cambiar su clave, puede cerrar esta pestaña y abrir su buzon de correo para seguir el proceso");                      
