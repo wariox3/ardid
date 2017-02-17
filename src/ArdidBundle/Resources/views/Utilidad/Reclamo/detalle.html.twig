@@ -23,74 +23,55 @@
                     <tbody><tr>
                             <td class="titulo">ID:</td>
                             <td class="td-in-well">{{arReclamo.codigoReclamoPk}}</td>
-                            <td class="titulo"></td>
-                            <td class="td-in-well"></td>
                         </tr>
                         <tr>
                             <td class="titulo">EMPRESA:</td>
                             <td class="td-in-well">{{arReclamo.empresaRel.nombre}}</td>
-                            <td class="titulo"></td>
-                            <td align="right"></td>
                         </tr> 
                         <tr>
                             <td class="titulo">TIPO:</td>
                             <td class="td-in-well">{{arReclamo.reclamoTipoRel.nombre}}</td>
-                            <td class="titulo"></td>
-                            <td align="right"></td>
                         </tr>                     
                         <tr>
                             <td class="titulo">FECHA:</td>
-                            <td class="td-in-well">{{arReclamo.fechaGeneracion | date('Y/m/d')}}</td>
-                            <td class="titulo"></td>
-                            <td align="right"></td>
+                            <td class="td-in-well">{{arReclamo.fechaSolicitud | date('Y/m/d')}}</td>
                         </tr>                  
 
 
                         <tr>
                             <td class="titulo">MOTIVO:</td>
                             <td class="td-in-well">{{arReclamo.motivo}}</td>
-                            <td class="titulo"></td>
-                            <td align="right"></td>
                         </tr>                
                         <tr>
                             <td class="titulo">DESCRIPCION:</td>
                             <td class="td-in-well">{{arReclamo.descripcion}}</td>
-                            <td class="titulo"></td>
-                            <td align="right"></td>
                         </tr> 
                     </tbody></table>
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">Novedades</div>
+            <div class="panel-heading">Respuestas</div>
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Fecha</th>
-                        <th>Descripcion</th>
-                        <th></th>
+                        <th>Respuesta</th>
                     </tr>
                 </thead>
                 {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
                 {{ form_errors(form) }}
                 <tbody>
-                    {% for arReclamo in arReclamo %}
+                    {% for arDetalleReclamo in arDetalleReclamo %}
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td><input type="checkbox" name="ChkSeleccionar[]" {#value="{{ arConceptoServicios.codigoConceptoServicioPk }}"#} /></td>
+                            <td>{{arDetalleReclamo.fecha| date('Y/m/d')}}</td>
+                            <td>{{arDetalleReclamo.solucion}}</td>
                         </tr>
                     {% endfor %}                    
                 </tbody>
             </table>
         </div>
-        <div class="btn-toolbar" style="float:right">
-            <div class="btn-group">
-                <a class="btn btn-default btn-sm" href="#">Nuevo</a>
-                <a class="btn btn-danger btn-sm" href="#">Eliminar</a>
-            </div>
-        </div>
-        <a class="btn btn-default btn-sm" href="{{ path('reclamo')}}">Volver</a>
+      
+        <a class="btn btn-default btn-sm" href="{{ path('utilidad_reclamo')}}">Volver</a>
         {{ form_end(form) }}
         <br/><br/><br/><br/>
     </section>

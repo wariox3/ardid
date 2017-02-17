@@ -15,7 +15,6 @@ class DetalleReclamoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fecha', DateTimeType::class, array('required' => true, 'data' => new \DateTime('now')))
             ->add('descripcion', TextareaType::class, array('required' => false))
             ->add('guardar', SubmitType::class);  
     }

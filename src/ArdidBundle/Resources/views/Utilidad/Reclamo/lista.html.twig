@@ -23,7 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Empresa</th>
                                     <th>Tipo</th>
                                     <th>Fecha solicitud</th>
                                     <th>Motivo</th>
@@ -32,21 +31,22 @@
                                     <th>Fecha solucion</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                             {% for arReclamo in arReclamo %}
+                             {% for arReclamo in arReclamos %}
                                 <tr>
                                     <td>{{arReclamo.codigoReclamoPk}}</td>
-                                   <td>{{arReclamo.empresaRel.nombre}}</td>
                                     <td>{{arReclamo.reclamoTipoRel.nombre}}</td>
-                                    <td>{{arReclamo.fechaGeneracion | date('Y/m/d')}}</td>
+                                    <td>{{arReclamo.fechaSolicitud | date('Y/m/d')}}</td>
                                     <td>{{arReclamo.motivo}}</td>
                                     <td>{{arReclamo.descripcion}}</td>
                                     <td></td>
                                     <td></td>
-                                    <td style="text-align: center"><a href="{{ path('reclamo_detalle', {'codigoReclamoPk': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=20 height=20 title="Editar"></a></td>
+                                    <td style="text-align: center"> {% if arReclamo.estadoAtendido == 0 %} <a href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_151_edit.png') }}" width=20 height=20 title="Editar"></a>{% endif %}</td>
+                                    <td style="text-align: center"><a href="{{ path('utilidad_reclamo_detalle', {'codigoReclamoPk': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=20 height=20 title="Editar"></a></td>
                                     <td><input type="checkbox" name="ChkSeleccionar[]" value="{{ arReclamo.codigoReclamoPk }}" /></td>
                                 </tr>
                                    {% endfor %}                    
@@ -58,7 +58,7 @@
                 <!-- /.box -->
                 <div class="btn-toolbar" style="float:right">
                 <div class="btn-group">
-                    <a class="btn btn-default btn-sm" href="{{ path('reclamo_nuevo')}}">Nuevo</a>
+                    <a class="btn btn-default btn-sm" href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': 0 })}}">Nuevo</a>
                      {{ form_widget(form.BtnEliminar, { 'attr': {'class': 'btn btn-danger btn-sm'} }) }}</td> 
                 </div>
             </div>

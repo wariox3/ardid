@@ -5,14 +5,14 @@ namespace ArdidBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="reclamo_detalle")
+ * @ORM\Table(name="reclamo_solucion")
  * @ORM\Entity(repositoryClass="ArdidBundle\Repository\ReclamoTipoRepository")
  */
-class ReclamoDetalle {
+class ReclamoSolucion {
 
     /**
      * @ORM\Id
-     * @ORM\Column(name="codigo_detalle_reclamo_Pk", type="integer")
+     * @ORM\Column(name="codigo_reclamo_solucion_pk", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $codigoDetalleReclamoPk;
@@ -23,9 +23,9 @@ class ReclamoDetalle {
     private $codigoReclamoFk;
     
     /**
-     * @ORM\Column(name="descripcion", type="string", length=60, nullable=true)
+     * @ORM\Column(name="solucion", type="string", length=60, nullable=true)
      */
-    private $descripcion;
+    private $solucion;
 
      /**
      * @ORM\Column(name="fecha", type="date", nullable=true)
@@ -33,13 +33,12 @@ class ReclamoDetalle {
     private $fecha;
     
      /**
-     * @ORM\ManyToOne(targetEntity="Reclamo", inversedBy="reclamosDetallesRel")
+     * @ORM\ManyToOne(targetEntity="Reclamo", inversedBy="reclamosSolucionRel")
      * @ORM\JoinColumn(name="codigo_reclamo_fk", referencedColumnName="codigo_reclamo_pk")
      */
-    protected $reclamoDetalleRel;
+    protected $reclamoSolucionRel;
     
 
-    
 
     /**
      * Get codigoDetalleReclamoPk
@@ -56,7 +55,7 @@ class ReclamoDetalle {
      *
      * @param integer $codigoReclamoFk
      *
-     * @return ReclamoDetalle
+     * @return ReclamoSolucion
      */
     public function setCodigoReclamoFk($codigoReclamoFk)
     {
@@ -76,27 +75,27 @@ class ReclamoDetalle {
     }
 
     /**
-     * Set descripcion
+     * Set solucion
      *
-     * @param string $descripcion
+     * @param string $solucion
      *
-     * @return ReclamoDetalle
+     * @return ReclamoSolucion
      */
-    public function setDescripcion($descripcion)
+    public function setSolucion($solucion)
     {
-        $this->descripcion = $descripcion;
+        $this->solucion = $solucion;
 
         return $this;
     }
 
     /**
-     * Get descripcion
+     * Get solucion
      *
      * @return string
      */
-    public function getDescripcion()
+    public function getSolucion()
     {
-        return $this->descripcion;
+        return $this->solucion;
     }
 
     /**
@@ -104,7 +103,7 @@ class ReclamoDetalle {
      *
      * @param \DateTime $fecha
      *
-     * @return ReclamoDetalle
+     * @return ReclamoSolucion
      */
     public function setFecha($fecha)
     {
@@ -124,26 +123,26 @@ class ReclamoDetalle {
     }
 
     /**
-     * Set reclamoDetalleRel
+     * Set reclamoSolucionRel
      *
-     * @param \ArdidBundle\Entity\Reclamo $reclamoDetalleRel
+     * @param \ArdidBundle\Entity\Reclamo $reclamoSolucionRel
      *
-     * @return ReclamoDetalle
+     * @return ReclamoSolucion
      */
-    public function setReclamoDetalleRel(\ArdidBundle\Entity\Reclamo $reclamoDetalleRel = null)
+    public function setReclamoSolucionRel(\ArdidBundle\Entity\Reclamo $reclamoSolucionRel = null)
     {
-        $this->reclamoDetalleRel = $reclamoDetalleRel;
+        $this->reclamoSolucionRel = $reclamoSolucionRel;
 
         return $this;
     }
 
     /**
-     * Get reclamoDetalleRel
+     * Get reclamoSolucionRel
      *
      * @return \ArdidBundle\Entity\Reclamo
      */
-    public function getReclamoDetalleRel()
+    public function getReclamoSolucionRel()
     {
-        return $this->reclamoDetalleRel;
+        return $this->reclamoSolucionRel;
     }
 }

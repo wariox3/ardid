@@ -43,9 +43,9 @@ class Reclamo {
     private $descripcion;
 
     /**
-     * @ORM\Column(name="fecha_generacion", type="date", nullable=true)
+     * @ORM\Column(name="fecha_solicitud", type="date", nullable=true)
      */
-    private $fechaGeneracion;
+    private $fechaSolicitud;
 
     /**
      * @ORM\Column(name="fecha_atendido", type="date", nullable=true)
@@ -60,12 +60,12 @@ class Reclamo {
      /**
      * @ORM\Column(name="estado_solucionado", type="boolean", nullable=true)
      */
-    private $estado_solucionado;
+    private $estadoSolucionado= false;
     
      /**
      * @ORM\Column(name="estado_atendido", type="boolean", nullable=true)
      */
-    private $estado_atendido;
+    private $estadoAtendido= false;
 
     /**
      * @ORM\ManyToOne(targetEntity="ReclamoTipo", inversedBy="reclamosTipoRel")
@@ -86,9 +86,9 @@ class Reclamo {
     protected $empresaRel;
     
     /**
-     * @ORM\OneToMany(targetEntity="ReclamoDetalle", mappedBy="reclamoDetalleRel")
+     * @ORM\OneToMany(targetEntity="ReclamoSolucion", mappedBy="reclamoSolucionRel")
      */
-    protected $reclamosDetallesRel; 
+    protected $reclamosSolucionRel; 
 
 
     /**
@@ -96,7 +96,7 @@ class Reclamo {
      */
     public function __construct()
     {
-        $this->reclamosDetallesRel = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reclamosSolucionRel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -230,27 +230,27 @@ class Reclamo {
     }
 
     /**
-     * Set fechaGeneracion
+     * Set fechaSolicitud
      *
-     * @param \DateTime $fechaGeneracion
+     * @param \DateTime $fechaSolicitud
      *
      * @return Reclamo
      */
-    public function setFechaGeneracion($fechaGeneracion)
+    public function setFechaSolicitud($fechaSolicitud)
     {
-        $this->fechaGeneracion = $fechaGeneracion;
+        $this->fechaSolicitud = $fechaSolicitud;
 
         return $this;
     }
 
     /**
-     * Get fechaGeneracion
+     * Get fechaSolicitud
      *
      * @return \DateTime
      */
-    public function getFechaGeneracion()
+    public function getFechaSolicitud()
     {
-        return $this->fechaGeneracion;
+        return $this->fechaSolicitud;
     }
 
     /**
@@ -310,7 +310,7 @@ class Reclamo {
      */
     public function setEstadoSolucionado($estadoSolucionado)
     {
-        $this->estado_solucionado = $estadoSolucionado;
+        $this->estadoSolucionado = $estadoSolucionado;
 
         return $this;
     }
@@ -322,7 +322,7 @@ class Reclamo {
      */
     public function getEstadoSolucionado()
     {
-        return $this->estado_solucionado;
+        return $this->estadoSolucionado;
     }
 
     /**
@@ -334,7 +334,7 @@ class Reclamo {
      */
     public function setEstadoAtendido($estadoAtendido)
     {
-        $this->estado_atendido = $estadoAtendido;
+        $this->estadoAtendido = $estadoAtendido;
 
         return $this;
     }
@@ -346,7 +346,7 @@ class Reclamo {
      */
     public function getEstadoAtendido()
     {
-        return $this->estado_atendido;
+        return $this->estadoAtendido;
     }
 
     /**
@@ -422,36 +422,36 @@ class Reclamo {
     }
 
     /**
-     * Add reclamosDetallesRel
+     * Add reclamosSolucionRel
      *
-     * @param \ArdidBundle\Entity\ReclamoDetalle $reclamosDetallesRel
+     * @param \ArdidBundle\Entity\ReclamoSolucion $reclamosSolucionRel
      *
      * @return Reclamo
      */
-    public function addReclamosDetallesRel(\ArdidBundle\Entity\ReclamoDetalle $reclamosDetallesRel)
+    public function addReclamosSolucionRel(\ArdidBundle\Entity\ReclamoSolucion $reclamosSolucionRel)
     {
-        $this->reclamosDetallesRel[] = $reclamosDetallesRel;
+        $this->reclamosSolucionRel[] = $reclamosSolucionRel;
 
         return $this;
     }
 
     /**
-     * Remove reclamosDetallesRel
+     * Remove reclamosSolucionRel
      *
-     * @param \ArdidBundle\Entity\ReclamoDetalle $reclamosDetallesRel
+     * @param \ArdidBundle\Entity\ReclamoSolucion $reclamosSolucionRel
      */
-    public function removeReclamosDetallesRel(\ArdidBundle\Entity\ReclamoDetalle $reclamosDetallesRel)
+    public function removeReclamosSolucionRel(\ArdidBundle\Entity\ReclamoSolucion $reclamosSolucionRel)
     {
-        $this->reclamosDetallesRel->removeElement($reclamosDetallesRel);
+        $this->reclamosSolucionRel->removeElement($reclamosSolucionRel);
     }
 
     /**
-     * Get reclamosDetallesRel
+     * Get reclamosSolucionRel
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getReclamosDetallesRel()
+    public function getReclamosSolucionRel()
     {
-        return $this->reclamosDetallesRel;
+        return $this->reclamosSolucionRel;
     }
 }
