@@ -19,6 +19,7 @@ class CertificadoIngresos extends \FPDF {
         $pdf->AddPage();
         $pdf->SetFont('Arial', '', 12);
         $pdf->SetFillColor(200, 200, 200);
+        $pdf->SetMargins(25, 15 , 25); 
         $this->Body($pdf);
         $pdf->Output("Contrato$codigoContrato.pdf", 'D');
     }
@@ -30,7 +31,7 @@ class CertificadoIngresos extends \FPDF {
         $this->SetFillColor(200, 200, 200);
         $this->SetFont('Arial', 'B', 10);
         //Logo
-       $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 12, 12, 35, 17);
+      $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 20, 12, 35, 0);
     }
 
     public function EncabezadoDetalles() {
@@ -42,7 +43,7 @@ class CertificadoIngresos extends \FPDF {
     }
 
     public function Body($pdf) {
-        $pdf->SetXY(10, 65);
+        $pdf->SetXY(25, 65);
         $pdf->SetFont('Arial', '', 10);
         
         $arContrato = new \ArdidBundle\Entity\Contrato;
