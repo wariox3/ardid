@@ -10,7 +10,8 @@
             <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Utilidades</a></li>
             <li class="active">Reclamo</li>
         </ol>
-    </section>  
+    </section> 
+    
     <section class="content">
         {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
         {{ form_errors(form) }}
@@ -53,16 +54,18 @@
                             </tbody>
                         </table>
                     </div>
+                            
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
+                  <label type="danger">{{mensaje}}</label>
                 <div class="btn-toolbar" style="float:right">
                 <div class="btn-group">
                     <a class="btn btn-default btn-sm" href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': 0 })}}">Nuevo</a>
                      {{ form_widget(form.BtnEliminar, { 'attr': {'class': 'btn btn-danger btn-sm'} }) }}</td> 
                 </div>
             </div>
-                 </div>
+                 </div>   
             <!-- /.col -->
         </div> 
         {{ form_rest(form) }}

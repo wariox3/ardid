@@ -19,6 +19,8 @@ class ReclamoController extends Controller {
         $arUsuario = $this->getUser();
         $arEmpleado = new \ArdidBundle\Entity\Empleado();
         $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->find($arUsuario->getCodigoEmpleadoFk());
+        $arDetalleReclamo = new \ArdidBundle\Entity\ReclamoSolucion();
+        $mensaje= '';
         $form = $this->createFormBuilder()
                 ->add('BtnEliminar', SubmitType::class, array('label' => 'Eliminar'))
                 ->getForm();
@@ -26,20 +28,31 @@ class ReclamoController extends Controller {
         if ($form->isValid()) {
             if ($form->get('BtnEliminar')->isClicked()) {
                 $arrSeleccionados = $request->request->get('ChkSeleccionar');
+                if($arrSeleccionados == null){
+                    
+                }else{
                 foreach ($arrSeleccionados AS $codigoReclamo) {
-                    $arReclamo = new \ArdidBundle\Entity\Reclamo();
-                    $arReclamo = $em->getRepository('ArdidBundle:Reclamo')->find($codigoReclamo);
-                    $em->remove($arReclamo);
+                    $arDetalleReclamo = $em->getRepository('ArdidBundle:ReclamoSolucion')->findBy(array('codigoReclamoFk' => $codigoReclamo));
+                    if($arDetalleReclamo =! null) {
+                        $mensaje= 'este Reclamo no se puede eliminar ya que contiene detalles';
+                    } else {
+                        $arReclamo = new \ArdidBundle\Entity\Reclamo();
+                        $arReclamo = $em->getRepository('ArdidBundle:Reclamo')->find($codigoReclamo);
+                        $em->remove($arReclamo);
+                    }
                 }
                 $em->flush();
             }
             return $this->redirect($this->generateUrl('utilidad_reclamo'));
         }
+        }
         $arReclamos = new \ArdidBundle\Entity\Reclamo();
         $arReclamos = $em->getRepository('ArdidBundle:Reclamo')->findBy(array('codigoEmpleadoFk' => $arEmpleado->getCodigoEmpleadoPk()));
         return $this->render('ArdidBundle:Utilidad/Reclamo:lista.html.twig', array(
                     'arReclamos' => $arReclamos,
+                    'mensaje' => $mensaje,
                     'form' => $form->createView()));
+    
     }
 
     /**
@@ -48,12 +61,12 @@ class ReclamoController extends Controller {
     public function nuevoAction(Request $request, $codigoReclamo) {
         $em = $this->getDoctrine()->getManager();
         $arUsuario = $this->getUser();
-        if($codigoReclamo == 0){
+        if ($codigoReclamo == 0) {
             $arReclamo = new \ArdidBundle\Entity\Reclamo();
-        }else{
-          $arReclamo = $em->getRepository('ArdidBundle:Reclamo')->find($codigoReclamo);
+        } else {
+            $arReclamo = $em->getRepository('ArdidBundle:Reclamo')->find($codigoReclamo);
         }
-        
+
         $arEmpleado = new \ArdidBundle\Entity\Empleado();
         $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->find($arUsuario->getCodigoEmpleadoFk());
         $nombre = $arEmpleado->getNombreCorto();
@@ -62,12 +75,12 @@ class ReclamoController extends Controller {
         if ($form->isValid()) {
             $arReclamo = $form->getData();
             $arReclamo->setEmpleadoRel($arEmpleado);
-            if($codigoReclamo == 0){
-                   $arReclamo->setFechaSolicitud(new \DateTime('now'));
+            if ($codigoReclamo == 0) {
+                $arReclamo->setFechaSolicitud(new \DateTime('now'));
             }
-                $em->persist($arReclamo);
-                $em->flush();
-                return $this->redirect($this->generateUrl('utilidad_reclamo'));
+            $em->persist($arReclamo);
+            $em->flush();
+            return $this->redirect($this->generateUrl('utilidad_reclamo'));
         }
 
         return $this->render('ArdidBundle:Utilidad/Reclamo:nuevo.html.twig', array(
@@ -92,8 +105,8 @@ class ReclamoController extends Controller {
         $form = $this->createFormBuilder()
                 ->getForm();
         $form->handleRequest($request);
-         
-      
+
+
 
         return $this->render('ArdidBundle:Utilidad/Reclamo:detalle.html.twig', array(
                     'arReclamo' => $arReclamo,
@@ -116,7 +129,7 @@ class ReclamoController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-          
+
             $arDetalleReclamo->setReclamoDetalleRel($arReclamo);
             $arDetalleReclamo->setFecha(new \DateTime('now'));
             $arDetalleReclamo = $form->getData();
