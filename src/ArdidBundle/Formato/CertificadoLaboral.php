@@ -61,7 +61,7 @@ class CertificadoLaboral extends \FPDF {
         $contenido = preg_replace('/#5/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
         $contenido = preg_replace('/#6/', $arContrato->getEmpresaRel()->getNit(), $contenido);
         $contenido = preg_replace('/#7/', $arContrato->getEmpresaRel()->getTelefono(), $contenido);
-        $contenido = preg_replace('/#a/', $fecha->format('Y/m/d'), $contenido);
+        $contenido = preg_replace('/#8/', $fecha->format('Y/m/d'), $contenido);
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
     }

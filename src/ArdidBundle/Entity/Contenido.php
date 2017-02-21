@@ -16,11 +16,16 @@ class Contenido {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $codigoContenidoPk;
-    
+
     /**
      * @ORM\Column(name="codigo_empresa_fk", type="integer",nullable=true)
      */
     private $codigoEmpresaFk;
+
+    /**
+     * @ORM\Column(name="codigo_contenido_tipo_fk", type="integer",nullable=true)
+     */
+    private $codigoContenidoTipoFk;
 
     /**
      * @ORM\Column(name="titulo", type="string", length=300, nullable=true)
@@ -41,8 +46,8 @@ class Contenido {
      * @ORM\Column(name="version", type="string", length=100, nullable=true)
      */
     private $version;
-    
-      /**
+
+    /**
      * @ORM\Column(name="tipo", type="integer", length=100, nullable=true)
      */
     private $tipo;
@@ -58,7 +63,13 @@ class Contenido {
      */
     protected $empresaRel;
 
-    
+    /**
+     * @ORM\ManyToOne(targetEntity="ContenidoTipo", inversedBy="codigoContenidoTipoRel")
+     * @ORM\JoinColumn(name="codigo_contenido_tipo_fk", referencedColumnName="codigo_contenido_tipo_pk")
+     */
+    protected $codigoContenidosTipoRel;
+
+
 
     /**
      * Get codigoContenidoPk
@@ -92,6 +103,30 @@ class Contenido {
     public function getCodigoEmpresaFk()
     {
         return $this->codigoEmpresaFk;
+    }
+
+    /**
+     * Set codigoContenidoTipoFk
+     *
+     * @param integer $codigoContenidoTipoFk
+     *
+     * @return Contenido
+     */
+    public function setCodigoContenidoTipoFk($codigoContenidoTipoFk)
+    {
+        $this->codigoContenidoTipoFk = $codigoContenidoTipoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoContenidoTipoFk
+     *
+     * @return integer
+     */
+    public function getCodigoContenidoTipoFk()
+    {
+        return $this->codigoContenidoTipoFk;
     }
 
     /**
@@ -260,5 +295,29 @@ class Contenido {
     public function getEmpresaRel()
     {
         return $this->empresaRel;
+    }
+
+    /**
+     * Set codigoContenidosTipoRel
+     *
+     * @param \ArdidBundle\Entity\ContenidoTipo $codigoContenidosTipoRel
+     *
+     * @return Contenido
+     */
+    public function setCodigoContenidosTipoRel(\ArdidBundle\Entity\ContenidoTipo $codigoContenidosTipoRel = null)
+    {
+        $this->codigoContenidosTipoRel = $codigoContenidosTipoRel;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoContenidosTipoRel
+     *
+     * @return \ArdidBundle\Entity\ContenidoTipo
+     */
+    public function getCodigoContenidosTipoRel()
+    {
+        return $this->codigoContenidosTipoRel;
     }
 }

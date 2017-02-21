@@ -1,0 +1,64 @@
+{% extends '::base2.html.twig' %}
+{% block content %}
+    <section class="content-header">
+        <h1>
+            Utilidades
+            <small>Reclamo: nuevo</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Utilidades</a></li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Reclamos</a></li>   
+            <li class="active">Nuevo</li>
+        </ol>
+    </section>    
+    <section class="content">        	
+        {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
+        {{ form_errors(form) }}
+        <div class="panel panel-default">
+            <div class="panel-heading">Contenido</div>
+            <div class="panel-body">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Titulo:</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.titulo, { 'attr': {'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Contenido:</label>
+                    <div class="col-sm-10">
+                    {{ form_widget(form.contenido, { 'attr': {'class': 'form-control','autofocus':'autofocus', 'rows':'15', 'cols':'50'} }) }} 
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Codigo Formato Iso:</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.codigoFormatoIso, { 'attr': {'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Version:</label>
+                    <div class="col-sm-10">
+                        {{form_widget(form.version, { 'attr': {'class': 'form-control','autofocus':'autofocus'} }) }}
+                    </div>
+                </div>    
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label">Fecha Version:</label>
+                    <div class="col-sm-10">
+                        {{ form_widget(form.fechaVersion, { 'attr': {'autofocus':'autofocus'} }) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-default btn-sm" href="{{ path('contenido_lista') }}">Cancelar</a>
+            {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-primary btn-sm'} }) }}
+        </div>
+        <div>
+            <div class="panel-heading">Etiquetas</div>
+            <textarea disabled rows="15" cols="50">{{arContenidoTipo.etiqueta}} </textarea>
+        </div>    
+        {{ form_end(form) }}
+        <br/><br/><br/><br/>    
+    </section>
+{% endblock %}
