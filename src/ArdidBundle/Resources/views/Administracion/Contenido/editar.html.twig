@@ -54,11 +54,16 @@
             <a class="btn btn-default btn-sm" href="{{ path('contenido_lista') }}">Cancelar</a>
             {{ form_widget(form.guardar, { 'attr': {'class': 'btn btn-primary btn-sm'} }) }}
         </div>
-        <div>
+         <div class="panel panel-default">
             <div class="panel-heading">Etiquetas</div>
+            <div class="panel-body">
+            <div class="panel-heading " align="center">
             <textarea disabled rows="15" cols="50">{{arContenidoTipo.etiqueta}} </textarea>
-        </div>    
+            </div>
+            </div>
+        </div> 
         {{ form_end(form) }}
         <br/><br/><br/><br/>    
     </section>
 {% endblock %}
+  

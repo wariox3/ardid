@@ -1,5 +1,7 @@
 <?php
+
 // src/AppBundle/Entity/User.php
+
 namespace ArdidBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -9,8 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="ArdidBundle\Repository\UserRepository")
  */
-class User implements UserInterface, \Serializable
-{
+class User implements UserInterface, \Serializable {
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -22,6 +24,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=25, unique=true)
      */
     private $username;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $roles;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -36,84 +43,82 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="codigo_verificacion", type="string", length=100, nullable=true)
      */
-    private $codigoVerificacion;    
-    
+    private $codigoVerificacion;
+
     /**
      * @ORM\Column(name="codigo_empleado_fk", type="integer", nullable=true)
      */
-    private $codigoEmpleadoFk;      
-    
+    private $codigoEmpleadoFk;
+
     /**
      * @ORM\Column(name="codigo_empresa_fk", type="integer", nullable=true)
      */
-    private $codigoEmpresaFk;    
+    private $codigoEmpresaFk;
 
     /**
      * @ORM\Column(name="nombre_corto", type="string", length=50, nullable=true)
      */
-    private $nombreCorto;    
-   
-    
+    private $nombreCorto;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="SegRoles", inversedBy="usersRolRel")
+     * @ORM\JoinColumn(name="roles", referencedColumnName="codigo_rol_pk")
+     */
+    protected $rolRel;
+
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->isActive = true;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid(null, true));
     }
 
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
-    public function getSalt()
-    {
+    public function getSalt() {
         // you *may* need a real salt depending on your encoder
         // see section on salt below
         return null;
     }
 
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
-    public function getRoles()
-    {
-        return array('ROLE_USER');
+    public function getRoles() {
+        return $this->roles;
     }
 
-    public function eraseCredentials()
-    {
+    public function eraseCredentials() {
+        
     }
 
     /** @see \Serializable::serialize() */
-    public function serialize()
-    {
+    public function serialize() {
         return serialize(array(
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt,
+                // see section on salt below
+                // $this->salt,
         ));
     }
 
     /** @see \Serializable::unserialize() */
-    public function unserialize($serialized)
-    {
+    public function unserialize($serialized) {
         list (
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized);
+                $this->id,
+                $this->username,
+                $this->password,
+                // see section on salt below
+                // $this->salt
+                ) = unserialize($serialized);
     }
 
     /**
@@ -121,8 +126,7 @@ class User implements UserInterface, \Serializable
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -133,8 +137,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->username = $username;
 
         return $this;
@@ -147,8 +150,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -161,8 +163,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
 
         return $this;
@@ -173,8 +174,7 @@ class User implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -185,8 +185,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setIsActive($isActive)
-    {
+    public function setIsActive($isActive) {
         $this->isActive = $isActive;
 
         return $this;
@@ -197,8 +196,7 @@ class User implements UserInterface, \Serializable
      *
      * @return boolean
      */
-    public function getIsActive()
-    {
+    public function getIsActive() {
         return $this->isActive;
     }
 
@@ -209,8 +207,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setCodigoEmpleadoFk($codigoEmpleadoFk)
-    {
+    public function setCodigoEmpleadoFk($codigoEmpleadoFk) {
         $this->codigoEmpleadoFk = $codigoEmpleadoFk;
 
         return $this;
@@ -221,8 +218,7 @@ class User implements UserInterface, \Serializable
      *
      * @return integer
      */
-    public function getCodigoEmpleadoFk()
-    {
+    public function getCodigoEmpleadoFk() {
         return $this->codigoEmpleadoFk;
     }
 
@@ -233,8 +229,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setCodigoEmpresaFk($codigoEmpresaFk)
-    {
+    public function setCodigoEmpresaFk($codigoEmpresaFk) {
         $this->codigoEmpresaFk = $codigoEmpresaFk;
 
         return $this;
@@ -245,8 +240,7 @@ class User implements UserInterface, \Serializable
      *
      * @return integer
      */
-    public function getCodigoEmpresaFk()
-    {
+    public function getCodigoEmpresaFk() {
         return $this->codigoEmpresaFk;
     }
 
@@ -257,8 +251,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setCodigoVerificacion($codigoVerificacion)
-    {
+    public function setCodigoVerificacion($codigoVerificacion) {
         $this->codigoVerificacion = $codigoVerificacion;
 
         return $this;
@@ -269,8 +262,7 @@ class User implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getCodigoVerificacion()
-    {
+    public function getCodigoVerificacion() {
         return $this->codigoVerificacion;
     }
 
@@ -281,8 +273,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setNombre1($nombre1)
-    {
+    public function setNombre1($nombre1) {
         $this->nombre1 = $nombre1;
 
         return $this;
@@ -293,8 +284,7 @@ class User implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getNombre1()
-    {
+    public function getNombre1() {
         return $this->nombre1;
     }
 
@@ -305,8 +295,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setNombre2($nombre2)
-    {
+    public function setNombre2($nombre2) {
         $this->nombre2 = $nombre2;
 
         return $this;
@@ -317,8 +306,7 @@ class User implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getNombre2()
-    {
+    public function getNombre2() {
         return $this->nombre2;
     }
 
@@ -329,8 +317,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setNombreCorto($nombreCorto)
-    {
+    public function setNombreCorto($nombreCorto) {
         $this->nombreCorto = $nombreCorto;
 
         return $this;
@@ -341,8 +328,45 @@ class User implements UserInterface, \Serializable
      *
      * @return string
      */
-    public function getNombreCorto()
-    {
+    public function getNombreCorto() {
         return $this->nombreCorto;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles) {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+
+    /**
+     * Set rolRel
+     *
+     * @param \ArdidBundle\Entity\SegRoles $rolRel
+     *
+     * @return User
+     */
+    public function setRolRel(\ArdidBundle\Entity\SegRoles $rolRel = null)
+    {
+        $this->rolRel = $rolRel;
+
+        return $this;
+    }
+
+    /**
+     * Get rolRel
+     *
+     * @return \ArdidBundle\Entity\SegRoles
+     */
+    public function getRolRel()
+    {
+        return $this->rolRel;
     }
 }

@@ -58,14 +58,12 @@ class CertificadoIngresos extends \FPDF {
         $contenido = preg_replace('/#3/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
         $contenido = preg_replace('/#4/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
         $contenido = preg_replace('/#5/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d'))), $contenido);
-        $contenido = preg_replace('/#6/',  $arContrato->getCargo(), $contenido);
-        $contenido = preg_replace('/#7/', $arContrato->getVrSalario(), $contenido);
-        $contenido = preg_replace('/#8/', $arContrato->getVrSalario(), $contenido);
-        $contenido = preg_replace('/#a/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
-        $contenido = preg_replace('/#b/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
-        $contenido = preg_replace('/#c/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
-        $contenido = preg_replace('/#d/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
-        $contenido = preg_replace('/#e/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
+        $contenido = preg_replace('/#6/',  $arContrato->getCargo(), $contenido);//tipo contrato
+        $contenido = preg_replace('/#7/', $arContrato->getCargo(), $contenido);// cargo
+        $contenido = preg_replace('/#8/', $arContrato->getVrSalario(), $contenido);//salario fijo
+        $contenido = preg_replace('/#9/', $arContrato->getVrSalario(), $contenido);//aux transporte
+        $contenido = preg_replace('/#a/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);// horas extras y recargos
+        $contenido = preg_replace('/#b/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
 
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);

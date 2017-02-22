@@ -63,10 +63,14 @@ class SeguridadController extends Controller
                     $arEmpleado = new \ArdidBundle\Entity\Empleado();
                     $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero' => $arUser->getUsername()));
                     if($arEmpleado) {
+                        $arRol = new \ArdidBundle\Entity\SegRoles();
+                        $arRol = $em->getRepository('ArdidBundle:SegRoles')->find('ROLE_USER');
                         $arUser->setPassword($password);
+                        
                         $arUser->setCodigoEmpleadoFk($arEmpleado->getCodigoEmpleadoPk());
                         $arUser->setNombreCorto($arEmpleado->getNombre1() . " " . $arEmpleado->getNombre2());
                         //$arUser->setIsActive(1);
+                        $arUser->setRolRel($arRol);
                         $em->persist($arUser);
                         $em->flush();
                         $this->get('session')->getFlashBag()->add("suceso", "Su registro fue exitoso ingrese con su numero de identificacion y su contraseña que tambien es su numero de identificacion, por su seguridad recuerde cambiarla cuando ingrese al sistema");

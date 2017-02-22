@@ -242,11 +242,14 @@
                             </li>                            
                             <li><a href="{{ path('documentacion') }}"><i class="fa fa-book"></i> <span>Documentacion</span></a></li>                            
                             <li>
+                                {% if is_granted('ROLE_ADMIN') %}
                                 <a href="#"><i class="fa fa-th"></i> Administracion
                                     <span class="pull-right-container">
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </span>
-                                </a>
+                                </a>                                
+                                    
+                                
                                 <ul class="treeview-menu">
                                     <li>
                                         <a href="#"><i class=" fa fa-angle-left pull-right"></i> Contenido
@@ -259,6 +262,7 @@
                                         </ul>
                                     </li>
                                 </ul>
+                                {% endif %}        
                             </li>  
                             <li class="header">RELACIONADOS</li>
                             <li><a href="{{ path('ayuda') }}"><i class="fa fa-circle-o text-red"></i> <span>Ayuda</span></a></li>
