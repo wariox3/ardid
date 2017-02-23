@@ -1,17 +1,17 @@
 {% extends '::base2.html.twig' %}
 {% block content %}
-    <section class="content-header">
+      <section class="content-header">
         <h1>
-            Utilidades
-            <small>Reclamo: nuevo</small>
+            Administracion
+            <small>Contenido: Editar</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Utilidades</a></li>
-            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Reclamos</a></li>   
-            <li class="active">Nuevo</li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Administracion</a></li>
+            <li><a href="/ardid/web/app_dev.php/"><i class="fa fa-calendar"></i> Contenido</a></li>
+            <li class="active">Editar</li>
         </ol>
-    </section>    
+    </section>   
     <section class="content">        	
         {{ form_start(form, { 'attr': {'class': 'form-horizontal'} }) }}
         {{ form_errors(form) }}
