@@ -33,6 +33,7 @@
                                 <th>Cargo</th>
                                 <th>Grupo pago</th>
                                 <th style="text-align: right">Salario</th>
+                                <th>Vigente</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -51,6 +52,7 @@
                                     <td>{{arContratos.cargo}}</td>
                                     <td>{{arContratos.grupoPago}}</td>
                                     <td>{{arContratos.vrSalario | number_format(0, '.', ',') }}</td>
+                                    <td>{%if arContratos.vigente == 0 %}  No {%else%}  Si  {% endif %}</td> 
                                     <td><button class="btn btn-default btn-xs" type="submit" name="opImprimir" value="{{ arContratos.codigoContratoPk }}"><b>Imprimir</b></button>     </td>
                                     </tr>
                             {% endfor %}                         

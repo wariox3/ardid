@@ -70,7 +70,7 @@ class Contrato {
     /**     
      * @ORM\Column(name="vigente", type="boolean")
      */    
-    private $vigente = 0;    
+    private $vigente = false;    
     
     /**
      * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="contratosEmpresaRel")
