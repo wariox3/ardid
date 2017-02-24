@@ -32,6 +32,7 @@ class CertificadoIngresos extends \FPDF {
         $this->SetFont('Arial', 'B', 10);
         //Logo
       $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 20, 12, 35, 0);
+      $this->Image('imagenes/firmas/firma-galaxia.jpg', 30, 170, 35, 20);
     }
 
     public function EncabezadoDetalles() {
