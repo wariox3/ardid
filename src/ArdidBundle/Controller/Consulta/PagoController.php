@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityRepository;
 use ArdidBundle\Entity\Empleado;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+
 class PagoController extends Controller {
 
     /**
@@ -48,7 +49,7 @@ class PagoController extends Controller {
         $form->handleRequest($request);
         if ($form->isValid()) {
             if ($form->get('BtnImprimir')->isClicked()) {
-                $objFormatoPago = new \ArdidBundle\Formato\FormatoPago();
+                $objFormatoPago = new \ArdidBundle\Formato\Pago();
                 $objFormatoPago->Generar($em, $codigoPago);
             }
         }
