@@ -11,7 +11,7 @@
             <li class="active">Reclamo</li>
         </ol>
     </section> 
-    
+
     <section class="content">
         {{ form_start(form, { 'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'} }) }}
         {{ form_errors(form) }}
@@ -19,7 +19,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <!-- /.box-header -->
-                    <div class="box-body">
+                    <div class="box-body table-responsive no-padding">
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -37,35 +37,37 @@
                             </thead>
 
                             <tbody>
-                             {% for arReclamo in arReclamos %}
-                                <tr>
-                                    <td>{{arReclamo.codigoReclamoPk}}</td>
-                                    <td>{{arReclamo.reclamoTipoRel.nombre}}</td>
-                                    <td>{{arReclamo.fechaSolicitud | date('Y/m/d')}}</td>
-                                    <td>{{arReclamo.motivo}}</td>
-                                    <td>{{arReclamo.descripcion}}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td style="text-align: center"> {% if arReclamo.estadoAtendido == 0 %} <a href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_151_edit.png') }}" width=20 height=20 title="Editar"></a>{% endif %}</td>
-                                    <td style="text-align: center"><a href="{{ path('utilidad_reclamo_detalle', {'codigoReclamoPk': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=20 height=20 title="Editar"></a></td>
-                                    <td><input type="checkbox" name="ChkSeleccionar[]" value="{{ arReclamo.codigoReclamoPk }}" /></td>
-                                </tr>
-                                   {% endfor %}                    
+                                {% for arReclamo in arReclamos %}
+                                    <tr>
+                                        <td>{{arReclamo.codigoReclamoPk}}</td>
+                                        <td>{{arReclamo.reclamoTipoRel.nombre}}</td>
+                                        <td>{{arReclamo.fechaSolicitud | date('Y/m/d')}}</td>
+                                        <td>{{arReclamo.motivo}}</td>
+                                        <td>{{arReclamo.descripcion}}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: center"> {% if arReclamo.estadoAtendido == 0 %} <a href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_151_edit.png') }}" width=20 height=20 title="Editar"></a>{% endif %}</td>
+                                        <td style="text-align: center"><a href="{{ path('utilidad_reclamo_detalle', {'codigoReclamoPk': arReclamo.codigoReclamoPk }) }}"><img src="{{ asset('imagenes/bootstrap/glyphicons_152_new_window.png') }}" width=20 height=20 title="Editar"></a></td>
+                                        <td><input type="checkbox" name="ChkSeleccionar[]" value="{{ arReclamo.codigoReclamoPk }}" /></td>
+                                    </tr>
+                                {% endfor %}                    
                             </tbody>
                         </table>
                     </div>
-                            
+
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
-                  <label type="danger">{{mensaje}}</label>
+                <label type="danger">{{mensaje}}</label>
                 <div class="btn-toolbar" style="float:right">
-                <div class="btn-group">
-                    <a class="btn btn-default btn-sm" href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': 0 })}}">Nuevo</a>
-                     {{ form_widget(form.BtnEliminar, { 'attr': {'class': 'btn btn-danger btn-sm'} }) }}</td> 
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" href="{{ path('utilidad_reclamo_nuevo', {'codigoReclamo': 0 })}}">Nuevo</a>
+                    </div>
+                    <div class="btn-group">
+                        {{ form_widget(form.BtnEliminar, { 'attr': {'class': 'btn btn-danger btn-sm'} }) }}</td> 
+                    </div>
                 </div>
-            </div>
-                 </div>   
+            </div>   
             <!-- /.col -->
         </div> 
         {{ form_rest(form) }}

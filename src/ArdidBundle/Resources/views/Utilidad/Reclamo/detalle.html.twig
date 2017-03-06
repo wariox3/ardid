@@ -18,7 +18,7 @@
         {{ form_errors(form) }}
         <div class="panel panel-default">
             <div class="panel-heading">Información</div>
-            <div class="panel-body">
+            <div class="box-body table-responsive no-padding">
                 <table width="100%" class="table table-condensed table-bordered">
                     <tbody><tr>
                             <td class="titulo">ID:</td>
@@ -51,6 +51,7 @@
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">Respuestas</div>
+            <div class="box-body table-responsive no-padding">
             <table id="example2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
@@ -70,7 +71,7 @@
                 </tbody>
             </table>
         </div>
-      
+      </div>
         <a class="btn btn-default btn-sm" href="{{ path('utilidad_reclamo')}}">Volver</a>
         {{ form_end(form) }}
         <br/><br/><br/><br/>
