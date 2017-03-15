@@ -28,6 +28,11 @@ class Empleado
     private $identificacionNumero; 
     
     /**
+     * @ORM\Column(name="lugar_expedicion_identificacion", type="string", length=80, nullable=true)
+     */
+    private $lugarExpedicionIdentificacion;    
+    
+    /**
      * @ORM\Column(name="nombre1", type="string", length=60, nullable=true)
      */    
     private $nombre1;
@@ -415,5 +420,29 @@ class Empleado
     public function getQuejasReclamosEmpleadoRel()
     {
         return $this->quejasReclamosEmpleadoRel;
+    }
+
+    /**
+     * Set lugarExpedicionIdentificacion
+     *
+     * @param string $lugarExpedicionIdentificacion
+     *
+     * @return Empleado
+     */
+    public function setLugarExpedicionIdentificacion($lugarExpedicionIdentificacion)
+    {
+        $this->lugarExpedicionIdentificacion = $lugarExpedicionIdentificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get lugarExpedicionIdentificacion
+     *
+     * @return string
+     */
+    public function getLugarExpedicionIdentificacion()
+    {
+        return $this->lugarExpedicionIdentificacion;
     }
 }

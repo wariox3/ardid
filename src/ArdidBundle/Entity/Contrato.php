@@ -23,19 +23,24 @@ class Contrato {
     private $codigoEmpresaFk;
 
     /**
+     * @ORM\Column(name="codigo", type="integer", nullable=true)
+     */
+    private $codigo;     
+    
+    /**
      * @ORM\Column(name="codigo_empleado_fk", type="integer", nullable=true)
      */
     private $codigoEmpleadoFk;
 
     /**
+     * @ORM\Column(name="tipo", type="string", length=80, nullable=true)
+     */
+    private $tipo;                
+    
+    /**
      * @ORM\Column(name="numero", type="string", nullable=true)
      */
-    private $numero;
-
-    /**
-     * @ORM\Column(name="codigo", type="integer", nullable=true)
-     */
-    private $codigo;    
+    private $numero;   
 
     /**
      * @ORM\Column(name="codigo_clase_fk", type="integer", nullable=true)
@@ -84,6 +89,8 @@ class Contrato {
      */
     protected $empleadoRel;    
     
+
+
 
     /**
      * Get codigoContratoPk
@@ -141,6 +148,30 @@ class Contrato {
     public function getCodigoEmpleadoFk()
     {
         return $this->codigoEmpleadoFk;
+    }
+
+    /**
+     * Set tipo
+     *
+     * @param string $tipo
+     *
+     * @return Contrato
+     */
+    public function setTipo($tipo)
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return string
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
     }
 
     /**
@@ -336,6 +367,30 @@ class Contrato {
     }
 
     /**
+     * Set vigente
+     *
+     * @param boolean $vigente
+     *
+     * @return Contrato
+     */
+    public function setVigente($vigente)
+    {
+        $this->vigente = $vigente;
+
+        return $this;
+    }
+
+    /**
+     * Get vigente
+     *
+     * @return boolean
+     */
+    public function getVigente()
+    {
+        return $this->vigente;
+    }
+
+    /**
      * Set empresaRel
      *
      * @param \ArdidBundle\Entity\Empresa $empresaRel
@@ -384,26 +439,26 @@ class Contrato {
     }
 
     /**
-     * Set vigente
+     * Set identificador
      *
-     * @param boolean $vigente
+     * @param integer $identificador
      *
      * @return Contrato
      */
-    public function setVigente($vigente)
+    public function setIdentificador($identificador)
     {
-        $this->vigente = $vigente;
+        $this->identificador = $identificador;
 
         return $this;
     }
 
     /**
-     * Get vigente
+     * Get identificador
      *
-     * @return boolean
+     * @return integer
      */
-    public function getVigente()
+    public function getIdentificador()
     {
-        return $this->vigente;
+        return $this->identificador;
     }
 }
