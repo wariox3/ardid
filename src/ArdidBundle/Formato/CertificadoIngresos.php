@@ -68,7 +68,8 @@ class CertificadoIngresos extends \FPDF {
         $contenido = preg_replace('/#9/', $auxilioTransporte, $contenido);//aux transporte
         $contenido = preg_replace('/#a/', number_format($devengadoPromedio, 0,'.',','), $contenido);// Devengado promedio
         $contenido = preg_replace('/#b/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
-
+        $contenido = preg_replace('/#c/', strftime("%d de ". $this->MesesEspañol($fecha->format('m')) ." de %Y", strtotime($fecha->format('Y-m-d'))), $contenido);
+        
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
     }
