@@ -45,25 +45,28 @@ class CertificadoIngresos extends \FPDF {
 
     public function Body($pdf) {
         $pdf->SetXY(25, 65);
-        $pdf->SetFont('Arial', '', 10);
-        
+        $pdf->SetFont('Arial', '', 10);        
         $arContrato = new \ArdidBundle\Entity\Contrato;
         $arContrato = self::$em->getRepository('ArdidBundle:Contrato')->find(self::$codigoContrato);                
         $arContenido = new \ArdidBundle\Entity\Contenido;
         $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->findOneBy(array('codigoEmpresaFk' => $arContrato->getCodigoEmpresaFk(), 'tipo'=> 1));
         $contenido = $arContenido->getContenido();                                       
         $fecha = new \DateTime('now');
-        
+        $auxilioTransporte = "NO";
+        $devengadoPromedio = self::$em->getRepository('ArdidBundle:Pago')->devengadoPromedio($arContrato->getCodigoEmpleadoFk());
+        if($arContrato->getAuxilioTransporte()) {
+            $auxilioTransporte = "SI";
+        }
         $contenido = preg_replace('/#1/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
         $contenido = preg_replace('/#2/', $arContrato->getEmpleadoRel()->getNombreCorto(), $contenido);
         $contenido = preg_replace('/#3/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
-        $contenido = preg_replace('/#4/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
+        $contenido = preg_replace('/#4/', $arContrato->getEmpleadoRel()->getLugarExpedicionIdentificacion(), $contenido);
         $contenido = preg_replace('/#5/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d'))), $contenido);
-        $contenido = preg_replace('/#6/',  $arContrato->getCargo(), $contenido);//tipo contrato
+        $contenido = preg_replace('/#6/',  $arContrato->getTipo(), $contenido);//tipo contrato
         $contenido = preg_replace('/#7/', $arContrato->getCargo(), $contenido);// cargo
-        $contenido = preg_replace('/#8/', $arContrato->getVrSalario(), $contenido);//salario fijo
-        $contenido = preg_replace('/#9/', $arContrato->getVrSalario(), $contenido);//aux transporte
-        $contenido = preg_replace('/#a/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);// horas extras y recargos
+        $contenido = preg_replace('/#8/', number_format($arContrato->getVrSalario(), 0,'.',','), $contenido);//salario fijo
+        $contenido = preg_replace('/#9/', $auxilioTransporte, $contenido);//aux transporte
+        $contenido = preg_replace('/#a/', number_format($devengadoPromedio, 0,'.',','), $contenido);// Devengado promedio
         $contenido = preg_replace('/#b/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
 
         $contenido = utf8_decode($contenido);    

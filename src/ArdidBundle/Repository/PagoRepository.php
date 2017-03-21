@@ -12,4 +12,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class PagoRepository extends EntityRepository
 {
+    public function devengadoPromedio($codigoEmpleado) {
+        $em = $this->getEntityManager();
+        $dql   = "SELECT p.vrDevengado FROM ArdidBundle:Pago p "
+                . "WHERE p.codigoEmpleadoFk = " . $codigoEmpleado . "ORDER BY p.fechaDesde DESC";
+        $query = $em->createQuery($dql)->setMaxResults(2);                
+        $devengado = 0;
+        $arResultados = $query->getResult();
+        foreach ($arResultados as $arResultado) {
+            $devengado += $arResultado['vrDevengado'];
+        }
+        return $devengado;
+    }    
 }

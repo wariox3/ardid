@@ -76,6 +76,11 @@ class Contrato {
      * @ORM\Column(name="vigente", type="boolean")
      */    
     private $vigente = false;    
+
+    /**     
+     * @ORM\Column(name="auxilio_transporte", type="boolean")
+     */    
+    private $auxilioTransporte = false; 
     
     /**
      * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="contratosEmpresaRel")
@@ -460,5 +465,29 @@ class Contrato {
     public function getIdentificador()
     {
         return $this->identificador;
+    }
+
+    /**
+     * Set auxilioTransporte
+     *
+     * @param boolean $auxilioTransporte
+     *
+     * @return Contrato
+     */
+    public function setAuxilioTransporte($auxilioTransporte)
+    {
+        $this->auxilioTransporte = $auxilioTransporte;
+
+        return $this;
+    }
+
+    /**
+     * Get auxilioTransporte
+     *
+     * @return boolean
+     */
+    public function getAuxilioTransporte()
+    {
+        return $this->auxilioTransporte;
     }
 }
