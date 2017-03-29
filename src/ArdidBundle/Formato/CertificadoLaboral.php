@@ -52,9 +52,16 @@ class CertificadoLaboral extends \FPDF {
         $arContrato = self::$em->getRepository('ArdidBundle:Contrato')->find(self::$codigoContrato);  
         $arContenido = new \ArdidBundle\Entity\Contenido;
         $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->findOneBy(array('codigoEmpresaFk' => $arContrato->getCodigoEmpresaFk(), 'tipo'=> 2));
-        $contenido = $arContenido->getContenido();                                       
+        $contenido = $arContenido->getContenido();
         $fecha = new \DateTime('now');
-        
+        $vigente;
+        $contratoVigente = $arContrato->getVigente();
+        if ($contratoVigente == 1){
+            $vigente = "SI";
+        }
+        if ($contratoVigente == 0){
+            $vigente = "NO";
+        }        
         $contenido = preg_replace('/#1/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
         $contenido = preg_replace('/#2/', $arContrato->getEmpleadoRel()->getNombreCorto(), $contenido);
         $contenido = preg_replace('/#3/', $arContrato->getCargo(), $contenido);
@@ -63,7 +70,7 @@ class CertificadoLaboral extends \FPDF {
         $contenido = preg_replace('/#6/', $arContrato->getEmpresaRel()->getNit(), $contenido);
         $contenido = preg_replace('/#7/', $arContrato->getEmpresaRel()->getTelefono(), $contenido);
         $contenido = preg_replace('/#8/', $fecha->format('Y/m/d'), $contenido);
-        $contenido = preg_replace('/#9/', $arContrato->getVigente(), $contenido);
+        $contenido = preg_replace('/#9/', $vigente, $contenido);
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
         
