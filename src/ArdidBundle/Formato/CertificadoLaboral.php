@@ -54,6 +54,7 @@ class CertificadoLaboral extends \FPDF {
         $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->findOneBy(array('codigoEmpresaFk' => $arContrato->getCodigoEmpresaFk(), 'tipo'=> 2));
         $contenido = $arContenido->getContenido();
         $fecha = new \DateTime('now');
+        
         $vigente;
         $contratoVigente = $arContrato->getVigente();
         if ($contratoVigente == 1){
