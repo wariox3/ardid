@@ -66,6 +66,7 @@ class CertificadoLaboral extends \FPDF {
         $contenido = preg_replace('/#9/', $arContrato->getVigente(), $contenido);
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
+        
     }
 
     public function Footer() {
