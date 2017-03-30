@@ -53,8 +53,7 @@ class CertificadoLaboral extends \FPDF {
         $arContenido = new \ArdidBundle\Entity\Contenido;
         $arContenido = self::$em->getRepository('ArdidBundle:Contenido')->findOneBy(array('codigoEmpresaFk' => $arContrato->getCodigoEmpresaFk(), 'tipo'=> 2));
         $contenido = $arContenido->getContenido();
-        $fecha = new \DateTime('now');
-        
+        $fecha = new \DateTime('now');        
         $vigente;
         $contratoVigente = $arContrato->getVigente();
         if ($contratoVigente == 1){
@@ -72,6 +71,8 @@ class CertificadoLaboral extends \FPDF {
         $contenido = preg_replace('/#7/', $arContrato->getEmpresaRel()->getTelefono(), $contenido);
         $contenido = preg_replace('/#8/', $fecha->format('Y/m/d'), $contenido);
         $contenido = preg_replace('/#9/', $vigente, $contenido);
+        $contenido = preg_replace('/#10/', $arContrato->getTipo(), $contenido);
+        $contenido = preg_replace('/#11/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
         
