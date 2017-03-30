@@ -64,6 +64,7 @@ class CertificadoLaboral extends \FPDF {
         }        
         $contenido = preg_replace('/#1/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
         $contenido = preg_replace('/#2/', $arContrato->getEmpleadoRel()->getNombreCorto(), $contenido);
+        
         $contenido = preg_replace('/#3/', $arContrato->getCargo(), $contenido);
         $contenido = preg_replace('/#4/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d'))), $contenido);
         $contenido = preg_replace('/#5/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
