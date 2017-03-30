@@ -74,8 +74,7 @@ class CertificadoLaboral extends \FPDF {
         $contenido = preg_replace('/#10/', $arContrato->getTipo(), $contenido);
         $contenido = preg_replace('/#11/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
         $contenido = utf8_decode($contenido);    
-        $pdf->MultiCell(0,5, $contenido);
-        
+        $pdf->MultiCell(0,5, $contenido);        
     }
 
     public function Footer() {
