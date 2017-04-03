@@ -72,6 +72,10 @@ class Empresa {
      */
     protected $quejasReclamosEmpresaRel; 
     
+    /**
+     * @ORM\OneToMany(targetEntity="Programacion", mappedBy="empresaRel")
+     */
+    protected $programacionesEmpresaRel;    
    
     
     /**
@@ -408,5 +412,39 @@ class Empresa {
     public function getQuejasReclamosEmpresaRel()
     {
         return $this->quejasReclamosEmpresaRel;
+    }
+
+    /**
+     * Add programacionesEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Programacion $programacionesEmpresaRel
+     *
+     * @return Empresa
+     */
+    public function addProgramacionesEmpresaRel(\ArdidBundle\Entity\Programacion $programacionesEmpresaRel)
+    {
+        $this->programacionesEmpresaRel[] = $programacionesEmpresaRel;
+
+        return $this;
+    }
+
+    /**
+     * Remove programacionesEmpresaRel
+     *
+     * @param \ArdidBundle\Entity\Programacion $programacionesEmpresaRel
+     */
+    public function removeProgramacionesEmpresaRel(\ArdidBundle\Entity\Programacion $programacionesEmpresaRel)
+    {
+        $this->programacionesEmpresaRel->removeElement($programacionesEmpresaRel);
+    }
+
+    /**
+     * Get programacionesEmpresaRel
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProgramacionesEmpresaRel()
+    {
+        return $this->programacionesEmpresaRel;
     }
 }
