@@ -38,6 +38,11 @@ class Pago {
     private $codigoContrato;     
     
     /**
+     * @ORM\Column(name="codigo_soporte_pago_fk", type="integer", nullable=true)
+     */
+    private $codigoSoportePagoFk;    
+    
+    /**
      * @ORM\Column(name="cargo", type="string", nullable=true)
      */
     private $cargo;
@@ -743,5 +748,29 @@ class Pago {
     public function getPagosDetallesPagoRel()
     {
         return $this->pagosDetallesPagoRel;
+    }
+
+    /**
+     * Set codigoSoportePagoFk
+     *
+     * @param integer $codigoSoportePagoFk
+     *
+     * @return Pago
+     */
+    public function setCodigoSoportePagoFk($codigoSoportePagoFk)
+    {
+        $this->codigoSoportePagoFk = $codigoSoportePagoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoSoportePagoFk
+     *
+     * @return integer
+     */
+    public function getCodigoSoportePagoFk()
+    {
+        return $this->codigoSoportePagoFk;
     }
 }
