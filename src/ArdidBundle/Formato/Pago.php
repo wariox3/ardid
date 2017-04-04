@@ -238,7 +238,7 @@ class Pago extends \FPDF {
         $pdf->Cell(30, 5, number_format($arPago->getvrNeto(), 0, '.', ','), 1, 0, 'R');
         $pdf->SetFillColor(255, 255, 255);
         $pdf->Ln(-8);
-        if($arPago->getCodigoSoportePagoFk()) {
+        if($arPago->getCodigoSoportePagoFk() != 0 && $arPago->getCodigoSoportePagoFk() != "") {
             $arProgramaciones = new \ArdidBundle\Entity\Programacion();
             $arProgramaciones = self::$em->getRepository('ArdidBundle:Programacion')->findBy(array('codigoEmpresaFk' => $arPago->getCodigoEmpresaFk(), 'codigoSoportePagoFk' => $arPago->getCodigoSoportePagoFk()));
             if($arProgramaciones) {
