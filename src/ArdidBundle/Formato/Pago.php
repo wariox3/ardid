@@ -238,7 +238,38 @@ class Pago extends \FPDF {
         $pdf->Cell(30, 5, number_format($arPago->getvrNeto(), 0, '.', ','), 1, 0, 'R');
         $pdf->SetFillColor(255, 255, 255);
         $pdf->Ln(-8);
+        if($arPago->getCodigoSoportePagoFk()) {
+            $arProgramaciones = new \ArdidBundle\Entity\Programacion();
+            $arProgramaciones = self::$em->getRepository('ArdidBundle:Programacion')->findBy(array('codigoEmpresaFk' => $arPago->getCodigoEmpresaFk(), 'codigoSoportePagoFk' => $arPago->getCodigoSoportePagoFk()));
+            if($arProgramaciones) {
+                $desde = $arPago->getFechaDesde()->format('j');
+                $hasta = $arPago->getFechaHasta()->format('j'); 
+                if($hasta == 30) {$hasta = 31;}
+                $header = array('D1','D2','D3','D4','D5','D6','D7','D8','D9','D10','D11','D12','D13','D14','D15','D16','D17','D18','D19','D20','D21','D22','D23','D24','D25','D26','D27','D28','D29','D30','D31');
+                $pdf->SetFillColor(200, 200, 200);
+                $pdf->SetTextColor(0);
+                $pdf->SetDrawColor(0, 0, 0);
+                $pdf->SetLineWidth(.2);
+                $pdf->SetFont('', 'B', 6.8);
 
+                //creamos la cabecera de la tabla.
+                $w = array(6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2,6.2);
+                for ($i = $desde; $i <= $hasta; $i++) {
+                    $pdf->Cell(6.2, 4, "D".$i, 1, 0, 'L', 1);
+                }
+                $pdf->Ln();
+                foreach ($arProgramaciones as $arProgramacion) {
+                    $detalle = $this->convertirArray($arProgramacion);
+                    $pdf->SetFont('Arial', '', 5);
+                    for($j=$desde; $j<=$hasta; $j++) {                            
+                        $pdf->Cell(6.2, 4, $detalle[$j], 1, 0, 'L');
+                    }
+                    $pdf->Ln();
+                    $pdf->SetAutoPageBreak(true, 15);
+                }                                        
+            }            
+        }          
+        
         $pdf->SetFont('Arial', 'B', 7);
     }
 
@@ -248,6 +279,44 @@ class Pago extends \FPDF {
         //$this->Text(185, 140, utf8_decode('Página ') . $this->PageNo() . ' de {nb}');
     }
 
+    private function convertirArray($arSoportePagoProgramacion) {
+        $arrProgramacionDetalle = array();
+        if($arSoportePagoProgramacion) {
+            $arrProgramacionDetalle[1] = $arSoportePagoProgramacion->getDia1();
+            $arrProgramacionDetalle[2] = $arSoportePagoProgramacion->getDia2();
+            $arrProgramacionDetalle[3] = $arSoportePagoProgramacion->getDia3();
+            $arrProgramacionDetalle[4] = $arSoportePagoProgramacion->getDia4();
+            $arrProgramacionDetalle[5] = $arSoportePagoProgramacion->getDia5();
+            $arrProgramacionDetalle[6] = $arSoportePagoProgramacion->getDia6();
+            $arrProgramacionDetalle[7] = $arSoportePagoProgramacion->getDia7();
+            $arrProgramacionDetalle[8] = $arSoportePagoProgramacion->getDia8();
+            $arrProgramacionDetalle[9] = $arSoportePagoProgramacion->getDia9();
+            $arrProgramacionDetalle[10] = $arSoportePagoProgramacion->getDia10();
+            $arrProgramacionDetalle[11] = $arSoportePagoProgramacion->getDia11();
+            $arrProgramacionDetalle[12] = $arSoportePagoProgramacion->getDia12();
+            $arrProgramacionDetalle[13] = $arSoportePagoProgramacion->getDia13();
+            $arrProgramacionDetalle[14] = $arSoportePagoProgramacion->getDia14();
+            $arrProgramacionDetalle[15] = $arSoportePagoProgramacion->getDia15();
+            $arrProgramacionDetalle[16] = $arSoportePagoProgramacion->getDia16();
+            $arrProgramacionDetalle[17] = $arSoportePagoProgramacion->getDia17();
+            $arrProgramacionDetalle[18] = $arSoportePagoProgramacion->getDia18();
+            $arrProgramacionDetalle[19] = $arSoportePagoProgramacion->getDia19();
+            $arrProgramacionDetalle[20] = $arSoportePagoProgramacion->getDia20();
+            $arrProgramacionDetalle[21] = $arSoportePagoProgramacion->getDia21();
+            $arrProgramacionDetalle[22] = $arSoportePagoProgramacion->getDia22();
+            $arrProgramacionDetalle[23] = $arSoportePagoProgramacion->getDia23();
+            $arrProgramacionDetalle[24] = $arSoportePagoProgramacion->getDia24();
+            $arrProgramacionDetalle[25] = $arSoportePagoProgramacion->getDia25();
+            $arrProgramacionDetalle[26] = $arSoportePagoProgramacion->getDia26();
+            $arrProgramacionDetalle[27] = $arSoportePagoProgramacion->getDia27();
+            $arrProgramacionDetalle[28] = $arSoportePagoProgramacion->getDia28();
+            $arrProgramacionDetalle[29] = $arSoportePagoProgramacion->getDia29();
+            $arrProgramacionDetalle[30] = $arSoportePagoProgramacion->getDia30();
+            $arrProgramacionDetalle[31] = $arSoportePagoProgramacion->getDia31();
+        }
+        return $arrProgramacionDetalle;
+    }    
+    
 }
 
 ?>

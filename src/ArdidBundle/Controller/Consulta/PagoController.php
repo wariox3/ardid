@@ -20,7 +20,7 @@ class PagoController extends Controller {
         $arUsuario = $this->getUser();
         $arEmpleado = new \ArdidBundle\Entity\Empleado();
         $arEmpleado = $em->getRepository('ArdidBundle:Empleado')->findOneBy(array('identificacionNumero' => $arUsuario->getUsername()));
-        $arPagos = $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arEmpleado->getCodigoEmpleadoPk()));
+        $arPagos = $em->getRepository('ArdidBundle:Pago')->findBy(array('codigoEmpleadoFk' => $arEmpleado->getCodigoEmpleadoPk()), array('fechaDesde' => 'DESC'));
         $form = $this->createFormBuilder()
                 ->getForm();
         $form->handleRequest($request);
