@@ -65,7 +65,7 @@ class CertificadoLaboral extends \FPDF {
         $fechaVigente;
         $contrato = $arContrato->getVigente();
         if ($contratoVigente == 1){
-            $fechaVigente = "desde el"." ". $arContrato->getFechaDesde()->format('d-m-Y');
+            $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')));
         }
         if ($contratoVigente == 0){
             $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')))." " ."hasta el". " ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))) ;
@@ -77,9 +77,9 @@ class CertificadoLaboral extends \FPDF {
         $contenido = preg_replace('/#5/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
         $contenido = preg_replace('/#6/', $arContrato->getEmpresaRel()->getNit(), $contenido);
         $contenido = preg_replace('/#7/', $arContrato->getEmpresaRel()->getTelefono(), $contenido);
-        $contenido = preg_replace('/#8/', $fecha->format('Y/m/d'), $contenido);
+        $contenido = preg_replace('/#8/', strftime("%d de ". $this->MesesEspañol($fecha->format('m')) ." de %Y", strtotime($fecha->format('Y-m-d'))), $contenido);
         $contenido = preg_replace('/#9/', $vigente, $contenido);
-        $contenido = preg_replace('/#a/',$arContrato->getTipo(), $contenido);
+        $contenido = preg_replace('/#a/', $arContrato->getTipo(), $contenido);
         $contenido = preg_replace('/#b/', $fechaVigente, $contenido);
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);        

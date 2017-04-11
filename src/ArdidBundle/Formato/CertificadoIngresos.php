@@ -62,7 +62,7 @@ class CertificadoIngresos extends \FPDF {
         $contenido = preg_replace('/#3/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
         $contenido = preg_replace('/#4/', $arContrato->getEmpleadoRel()->getLugarExpedicionIdentificacion(), $contenido);
         $contenido = preg_replace('/#5/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d'))), $contenido);
-        $contenido = preg_replace('/#6/',  $arContrato->getTipo(), $contenido);//tipo contrato
+        $contenido = preg_replace('/#6/', $arContrato->getTipo(), $contenido);//tipo contrato
         $contenido = preg_replace('/#7/', $arContrato->getCargo(), $contenido);// cargo
         $contenido = preg_replace('/#8/', number_format($arContrato->getVrSalario(), 0,'.',','), $contenido);//salario fijo
         $contenido = preg_replace('/#9/', $auxilioTransporte, $contenido);//aux transporte
