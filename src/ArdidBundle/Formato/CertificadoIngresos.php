@@ -57,6 +57,22 @@ class CertificadoIngresos extends \FPDF {
         if($arContrato->getAuxilioTransporte()) {
             $auxilioTransporte = "SI";
         }
+        $vigente;
+        $contratoVigente = $arContrato->getVigente();
+        if ($contratoVigente == 1){
+            $vigente = "labora";
+        }
+        if ($contratoVigente == 0){
+            $vigente = "laboró";
+        }
+        $fechaVigente;
+        $contrato = $arContrato->getVigente();
+        if ($contratoVigente == 1){
+            $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')));
+        }
+        if ($contratoVigente == 0){
+            $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')))." " ."hasta el". " ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))) ;
+        }  
         $contenido = preg_replace('/#1/', $arContrato->getEmpresaRel()->getNombre(), $contenido);
         $contenido = preg_replace('/#2/', $arContrato->getEmpleadoRel()->getNombreCorto(), $contenido);
         $contenido = preg_replace('/#3/', $arContrato->getEmpleadoRel()->getIdentificacionNumero(), $contenido);
@@ -69,6 +85,8 @@ class CertificadoIngresos extends \FPDF {
         $contenido = preg_replace('/#a/', number_format($devengadoPromedio, 0,'.',','), $contenido);// Devengado promedio
         $contenido = preg_replace('/#b/', strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))), $contenido);
         $contenido = preg_replace('/#c/', strftime("%d de ". $this->MesesEspañol($fecha->format('m')) ." de %Y", strtotime($fecha->format('Y-m-d'))), $contenido);
+        $contenido = preg_replace('/#d/', $fechaVigente, $contenido);
+        $contenido = preg_replace('/#e/', $vigente, $contenido);
         
         $contenido = utf8_decode($contenido);    
         $pdf->MultiCell(0,5, $contenido);
