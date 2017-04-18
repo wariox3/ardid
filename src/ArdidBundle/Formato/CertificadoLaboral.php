@@ -65,7 +65,7 @@ class CertificadoLaboral extends \FPDF {
         $fechaVigente;
         $contrato = $arContrato->getVigente();
         if ($contratoVigente == 1){
-            $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')));
+            $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')))." ". "a la fecha.";
         }
         if ($contratoVigente == 0){
             $fechaVigente = "desde el"." ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaDesde()->format('m')) ." de %Y", strtotime($arContrato->getFechaDesde()->format('Y-m-d')))." " ."hasta el". " ". strftime("%d de ". $this->MesesEspañol($arContrato->getFechaHasta()->format('m')) ." de %Y", strtotime($arContrato->getFechaHasta()->format('Y-m-d'))) ;
