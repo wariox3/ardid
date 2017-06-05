@@ -19,6 +19,7 @@ class ContenidoType extends AbstractType {
                 ->add('contenido', TextareaType::class, array('required' => true))
                 ->add('codigoFormatoIso', TextType::class, array('required' => true))
                 ->add('version', TextType::class, array('required' => true))
+                ->add('tamanoFuente', NumberType::class, array('required' => false))
                 ->add('fechaVersion', DateType::class, array('format' => 'yyyyMMMdd'))
                 ->add('guardar', SubmitType::class);
     }

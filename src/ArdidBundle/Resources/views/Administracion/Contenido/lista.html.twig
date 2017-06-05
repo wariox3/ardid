@@ -29,6 +29,7 @@
                                     <th>Contenido</th>
                                     <th>Cod. Formato iso</th>
                                     <th>Version</th>
+                                    <th>Tamaño fuente</th>
                                     <th>Tipo</th>
                                     <th>Fecha version</th>
                                     <th></th>
@@ -44,6 +45,7 @@
                                         <td>{{arContenido.contenido}}</td>
                                         <td>{{arContenido.codigoFormatoIso}}</td>
                                         <td>{{arContenido.version}}</td>
+                                        <td>{{arContenido.tamanoFuente}}</td>
                                         <td>{{arContenido.codigoContenidosTipoRel.nombre}}</td>
                                         <td>{{arContenido.fechaVersion | date('Y/m/d')}}</td>
                                         <td style="text-align: center"><a href="{{ path('contenido_editar', {'codigoContenido': arContenido.codigoContenidoPk })}}"><img src="{{ asset('imagenes/bootstrap/glyphicons_151_edit.png') }}" width=20 height=20 title="Editar"></a></td>

@@ -56,6 +56,11 @@ class Contenido {
      * @ORM\Column(name="fecha_version", type="date", nullable=true)
      */
     private $fechaVersion;
+    
+    /**
+     * @ORM\Column(name="tamano_fuente", type="integer", nullable=true)
+     */
+    private $tamanoFuente = 12;
 
     /**
      * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="contenidoEmpresaRel")
@@ -319,5 +324,29 @@ class Contenido {
     public function getCodigoContenidosTipoRel()
     {
         return $this->codigoContenidosTipoRel;
+    }
+
+    /**
+     * Set tamanoFuente
+     *
+     * @param \DateTime $tamanoFuente
+     *
+     * @return Contenido
+     */
+    public function setTamanoFuente($tamanoFuente)
+    {
+        $this->tamanoFuente = $tamanoFuente;
+
+        return $this;
+    }
+
+    /**
+     * Get tamanoFuente
+     *
+     * @return \DateTime
+     */
+    public function getTamanoFuente()
+    {
+        return $this->tamanoFuente;
     }
 }

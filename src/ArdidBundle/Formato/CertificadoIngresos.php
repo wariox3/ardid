@@ -9,15 +9,20 @@ class CertificadoIngresos extends \FPDF {
     public static $em;
     public static $codigoContrato;
     public static $arUsuario;
+    public static $tamañoFuente;
 
     public function Generar($em, $codigoContrato) {
         ob_clean();
+        
         self::$em = $em;
+        $arContenido = new \ArdidBundle\Entity\Contenido();
+        $arContenido = self::$em->getRepository('ArdidBundle:contenido')->findOneBy(array('codigoContenidoTipoFk'=>2));
         self::$codigoContrato = $codigoContrato;
+        self::$tamañoFuente = $arContenido->getTamanoFuente();
         $pdf = new CertificadoIngresos();
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        $pdf->SetFont('Arial', '', 12);
+        $pdf->SetFont('Arial', '', self::$tamañoFuente);
         $pdf->SetFillColor(200, 200, 200);
         $pdf->SetMargins(25, 15 , 25); 
         $this->Body($pdf);
@@ -29,7 +34,7 @@ class CertificadoIngresos extends \FPDF {
         $arContrato = self::$em->getRepository('ArdidBundle:contrato')->find(self::$codigoContrato);
 
         $this->SetFillColor(200, 200, 200);
-        $this->SetFont('Arial', 'B', 10);
+        $this->SetFont('Arial', 'B', self::$tamañoFuente);
         //Logo
       $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 20, 12, 35, 0);
        $this->Image('imagenes/firmas/firma'.$arContrato->getCodigoEmpresaFk().'.jpg', 30, 170, 35, 20);
@@ -38,14 +43,14 @@ class CertificadoIngresos extends \FPDF {
     public function EncabezadoDetalles() {
         $arConfiguracion = new \Brasa\GeneralBundle\Entity\GenConfiguracion();
         $arConfiguracion = self::$em->getRepository('BrasaGeneralBundle:GenConfiguracion')->find(1);        
-        $this->SetFont('Arial','','9');
+        $this->SetFont('Arial','',self::$tamañoFuente);
         //$this->Text(10, 55, utf8_decode($arConfiguracion->getCiudadRel()->getNombre()). " ". self::$fechaProceso);
         $this->Ln(20);
     }
 
     public function Body($pdf) {
         $pdf->SetXY(25, 65);
-        $pdf->SetFont('Arial', '', 10);        
+        $pdf->SetFont('Arial', '', self::$tamañoFuente);        
         $arContrato = new \ArdidBundle\Entity\Contrato;
         $arContrato = self::$em->getRepository('ArdidBundle:Contrato')->find(self::$codigoContrato);                
         $arContenido = new \ArdidBundle\Entity\Contenido;
