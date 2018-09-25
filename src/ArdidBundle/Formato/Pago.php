@@ -81,7 +81,7 @@ class Pago extends \FPDF {
         $pdf->SetFont('Arial', '', 7);
         $pdf->SetFillColor(200, 200, 200);
         $arPago = self::$em->getRepository('ArdidBundle:Pago')->find(self::$codigoPago);
-        $numeroPagos = count($arPago);
+//        $numeroPagos = count($arPago);
         $contador = 1;
 
         $y = 25;
@@ -268,12 +268,20 @@ class Pago extends \FPDF {
                     $pdf->SetAutoPageBreak(true, 15);
                 }                                        
             }            
-        }          
+        }
+
+        if ($arPago->getMensajePago() != null) {
+            $pdf->Ln(16);
+            $pdf->SetY($pdf->GetY());
+            $pdf->SetFont('Arial', 'B', 7);
+            $pdf->Cell(193, 4, utf8_decode($arPago->getMensajePago()), 0, 0, 'C');
+        }
         
         $pdf->SetFont('Arial', 'B', 7);
     }
 
     public function Footer() {
+
 
         //$this->SetFont('Arial','', 8);  
         //$this->Text(185, 140, utf8_decode('Página ') . $this->PageNo() . ' de {nb}');

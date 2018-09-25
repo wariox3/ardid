@@ -123,6 +123,11 @@ class Pago {
     private $vrDevengado = 0;
 
     /**
+     * @ORM\Column(name="mensaje_pago", type="text", nullable=true)
+     */
+    private $mensajePago;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Empresa", inversedBy="pagosEmpresaRel")
      * @ORM\JoinColumn(name="codigo_empresa_fk", referencedColumnName="codigo_empresa_pk")
      */
@@ -144,7 +149,6 @@ class Pago {
      * @ORM\OneToMany(targetEntity="PagoDetalle", mappedBy="pagoRel")
      */
     protected $pagosDetallesPagoRel;
-    
 
     /**
      * Constructor
@@ -155,9 +159,9 @@ class Pago {
     }
 
     /**
-     * Get codigoPagoPk
+     * Get codigoPagoPk.
      *
-     * @return integer
+     * @return int
      */
     public function getCodigoPagoPk()
     {
@@ -165,13 +169,13 @@ class Pago {
     }
 
     /**
-     * Set codigoEmpresaFk
+     * Set codigoEmpresaFk.
      *
-     * @param integer $codigoEmpresaFk
+     * @param int|null $codigoEmpresaFk
      *
      * @return Pago
      */
-    public function setCodigoEmpresaFk($codigoEmpresaFk)
+    public function setCodigoEmpresaFk($codigoEmpresaFk = null)
     {
         $this->codigoEmpresaFk = $codigoEmpresaFk;
 
@@ -179,9 +183,9 @@ class Pago {
     }
 
     /**
-     * Get codigoEmpresaFk
+     * Get codigoEmpresaFk.
      *
-     * @return integer
+     * @return int|null
      */
     public function getCodigoEmpresaFk()
     {
@@ -189,13 +193,13 @@ class Pago {
     }
 
     /**
-     * Set codigoEmpleadoFk
+     * Set codigoEmpleadoFk.
      *
-     * @param integer $codigoEmpleadoFk
+     * @param int|null $codigoEmpleadoFk
      *
      * @return Pago
      */
-    public function setCodigoEmpleadoFk($codigoEmpleadoFk)
+    public function setCodigoEmpleadoFk($codigoEmpleadoFk = null)
     {
         $this->codigoEmpleadoFk = $codigoEmpleadoFk;
 
@@ -203,9 +207,9 @@ class Pago {
     }
 
     /**
-     * Get codigoEmpleadoFk
+     * Get codigoEmpleadoFk.
      *
-     * @return integer
+     * @return int|null
      */
     public function getCodigoEmpleadoFk()
     {
@@ -213,13 +217,13 @@ class Pago {
     }
 
     /**
-     * Set codigoPagoTipoFk
+     * Set codigoPagoTipoFk.
      *
-     * @param integer $codigoPagoTipoFk
+     * @param int|null $codigoPagoTipoFk
      *
      * @return Pago
      */
-    public function setCodigoPagoTipoFk($codigoPagoTipoFk)
+    public function setCodigoPagoTipoFk($codigoPagoTipoFk = null)
     {
         $this->codigoPagoTipoFk = $codigoPagoTipoFk;
 
@@ -227,9 +231,9 @@ class Pago {
     }
 
     /**
-     * Get codigoPagoTipoFk
+     * Get codigoPagoTipoFk.
      *
-     * @return integer
+     * @return int|null
      */
     public function getCodigoPagoTipoFk()
     {
@@ -237,13 +241,13 @@ class Pago {
     }
 
     /**
-     * Set codigoContrato
+     * Set codigoContrato.
      *
-     * @param integer $codigoContrato
+     * @param int|null $codigoContrato
      *
      * @return Pago
      */
-    public function setCodigoContrato($codigoContrato)
+    public function setCodigoContrato($codigoContrato = null)
     {
         $this->codigoContrato = $codigoContrato;
 
@@ -251,9 +255,9 @@ class Pago {
     }
 
     /**
-     * Get codigoContrato
+     * Get codigoContrato.
      *
-     * @return integer
+     * @return int|null
      */
     public function getCodigoContrato()
     {
@@ -261,13 +265,37 @@ class Pago {
     }
 
     /**
-     * Set cargo
+     * Set codigoSoportePagoFk.
      *
-     * @param string $cargo
+     * @param int|null $codigoSoportePagoFk
      *
      * @return Pago
      */
-    public function setCargo($cargo)
+    public function setCodigoSoportePagoFk($codigoSoportePagoFk = null)
+    {
+        $this->codigoSoportePagoFk = $codigoSoportePagoFk;
+
+        return $this;
+    }
+
+    /**
+     * Get codigoSoportePagoFk.
+     *
+     * @return int|null
+     */
+    public function getCodigoSoportePagoFk()
+    {
+        return $this->codigoSoportePagoFk;
+    }
+
+    /**
+     * Set cargo.
+     *
+     * @param string|null $cargo
+     *
+     * @return Pago
+     */
+    public function setCargo($cargo = null)
     {
         $this->cargo = $cargo;
 
@@ -275,9 +303,9 @@ class Pago {
     }
 
     /**
-     * Get cargo
+     * Get cargo.
      *
-     * @return string
+     * @return string|null
      */
     public function getCargo()
     {
@@ -285,13 +313,13 @@ class Pago {
     }
 
     /**
-     * Set grupoPago
+     * Set grupoPago.
      *
-     * @param string $grupoPago
+     * @param string|null $grupoPago
      *
      * @return Pago
      */
-    public function setGrupoPago($grupoPago)
+    public function setGrupoPago($grupoPago = null)
     {
         $this->grupoPago = $grupoPago;
 
@@ -299,9 +327,9 @@ class Pago {
     }
 
     /**
-     * Get grupoPago
+     * Get grupoPago.
      *
-     * @return string
+     * @return string|null
      */
     public function getGrupoPago()
     {
@@ -309,13 +337,13 @@ class Pago {
     }
 
     /**
-     * Set zona
+     * Set zona.
      *
-     * @param string $zona
+     * @param string|null $zona
      *
      * @return Pago
      */
-    public function setZona($zona)
+    public function setZona($zona = null)
     {
         $this->zona = $zona;
 
@@ -323,9 +351,9 @@ class Pago {
     }
 
     /**
-     * Get zona
+     * Get zona.
      *
-     * @return string
+     * @return string|null
      */
     public function getZona()
     {
@@ -333,13 +361,13 @@ class Pago {
     }
 
     /**
-     * Set periodoPago
+     * Set periodoPago.
      *
-     * @param string $periodoPago
+     * @param string|null $periodoPago
      *
      * @return Pago
      */
-    public function setPeriodoPago($periodoPago)
+    public function setPeriodoPago($periodoPago = null)
     {
         $this->periodoPago = $periodoPago;
 
@@ -347,9 +375,9 @@ class Pago {
     }
 
     /**
-     * Get periodoPago
+     * Get periodoPago.
      *
-     * @return string
+     * @return string|null
      */
     public function getPeriodoPago()
     {
@@ -357,13 +385,13 @@ class Pago {
     }
 
     /**
-     * Set cuenta
+     * Set cuenta.
      *
-     * @param string $cuenta
+     * @param string|null $cuenta
      *
      * @return Pago
      */
-    public function setCuenta($cuenta)
+    public function setCuenta($cuenta = null)
     {
         $this->cuenta = $cuenta;
 
@@ -371,9 +399,9 @@ class Pago {
     }
 
     /**
-     * Get cuenta
+     * Get cuenta.
      *
-     * @return string
+     * @return string|null
      */
     public function getCuenta()
     {
@@ -381,13 +409,13 @@ class Pago {
     }
 
     /**
-     * Set banco
+     * Set banco.
      *
-     * @param string $banco
+     * @param string|null $banco
      *
      * @return Pago
      */
-    public function setBanco($banco)
+    public function setBanco($banco = null)
     {
         $this->banco = $banco;
 
@@ -395,9 +423,9 @@ class Pago {
     }
 
     /**
-     * Get banco
+     * Get banco.
      *
-     * @return string
+     * @return string|null
      */
     public function getBanco()
     {
@@ -405,13 +433,13 @@ class Pago {
     }
 
     /**
-     * Set pension
+     * Set pension.
      *
-     * @param string $pension
+     * @param string|null $pension
      *
      * @return Pago
      */
-    public function setPension($pension)
+    public function setPension($pension = null)
     {
         $this->pension = $pension;
 
@@ -419,9 +447,9 @@ class Pago {
     }
 
     /**
-     * Get pension
+     * Get pension.
      *
-     * @return string
+     * @return string|null
      */
     public function getPension()
     {
@@ -429,13 +457,13 @@ class Pago {
     }
 
     /**
-     * Set salud
+     * Set salud.
      *
-     * @param string $salud
+     * @param string|null $salud
      *
      * @return Pago
      */
-    public function setSalud($salud)
+    public function setSalud($salud = null)
     {
         $this->salud = $salud;
 
@@ -443,9 +471,9 @@ class Pago {
     }
 
     /**
-     * Get salud
+     * Get salud.
      *
-     * @return string
+     * @return string|null
      */
     public function getSalud()
     {
@@ -453,13 +481,13 @@ class Pago {
     }
 
     /**
-     * Set vrSalario
+     * Set vrSalario.
      *
-     * @param float $vrSalario
+     * @param float|null $vrSalario
      *
      * @return Pago
      */
-    public function setVrSalario($vrSalario)
+    public function setVrSalario($vrSalario = null)
     {
         $this->vrSalario = $vrSalario;
 
@@ -467,9 +495,9 @@ class Pago {
     }
 
     /**
-     * Get vrSalario
+     * Get vrSalario.
      *
-     * @return float
+     * @return float|null
      */
     public function getVrSalario()
     {
@@ -477,13 +505,13 @@ class Pago {
     }
 
     /**
-     * Set fechaDesde
+     * Set fechaDesde.
      *
-     * @param \DateTime $fechaDesde
+     * @param \DateTime|null $fechaDesde
      *
      * @return Pago
      */
-    public function setFechaDesde($fechaDesde)
+    public function setFechaDesde($fechaDesde = null)
     {
         $this->fechaDesde = $fechaDesde;
 
@@ -491,9 +519,9 @@ class Pago {
     }
 
     /**
-     * Get fechaDesde
+     * Get fechaDesde.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getFechaDesde()
     {
@@ -501,13 +529,13 @@ class Pago {
     }
 
     /**
-     * Set fechaHasta
+     * Set fechaHasta.
      *
-     * @param \DateTime $fechaHasta
+     * @param \DateTime|null $fechaHasta
      *
      * @return Pago
      */
-    public function setFechaHasta($fechaHasta)
+    public function setFechaHasta($fechaHasta = null)
     {
         $this->fechaHasta = $fechaHasta;
 
@@ -515,9 +543,9 @@ class Pago {
     }
 
     /**
-     * Get fechaHasta
+     * Get fechaHasta.
      *
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getFechaHasta()
     {
@@ -525,13 +553,13 @@ class Pago {
     }
 
     /**
-     * Set numero
+     * Set numero.
      *
-     * @param integer $numero
+     * @param int|null $numero
      *
      * @return Pago
      */
-    public function setNumero($numero)
+    public function setNumero($numero = null)
     {
         $this->numero = $numero;
 
@@ -539,9 +567,9 @@ class Pago {
     }
 
     /**
-     * Get numero
+     * Get numero.
      *
-     * @return integer
+     * @return int|null
      */
     public function getNumero()
     {
@@ -549,13 +577,13 @@ class Pago {
     }
 
     /**
-     * Set vrDeducciones
+     * Set vrDeducciones.
      *
-     * @param float $vrDeducciones
+     * @param float|null $vrDeducciones
      *
      * @return Pago
      */
-    public function setVrDeducciones($vrDeducciones)
+    public function setVrDeducciones($vrDeducciones = null)
     {
         $this->vrDeducciones = $vrDeducciones;
 
@@ -563,9 +591,9 @@ class Pago {
     }
 
     /**
-     * Get vrDeducciones
+     * Get vrDeducciones.
      *
-     * @return float
+     * @return float|null
      */
     public function getVrDeducciones()
     {
@@ -573,13 +601,13 @@ class Pago {
     }
 
     /**
-     * Set vrNeto
+     * Set vrNeto.
      *
-     * @param float $vrNeto
+     * @param float|null $vrNeto
      *
      * @return Pago
      */
-    public function setVrNeto($vrNeto)
+    public function setVrNeto($vrNeto = null)
     {
         $this->vrNeto = $vrNeto;
 
@@ -587,9 +615,9 @@ class Pago {
     }
 
     /**
-     * Get vrNeto
+     * Get vrNeto.
      *
-     * @return float
+     * @return float|null
      */
     public function getVrNeto()
     {
@@ -597,13 +625,13 @@ class Pago {
     }
 
     /**
-     * Set vrSalarioEmpleado
+     * Set vrSalarioEmpleado.
      *
-     * @param float $vrSalarioEmpleado
+     * @param float|null $vrSalarioEmpleado
      *
      * @return Pago
      */
-    public function setVrSalarioEmpleado($vrSalarioEmpleado)
+    public function setVrSalarioEmpleado($vrSalarioEmpleado = null)
     {
         $this->vrSalarioEmpleado = $vrSalarioEmpleado;
 
@@ -611,9 +639,9 @@ class Pago {
     }
 
     /**
-     * Get vrSalarioEmpleado
+     * Get vrSalarioEmpleado.
      *
-     * @return float
+     * @return float|null
      */
     public function getVrSalarioEmpleado()
     {
@@ -621,13 +649,13 @@ class Pago {
     }
 
     /**
-     * Set vrDevengado
+     * Set vrDevengado.
      *
-     * @param float $vrDevengado
+     * @param float|null $vrDevengado
      *
      * @return Pago
      */
-    public function setVrDevengado($vrDevengado)
+    public function setVrDevengado($vrDevengado = null)
     {
         $this->vrDevengado = $vrDevengado;
 
@@ -635,9 +663,9 @@ class Pago {
     }
 
     /**
-     * Get vrDevengado
+     * Get vrDevengado.
      *
-     * @return float
+     * @return float|null
      */
     public function getVrDevengado()
     {
@@ -645,9 +673,33 @@ class Pago {
     }
 
     /**
-     * Set empresaRel
+     * Set mensajePago.
      *
-     * @param \ArdidBundle\Entity\Empresa $empresaRel
+     * @param string|null $mensajePago
+     *
+     * @return Pago
+     */
+    public function setMensajePago($mensajePago = null)
+    {
+        $this->mensajePago = $mensajePago;
+
+        return $this;
+    }
+
+    /**
+     * Get mensajePago.
+     *
+     * @return string|null
+     */
+    public function getMensajePago()
+    {
+        return $this->mensajePago;
+    }
+
+    /**
+     * Set empresaRel.
+     *
+     * @param \ArdidBundle\Entity\Empresa|null $empresaRel
      *
      * @return Pago
      */
@@ -659,9 +711,9 @@ class Pago {
     }
 
     /**
-     * Get empresaRel
+     * Get empresaRel.
      *
-     * @return \ArdidBundle\Entity\Empresa
+     * @return \ArdidBundle\Entity\Empresa|null
      */
     public function getEmpresaRel()
     {
@@ -669,9 +721,9 @@ class Pago {
     }
 
     /**
-     * Set empleadoRel
+     * Set empleadoRel.
      *
-     * @param \ArdidBundle\Entity\Empleado $empleadoRel
+     * @param \ArdidBundle\Entity\Empleado|null $empleadoRel
      *
      * @return Pago
      */
@@ -683,9 +735,9 @@ class Pago {
     }
 
     /**
-     * Get empleadoRel
+     * Get empleadoRel.
      *
-     * @return \ArdidBundle\Entity\Empleado
+     * @return \ArdidBundle\Entity\Empleado|null
      */
     public function getEmpleadoRel()
     {
@@ -693,9 +745,9 @@ class Pago {
     }
 
     /**
-     * Set pagoTipoRel
+     * Set pagoTipoRel.
      *
-     * @param \ArdidBundle\Entity\PagoTipo $pagoTipoRel
+     * @param \ArdidBundle\Entity\PagoTipo|null $pagoTipoRel
      *
      * @return Pago
      */
@@ -707,9 +759,9 @@ class Pago {
     }
 
     /**
-     * Get pagoTipoRel
+     * Get pagoTipoRel.
      *
-     * @return \ArdidBundle\Entity\PagoTipo
+     * @return \ArdidBundle\Entity\PagoTipo|null
      */
     public function getPagoTipoRel()
     {
@@ -717,7 +769,7 @@ class Pago {
     }
 
     /**
-     * Add pagosDetallesPagoRel
+     * Add pagosDetallesPagoRel.
      *
      * @param \ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel
      *
@@ -731,46 +783,24 @@ class Pago {
     }
 
     /**
-     * Remove pagosDetallesPagoRel
+     * Remove pagosDetallesPagoRel.
      *
      * @param \ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removePagosDetallesPagoRel(\ArdidBundle\Entity\PagoDetalle $pagosDetallesPagoRel)
     {
-        $this->pagosDetallesPagoRel->removeElement($pagosDetallesPagoRel);
+        return $this->pagosDetallesPagoRel->removeElement($pagosDetallesPagoRel);
     }
 
     /**
-     * Get pagosDetallesPagoRel
+     * Get pagosDetallesPagoRel.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getPagosDetallesPagoRel()
     {
         return $this->pagosDetallesPagoRel;
-    }
-
-    /**
-     * Set codigoSoportePagoFk
-     *
-     * @param integer $codigoSoportePagoFk
-     *
-     * @return Pago
-     */
-    public function setCodigoSoportePagoFk($codigoSoportePagoFk)
-    {
-        $this->codigoSoportePagoFk = $codigoSoportePagoFk;
-
-        return $this;
-    }
-
-    /**
-     * Get codigoSoportePagoFk
-     *
-     * @return integer
-     */
-    public function getCodigoSoportePagoFk()
-    {
-        return $this->codigoSoportePagoFk;
     }
 }
