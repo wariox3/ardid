@@ -36,7 +36,12 @@ class CertificadoLaboral extends \FPDF {
         $this->SetFont('Arial', 'B', self::$tamañoFuente);
         //Logo
         $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 20, 12, 35, 0);
-        $this->Image('imagenes/firmas/firma'.$arContrato->getCodigoEmpresaFk().'.jpg', 30, 195, 35, 20);
+        if($arContrato->getCodigoEmpresaFk() == 2){
+            $this->Image('imagenes/firmas/firma'.$arContrato->getCodigoEmpresaFk().'.jpg', 25, 206, 75, 25);
+            $this->Image('imagenes/logos/informacion.jpg', 42, 267, 130, 22);
+        }else{
+            $this->Image('imagenes/firmas/firma'.$arContrato->getCodigoEmpresaFk().'.jpg', 30, 195, 35, 20);
+        }
     }
 
     public function EncabezadoDetalles() {
