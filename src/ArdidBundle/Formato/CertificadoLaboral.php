@@ -38,7 +38,7 @@ class CertificadoLaboral extends \FPDF {
         $this->Image('imagenes/logos/logo' . $arContrato->getCodigoEmpresaFk() . '.jpg', 160, 12, 35, 0);
         if($arContrato->getCodigoEmpresaFk() == 2){
             $this->Image('imagenes/firmas/firma'.$arContrato->getCodigoEmpresaFk().'.jpg', 25, 206, 60, 25);
-            $this->Image('imagenes/logos/informacion.jpg', 42, 260, 130, 22);
+            $this->Image('imagenes/logos/informacion.jpg', 42, 250, 130, 22);
         }else{
             $this->Image('imagenes/firmas/firma'.$arContrato->getCodigoEmpresaFk().'.jpg', 30, 195, 35, 20);
         }
